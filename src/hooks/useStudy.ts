@@ -13,7 +13,7 @@ export const useStudy = () => {
       timeout: 30000,
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
-        'x-api-key': import.meta.env.VITE_APIGATEWAY_API_KEY,
+        "x-api-key": import.meta.env.VITE_APIGATEWAY_API_KEY,
       },
     });
     axiosInstance.interceptors.response.use(
