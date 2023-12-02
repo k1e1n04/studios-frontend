@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { StudyRegisterFormInput } from "../../../types/StudyRegisterFormInput";
-import {Controller, SubmitHandler, useFieldArray, useForm} from "react-hook-form";
+import {
+  Controller,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import { useStudy } from "../../../hooks/useStudy";
 import { StudyErrorResponseDto } from "../../../types/StudyErrorResponseDto";
 import { useNavigate, useParams } from "react-router-dom";
@@ -54,11 +59,7 @@ export const StudyUpdateForm: React.FC = () => {
       content: "",
     },
   });
-  const {
-    fields,
-    append,
-    remove,
-  } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "tags",
   });
@@ -75,8 +76,8 @@ export const StudyUpdateForm: React.FC = () => {
         // 既存のタグをクリア
         setValue("tags", []);
         study.tags.forEach((tag) => {
-            append({ name: tag.name });
-        })
+          append({ name: tag.name });
+        });
         setValue("content", study.content);
         setIsLoaded(true);
       }
@@ -182,27 +183,27 @@ export const StudyUpdateForm: React.FC = () => {
               <ErrorText>{errors.title.message}</ErrorText>
             )}
             {fields.map((item, index) => (
-                <div key={item.id}>
-                  <TextField
-                      {...register(`tags.${index}.name`)}
-                      variant={"standard"}
-                      defaultValue={item.name} // 初期値を設定
-                      required={true}
-                  />
-                  <Button onClick={() => remove(index)}>削除</Button>
-                </div>
+              <div key={item.id}>
+                <TextField
+                  {...register(`tags.${index}.name`)}
+                  variant={"standard"}
+                  defaultValue={item.name} // 初期値を設定
+                  required={true}
+                />
+                <Button onClick={() => remove(index)}>削除</Button>
+              </div>
             ))}
             <TextField
-                value={newTag}
-                variant={"standard"}
-                placeholder={"タグを追加"}
-                onChange={(e) => handleTagChange(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleAddTag(newTag);
-                    e.preventDefault();
-                  }
-                }}
+              value={newTag}
+              variant={"standard"}
+              placeholder={"タグを追加"}
+              onChange={(e) => handleTagChange(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleAddTag(newTag);
+                  e.preventDefault();
+                }
+              }}
             />
             <div>
               {suggestedTags.map((tag, index) => (
@@ -223,6 +224,7 @@ export const StudyUpdateForm: React.FC = () => {
                 </Button>
               ))}
             </div>
+            <Button onClick={() => handleAddTag(newTag)}>追加</Button>
             {errors.tags?.message && (
               <ErrorText>{errors.tags.message}</ErrorText>
             )}
