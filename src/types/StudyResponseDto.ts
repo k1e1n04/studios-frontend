@@ -1,9 +1,10 @@
+import { TagResponseDto } from "./TagResponseDto.ts";
 
 export type StudyResponseDto = {
-    id: string;
-    title: string;
-    tags: string;
-    content: string;
-    created_date: string;
-    updated_date: string;
+  id: string;
+  title: string;
+  tags: TagResponseDto[];
+  content: string;
+  created_date: string;
+  updated_date: string;
 };

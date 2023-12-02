@@ -5,59 +5,51 @@ import { TagErrorResponseDto } from "../types/TagErrorResponseDto";
 import { TagListResponseDto } from "../types/TagListResponseDto";
 
 export const useTag = () => {
-    const navigate = useNavigate();
-    const tagApi = useMemo((): AxiosInstance => {
-      const axiosInstance = axios.create({
-        baseURL:
-        import.meta.env.VITE_API_BASE_URL,
-        timeout: 30000,
-        headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_API_KEY}`,
-        },
-      });
-      axiosInstance.interceptors.response.use(
-        (response: AxiosResponse) => response,
-        (error: AxiosError<TagErrorResponseDto>) => {
-          if (!error.response) {
-            return Promise.reject(error);
-          }
-          switch (error.response.status) {
-            case axios.HttpStatusCode.BadRequest:
-              break;
-            case axios.HttpStatusCode.NotFound:
-              navigate("/not_found");
-              break;
-            case axios.HttpStatusCode.InternalServerError:
-              navigate("/internal_server_error");
-              break;
-            default:
-              navigate("/internal_server_error");
-              break;
-          }
+  const navigate = useNavigate();
+  const tagApi = useMemo((): AxiosInstance => {
+    const axiosInstance = axios.create({
+      baseURL: import.meta.env.VITE_API_BASE_URL,
+      timeout: 30000,
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+      },
+    });
+    axiosInstance.interceptors.response.use(
+      (response: AxiosResponse) => response,
+      (error: AxiosError<TagErrorResponseDto>) => {
+        if (!error.response) {
           return Promise.reject(error);
         }
-      );
-      return axiosInstance;
-    }, [navigate]);
-
-    const fetchTags = useCallback(
-      async (name: string | null = null): Promise<TagListResponseDto> => {
-        const tagsList = await tagApi
-          .get("/tags", {
-            params: { name },
-          })
-          .then(
-            (response: AxiosResponse): TagListResponseDto => response.data.tags
-          );
-        return tagsList;
+        switch (error.response.status) {
+          case axios.HttpStatusCode.BadRequest:
+            break;
+          case axios.HttpStatusCode.NotFound:
+            navigate("/not_found");
+            break;
+          case axios.HttpStatusCode.InternalServerError:
+            navigate("/internal_server_error");
+            break;
+          default:
+            navigate("/internal_server_error");
+            break;
+        }
+        return Promise.reject(error);
       },
-      [tagApi]
     );
+    return axiosInstance;
+  }, [navigate]);
 
-    const deleteTag = async (name: string): Promise<void> => {
-      await tagApi.delete(`/tag/${name}`);
-      
-    };
+  const fetchTags = useCallback(
+    async (tag: string | null = null): Promise<TagListResponseDto> => {
+      const tagsList = await tagApi
+        .get("/tag/list", {
+          params: { tag },
+        })
+        .then((response: AxiosResponse): TagListResponseDto => response.data);
+      return tagsList;
+    },
+    [tagApi],
+  );
 
-    return { fetchTags, deleteTag } as const;
-  };
+  return { fetchTags } as const;
+};

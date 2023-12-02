@@ -43,22 +43,13 @@ const TagsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-const DeleteButton = styled(Button)`
-  background-color: #f06060;
-  color: white;
-
-  &:hover {
-    background-color: #fabebb;
-  }
-`;
-
 export const TagListPage: React.FC = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   const [tagListResponseDto, setTagListResponseDto] =
     useState<TagListResponseDto>();
-  const { fetchTags, deleteTag } = useTag();
+  const { fetchTags } = useTag();
   const [openActionModal, setOpenActionModal] = useState(false);
   const [selectedTagName, setSelectedTagName] = useState<string>("");
   const [searchTag, setSearchTag] = useState<string>("");
@@ -76,15 +67,6 @@ export const TagListPage: React.FC = () => {
   const handleOpenActionModal = (tagName: string) => {
     setOpenActionModal(true);
     setSelectedTagName(tagName);
-  };
-
-  const tagDeleteHandler = async (name: string) => {
-    await deleteTag(name);
-    // tagListResponseDtoから削除したタグを除外する
-    const newTagListResponseDto = tagListResponseDto?.filter(
-      (tag) => tag !== name
-    );
-    setTagListResponseDto(newTagListResponseDto);
   };
 
   const tagShowRelatedItemsHandler = () => {
@@ -149,16 +131,16 @@ export const TagListPage: React.FC = () => {
           </Stack>
         )}
         <TagsContainer>
-          {tagListResponseDto?.map((tag) => (
+          {tagListResponseDto?.tags.map((tag) => (
             <Button
-              key={tag}
+              key={tag.name}
               variant="outlined"
               sx={{
                 m: 1,
               }}
-              onClick={() => handleOpenActionModal(tag)}
+              onClick={() => handleOpenActionModal(tag.name)}
             >
-              {tag}
+              {tag.name}
             </Button>
           ))}
         </TagsContainer>
@@ -175,15 +157,6 @@ export const TagListPage: React.FC = () => {
             <Button onClick={handleCloseActionModal} color="primary">
               キャンセル
             </Button>
-            <DeleteButton
-              onClick={() => {
-                tagDeleteHandler(selectedTagName);
-                handleCloseActionModal();
-              }}
-              variant="contained"
-            >
-              削除
-            </DeleteButton>
             <Button
               onClick={tagShowRelatedItemsHandler}
               variant="contained"

@@ -25,10 +25,10 @@ type Props = {
   children: React.ReactNode;
 };
 
-const StyledDiv = styled("div") `
-    font-size: 0.8rem;
-    color: #929292;
-    margin-left: 10px;
+const StyledDiv = styled("div")`
+  font-size: 0.8rem;
+  color: #929292;
+  margin-left: 10px;
 `;
 
 const drawerWidth = 240;
@@ -141,7 +141,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
         </DrawerHeader>
         <Divider />
         <List>
-            <StyledDiv>学び管理</StyledDiv>
+          <StyledDiv>学び管理</StyledDiv>
           <ListItem key="学び一覧" disablePadding>
             <ListItemButton component={RouterLink} to="/">
               <ListItemIcon>
@@ -158,8 +158,8 @@ export const Layout: React.FC<Props> = ({ children }) => {
               <ListItemText primary="学び登録" />
             </ListItemButton>
           </ListItem>
-          <Divider sx={{ mb: "10px" }}/>
-            <StyledDiv>タグ管理</StyledDiv>
+          <Divider sx={{ mb: "10px" }} />
+          <StyledDiv>タグ管理</StyledDiv>
           <ListItem key="タグ一覧" disablePadding>
             <ListItemButton component={RouterLink} to="/tags">
               <ListItemIcon>

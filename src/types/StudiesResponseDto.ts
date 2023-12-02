@@ -1,7 +1,7 @@
 import { StudyResponseDto } from "./StudyResponseDto";
+import { PageResponseDto } from "./PageResponseDto.ts";
 
 export type StudiesResponseDto = {
   studies: StudyResponseDto[];
-  lastEvaluatedKey: string | null;
-  totalCount: number;
+  page: PageResponseDto;
 };

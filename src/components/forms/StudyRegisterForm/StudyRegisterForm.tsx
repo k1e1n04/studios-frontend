@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { StudyRegisterFormInput } from "../../../types/StudyRegisterFormInput";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import {
+  Controller,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import { useStudy } from "../../../hooks/useStudy";
 import { StudyErrorResponseDto } from "../../../types/StudyErrorResponseDto";
 import { useNavigate } from "react-router-dom";
@@ -32,12 +37,13 @@ export const StudyRegisterForm: React.FC = () => {
     useState<StudyErrorResponseDto>();
   const [suggestedTags, setSuggestedTags] = useState<string[]>([]);
   const [isFormChanged, setIsFormChanged] = useState(false);
+  const [newTag, setNewTag] = useState("");
   const navigate = useNavigate();
   const {
     control,
     handleSubmit,
-    setValue,
     watch,
+    register,
     formState: { errors, isSubmitting },
   } = useForm<StudyRegisterFormInput>({
     mode: "onChange",
@@ -45,17 +51,22 @@ export const StudyRegisterForm: React.FC = () => {
     shouldUnregister: false,
     defaultValues: {
       title: "",
-      tags: "",
+      tags: [],
       content: "",
     },
+  });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "tags",
   });
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
 
   const onSubmit: SubmitHandler<StudyRegisterFormInput> = async (data) => {
+    const distinctTags = Array.from(new Set(data.tags.map((tag) => tag.name)));
     const [status, resData] = await createStudy(
       data.title,
-      data.tags,
-      data.content
+      distinctTags,
+      data.content,
     );
     if (status === axios.HttpStatusCode.BadRequest) {
       setStudyErrorResponseDto(resData);
@@ -66,13 +77,23 @@ export const StudyRegisterForm: React.FC = () => {
   };
 
   const getTagsSuggestions = async (name: string) => {
-    const tags = await fetchTags(name);
-    setSuggestedTags(tags);
+    const tagListResponseDto = await fetchTags(name);
+    setSuggestedTags(tagListResponseDto.tags.map((tag) => tag.name));
+  };
+
+  const handleTagChange = async (name: string) => {
+    setNewTag(name);
+    await getTagsSuggestions(name);
+  };
+
+  const handleAddTag = (newTagName: string) => {
+    append({ name: newTagName });
+    setNewTag("");
   };
 
   // フィールド監視
   const title = watch("title", "");
-  const tags = watch("tags", "");
+  const tags = watch("tags", []);
   const content = watch("content", "");
 
   const isFormComplete = title && tags && content;
@@ -80,11 +101,12 @@ export const StudyRegisterForm: React.FC = () => {
 
   useEffect(() => {
     if (isFormChanged) {
-      window.onbeforeunload = () => "変更が保存されていません。ページから移動しますか？";
+      window.onbeforeunload = () =>
+        "変更が保存されていません。ページから移動しますか？";
     } else {
       window.onbeforeunload = null;
     }
-  
+
     return () => {
       window.onbeforeunload = null;
     };
@@ -128,38 +150,37 @@ export const StudyRegisterForm: React.FC = () => {
           )}
         ></Controller>
         {errors.title?.message && <ErrorText>{errors.title.message}</ErrorText>}
-        <Controller
-          name="tags"
-          control={control}
-          rules={{
-            required: "タグは必須です。",
-            maxLength: {
-              value: 50,
-              message: "タグは50文字以内で入力してください。",
-            },
-          }}
-          render={({ field }) => (
+        {fields.map((item, index) => (
+          <div key={item.id}>
             <TextField
-              {...field}
-              variant="standard"
-              label="タグ(1つ)"
-              error={!!errors.tags}
-              onChange={(e) => {
-                setIsFormChanged(true);
-                field.onChange(e);
-                getTagsSuggestions(e.target.value);
-              }}
+              {...register(`tags.${index}.name`)}
+              variant={"standard"}
+              defaultValue={item.name} // 初期値を設定
+              required={true}
             />
-          )}
-        ></Controller>
+            <Button onClick={() => remove(index)}>削除</Button>
+          </div>
+        ))}
+        <TextField
+          value={newTag}
+          variant={"standard"}
+          placeholder={"タグを追加"}
+          onChange={(e) => handleTagChange(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleAddTag(newTag);
+              e.preventDefault();
+            }
+          }}
+        />
         <div>
           {suggestedTags.map((tag, index) => (
             <Button
               key={index}
               onClick={() => {
-                setValue("tags", tag, { shouldValidate: true }); // クリックされたタグを入力欄にセット
+                handleAddTag(tag);
                 setSuggestedTags([]); // サジェッションをクリア
-              }} // カーソルをポインターに
+              }}
               sx={{
                 cursor: "pointer",
                 border: (theme) => `1px solid ${theme.palette.primary.main}`,
@@ -170,6 +191,7 @@ export const StudyRegisterForm: React.FC = () => {
             </Button>
           ))}
         </div>
+        <Button onClick={() => handleAddTag(newTag)}>追加</Button>
         {errors.tags?.message && <ErrorText>{errors.tags.message}</ErrorText>}
         <Controller
           name="content"

@@ -19,7 +19,7 @@ import { grey } from "@mui/material/colors";
 import styled from "styled-components";
 import Prism from "prismjs";
 import { StyledContainer } from "../../components/containers/StyledContrainer";
-import { marked } from 'marked';
+import { marked } from "marked";
 
 const DateAndDeleteContainer = styled.div`
   display: flex;
@@ -145,21 +145,25 @@ export const StudyDetailPage: React.FC = () => {
               </DeleteButton>
             </ButtonsContainer>
           </DateAndDeleteContainer>
-          <TagsButton
-            variant="contained"
-            sx={{
-              backgroundColor: grey[500],
-              color: theme.palette.secondary.main,
-              mt: 2,
-            }}
-            href={`/?tags=${studyResponseDto.tags}`}
-          >
-            {studyResponseDto.tags}
-          </TagsButton>
-
-          <div className="markdown" style={{ marginTop: "20px" }}
+          {studyResponseDto.tags.map((tag) => (
+            <TagsButton
+              key={tag.id}
+              variant="contained"
+              sx={{
+                backgroundColor: grey[500],
+                color: theme.palette.secondary.main,
+                mt: 2,
+              }}
+              href={`/?tags=${tag.name}`}
+            >
+              {tag.name}
+            </TagsButton>
+          ))}
+          <div
+            className="markdown"
+            style={{ marginTop: "20px" }}
             dangerouslySetInnerHTML={{
-              __html:convertedContent,
+              __html: convertedContent,
             }}
           />
         </StyledContainer>

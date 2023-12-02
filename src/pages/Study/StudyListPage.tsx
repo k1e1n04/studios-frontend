@@ -21,7 +21,6 @@ import { Layout } from "../../components/layouts/Layout/Layout";
 import { useTheme } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { StudiesResponseDto } from "../../types/StudiesResponseDto";
 import { StyledContainer } from "../../components/containers/StyledContrainer";
 import { SearchTextField } from "../../components/inputs/SerachTextFiled";
 
@@ -40,7 +39,6 @@ export const StudyListPage: React.FC = () => {
   const { fetchStudies } = useStudy();
   const [studyResponseDtos, setStudyResponseDtos] =
     useState<StudyResponseDto[]>();
-  const [totalCount, setTotalCount] = useState<number>();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const location = useLocation();
@@ -50,16 +48,16 @@ export const StudyListPage: React.FC = () => {
   const queryTitle = queryParams.get("title");
   const [searchTitle, setSearchTitle] = useState(queryTitle || "");
   const [searchTags, setSearchTags] = useState(queryTags || "");
-  // 現在のlastEvaluatedKey
-  const [lastEvaluatedKey, setLastEvaluatedKey] = useState<string | null>();
-  // 現在のlastEvaluatedKeyのインデックス
-  const [lastEvaluatedKeyIndex, setLastEvaluatedKeyIndex] = useState<number>(-1);
-  // lastEvaluatedKeyの履歴を追跡するための配列
-  const [lastEvaluatedKeys, setLastEvaluatedKeys] = useState<(string | null)[]>(
-    []
-  );
+  // 現在のページ番号
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  // ページの総数
+  const [totalPages, setTotalPages] = useState<number>();
+  // 学習の総数
+  const [totalStudies, setTotalStudies] = useState<number>();
+  // ページ内の表示件数
+  const [pageElements, setPageElements] = useState<number>();
 
-  const size = 10;
+  const limit = 10;
 
   const handleSearch = () => {
     navigate(`/?tags=${searchTags}&title=${searchTitle}`);
@@ -67,52 +65,34 @@ export const StudyListPage: React.FC = () => {
 
   // 次へボタンのクリックハンドラー
   const handleNext = async () => {
-    if (lastEvaluatedKey !== undefined && !lastEvaluatedKeys.includes(lastEvaluatedKey)) {
-      setLastEvaluatedKeys([...lastEvaluatedKeys, lastEvaluatedKey]); // ここで現在の lastEvaluatedKey を履歴に追加
-    }
     const studiesResponseDto = await fetchStudies(
       queryTags === null ? "" : queryTags,
       queryTitle === null ? "" : queryTitle,
-      lastEvaluatedKey,
-      size
+      pageNumber + 1,
+      limit,
     );
 
     setStudyResponseDtos(studiesResponseDto.studies);
-    setLastEvaluatedKey(studiesResponseDto.lastEvaluatedKey);
-    setTotalCount(studiesResponseDto.totalCount);
-    setLastEvaluatedKeyIndex(lastEvaluatedKeyIndex + 1);
+    setTotalPages(studiesResponseDto.page.totalPages);
+    setTotalStudies(studiesResponseDto.page.totalElements);
+    setPageElements(studiesResponseDto.page.pageElements);
+    setPageNumber(studiesResponseDto.page.pageNumber);
   };
 
   // 前へボタンのクリックハンドラー
   const handlePrevious = async () => {
-    const previousLastEvaluatedKeyIndex = lastEvaluatedKeyIndex - 1;
-    const previousLastEvaluatedKey = lastEvaluatedKeys[previousLastEvaluatedKeyIndex];
+    const studiesResponseDto = await fetchStudies(
+      queryTags || "",
+      queryTitle || "",
+      pageNumber - 1,
+      limit,
+    );
 
-    let studiesResponseDto: StudiesResponseDto;
-
-    if (
-      previousLastEvaluatedKey === null ||
-      previousLastEvaluatedKey === undefined
-    ) {
-      studiesResponseDto = await fetchStudies(
-        queryTags || "",
-        queryTitle || "",
-        null,
-        size
-      );
-    } else {
-      studiesResponseDto = await fetchStudies(
-        queryTags || "",
-        queryTitle || "",
-        previousLastEvaluatedKey,
-        size
-      );
-    }
-
-    setLastEvaluatedKey(previousLastEvaluatedKey);
-    setLastEvaluatedKeyIndex(previousLastEvaluatedKeyIndex);
     setStudyResponseDtos(studiesResponseDto.studies);
-    setTotalCount(studiesResponseDto.totalCount);
+    setTotalPages(studiesResponseDto.page.totalPages);
+    setTotalStudies(studiesResponseDto.page.totalElements);
+    setPageElements(studiesResponseDto.page.pageElements);
+    setPageNumber(studiesResponseDto.page.pageNumber);
   };
 
   useEffect(() => {
@@ -120,12 +100,14 @@ export const StudyListPage: React.FC = () => {
       const studiesResponseDto = await fetchStudies(
         queryTags === null ? "" : queryTags,
         queryTitle === null ? "" : queryTitle,
-        null,
-        size
+        pageNumber,
+        limit,
       );
       setStudyResponseDtos(studiesResponseDto.studies);
-      setTotalCount(studiesResponseDto.totalCount);
-      setLastEvaluatedKey(studiesResponseDto.lastEvaluatedKey);
+      setTotalPages(studiesResponseDto.page.totalPages);
+      setTotalStudies(studiesResponseDto.page.totalElements);
+      setPageElements(studiesResponseDto.page.pageElements);
+      setPageNumber(studiesResponseDto.page.pageNumber);
     })();
   }, [fetchStudies, queryTags, queryTitle]);
 
@@ -170,7 +152,7 @@ export const StudyListPage: React.FC = () => {
           </Grid>
         </Grid>
         <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
-          {totalCount}件
+          {pageElements}/{totalStudies}件
         </Typography>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -222,7 +204,9 @@ export const StudyListPage: React.FC = () => {
                       </Button>
                     </StyledTableCell>
                     <StyledTableCell>{studyResponseDto.title}</StyledTableCell>
-                    <StyledTableCell>{studyResponseDto.tags}</StyledTableCell>
+                    <StyledTableCell>
+                      {studyResponseDto.tags.map((tag) => tag.name).join(", ")}
+                    </StyledTableCell>
                     <StyledTableCell align="right">
                       {studyResponseDto.created_date}
                     </StyledTableCell>
@@ -243,14 +227,14 @@ export const StudyListPage: React.FC = () => {
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
           <Button
             variant="outlined"
-            disabled={lastEvaluatedKeyIndex === -1}
+            disabled={pageNumber === 1}
             onClick={handlePrevious}
           >
             前へ
           </Button>
           <Button
             variant="outlined"
-            disabled={lastEvaluatedKey === null}
+            disabled={pageNumber === totalPages}
             onClick={handleNext}
           >
             次へ

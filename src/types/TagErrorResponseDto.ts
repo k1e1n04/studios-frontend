@@ -2,5 +2,5 @@
  * タグのエラーレスポンスDTO
  */
 export type TagErrorResponseDto = {
-    message: string;
+  message: string;
 };

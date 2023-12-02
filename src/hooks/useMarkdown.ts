@@ -1,8 +1,7 @@
 import Prism from "prismjs";
-import { marked } from 'marked';
+import { marked } from "marked";
 
 export const useMarkdown = () => {
-
   const generateMarkdownPreview = (markdown: string) => {
     // markedを使ってマークダウンをHTMLに変換
     const html = marked(markdown);

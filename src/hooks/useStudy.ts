@@ -9,11 +9,10 @@ export const useStudy = () => {
   const navigate = useNavigate();
   const studyApi = useMemo((): AxiosInstance => {
     const axiosInstance = axios.create({
-      baseURL:
-      import.meta.env.VITE_API_BASE_URL,
+      baseURL: import.meta.env.VITE_API_BASE_URL,
       timeout: 30000,
       headers: {
-        'Authorization': `Bearer ${import.meta.env.VITE_API_KEY}`,
+        Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
       },
     });
     axiosInstance.interceptors.response.use(
@@ -36,45 +35,45 @@ export const useStudy = () => {
             break;
         }
         return Promise.reject(error);
-      }
+      },
     );
     return axiosInstance;
   }, [navigate]);
 
   const fetchStudies = useCallback(
-      async (
-          tags: string | null = null,
-          title: string | null = null,
-          lastEvaluatedKey: string | null = null,
-          size: number = 10
-        ): Promise<StudiesResponseDto> => {
+    async (
+      tags: string | null = null,
+      title: string | null = null,
+      page: number | null = null,
+      limit: number = 10,
+    ): Promise<StudiesResponseDto> => {
       const studiesResponseDto = await studyApi
-        .get("/my_studies", {
-          params: { tags, title, lastEvaluatedKey, size },
+        .get("/study/list", {
+          params: { tags, title, page, limit },
         })
-        .then(
-          (response: AxiosResponse): StudiesResponseDto => response.data
-        );
+        .then((response: AxiosResponse): StudiesResponseDto => response.data);
       return studiesResponseDto;
     },
-    [studyApi]
+    [studyApi],
   );
 
   const fetchStudy = useCallback(
     async (id: string | undefined): Promise<StudyResponseDto> => {
       const studyResponseDto = await studyApi
-        .get(`/my_study/${id}`)
-        .then(
-          (response: AxiosResponse): StudyResponseDto => response.data.study
-        );
+        .get(`/study/${id}`)
+        .then((response: AxiosResponse): StudyResponseDto => response.data);
       return studyResponseDto;
     },
-    [studyApi]
+    [studyApi],
   );
 
-  const createStudy = async (title: string, tags: string, content: string) => {
+  const createStudy = async (
+    title: string,
+    tags: string[],
+    content: string,
+  ) => {
     const response = await studyApi
-      .post("/my_study", {
+      .post("/study/register", {
         title: title,
         tags: tags,
         content: content,
@@ -86,7 +85,7 @@ export const useStudy = () => {
 
   const deleteStudy = async (id: string) => {
     const response = await studyApi
-      .delete(`/my_study/${id}`)
+      .delete(`/study/delete/${id}`)
       .then((response) => [response.status, response.data])
       .catch((error) => [error.response.status, error.response.data]);
     return response;
@@ -95,12 +94,11 @@ export const useStudy = () => {
   const updateStudy = async (
     id: string,
     title: string,
-    tags: string,
-    content: string
+    tags: string[],
+    content: string,
   ) => {
     const response = await studyApi
-      .put(`/my_study`, {
-        id: id,
+      .put(`/study/update/${id}`, {
         title: title,
         tags: tags,
         content: content,
@@ -109,7 +107,6 @@ export const useStudy = () => {
       .catch((error) => [error.response.status, error.response.data]);
     return response;
   };
-
 
   return {
     fetchStudies,

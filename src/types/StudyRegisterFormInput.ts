@@ -3,6 +3,6 @@
  */
 export type StudyRegisterFormInput = {
   title: string;
-  tags: string;
+  tags: { name: string }[];
   content: string;
 };
