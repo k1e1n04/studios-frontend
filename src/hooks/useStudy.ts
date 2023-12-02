@@ -43,14 +43,14 @@ export const useStudy = () => {
 
   const fetchStudies = useCallback(
     async (
-      tags: string | null = null,
+      tag: string | null = null,
       title: string | null = null,
       page: number | null = null,
       limit: number = 10,
     ): Promise<StudiesResponseDto> => {
       const studiesResponseDto = await studyApi
         .get("/study/list", {
-          params: { tags, title, page, limit },
+          params: { tag, title, page, limit },
         })
         .then((response: AxiosResponse): StudiesResponseDto => response.data);
       return studiesResponseDto;
