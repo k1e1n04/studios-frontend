@@ -1,0 +1,87 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+/* TODO: importantやめたい */
+.react-mde textarea {
+  outline: none !important;
+}
+
+.mde-header {
+  background-color: #659CBA!important;
+  color: #F0F0F0!important;
+}
+.mde-header button{
+  border-radius: 10px!important;
+  color: #F0F0F0!important;
+}
+.mde-header button:hover{
+  background-color: #F0F0F0!important;
+  color: #659CBA!important;
+}
+.mde-header button:focus{
+  outline: none !important;
+}
+.mde-tabs button {
+  color: #F0F0F0!important;
+}
+.mde-textarea-wrapper textarea {
+  border-color: #659CBA !important;
+}
+/* プレビュー時のコードブロック */
+.mde-preview .mde-preview-content pre {
+  background-color: hsl(0,0%,8%)!important;
+}
+/* コードブロック表示エリア */
+pre {
+  width: 100%;
+  overflow-x: auto;
+  padding: 7px;
+  background-color: hsl(0,0%,8%)!important;
+  border-radius: 5px;
+  white-space: pre-wrap; 
+  word-wrap: break-word;
+}
+/* 引用表示エリア */
+blockquote {
+  margin-left: 0!important;
+  padding: 0 1em!important;
+  color: #777!important;
+  border-left: 0.25em solid #ddd!important;
+}

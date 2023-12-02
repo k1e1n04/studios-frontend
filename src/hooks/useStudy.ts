@@ -1,0 +1,121 @@
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
+import { useCallback, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { StudyErrorResponseDto } from "../types/StudyErrorResponseDto";
+import { StudyResponseDto } from "../types/StudyResponseDto";
+import { StudiesResponseDto } from "../types/StudiesResponseDto";
+
+export const useStudy = () => {
+  const navigate = useNavigate();
+  const studyApi = useMemo((): AxiosInstance => {
+    const axiosInstance = axios.create({
+      baseURL:
+      import.meta.env.VITE_API_BASE_URL,
+      timeout: 30000,
+      headers: {
+        'Authorization': `Bearer ${import.meta.env.VITE_API_KEY}`,
+      },
+    });
+    axiosInstance.interceptors.response.use(
+      (response: AxiosResponse) => response,
+      (error: AxiosError<StudyErrorResponseDto>) => {
+        if (!error.response) {
+          return Promise.reject(error);
+        }
+        switch (error.response.status) {
+          case axios.HttpStatusCode.BadRequest:
+            break;
+          case axios.HttpStatusCode.NotFound:
+            navigate("/not_found");
+            break;
+          case axios.HttpStatusCode.InternalServerError:
+            navigate("/internal_server_error");
+            break;
+          default:
+            navigate("/internal_server_error");
+            break;
+        }
+        return Promise.reject(error);
+      }
+    );
+    return axiosInstance;
+  }, [navigate]);
+
+  const fetchStudies = useCallback(
+      async (
+          tags: string | null = null,
+          title: string | null = null,
+          lastEvaluatedKey: string | null = null,
+          size: number = 10
+        ): Promise<StudiesResponseDto> => {
+      const studiesResponseDto = await studyApi
+        .get("/my_studies", {
+          params: { tags, title, lastEvaluatedKey, size },
+        })
+        .then(
+          (response: AxiosResponse): StudiesResponseDto => response.data
+        );
+      return studiesResponseDto;
+    },
+    [studyApi]
+  );
+
+  const fetchStudy = useCallback(
+    async (id: string | undefined): Promise<StudyResponseDto> => {
+      const studyResponseDto = await studyApi
+        .get(`/my_study/${id}`)
+        .then(
+          (response: AxiosResponse): StudyResponseDto => response.data.study
+        );
+      return studyResponseDto;
+    },
+    [studyApi]
+  );
+
+  const createStudy = async (title: string, tags: string, content: string) => {
+    const response = await studyApi
+      .post("/my_study", {
+        title: title,
+        tags: tags,
+        content: content,
+      })
+      .then((response) => [response.status, response.data])
+      .catch((error) => [error.response.status, error.response.data]);
+    return response;
+  };
+
+  const deleteStudy = async (id: string) => {
+    const response = await studyApi
+      .delete(`/my_study/${id}`)
+      .then((response) => [response.status, response.data])
+      .catch((error) => [error.response.status, error.response.data]);
+    return response;
+  };
+
+  const updateStudy = async (
+    id: string,
+    title: string,
+    tags: string,
+    content: string
+  ) => {
+    const response = await studyApi
+      .put(`/my_study`, {
+        id: id,
+        title: title,
+        tags: tags,
+        content: content,
+      })
+      .then((response) => [response.status, response.data])
+      .catch((error) => [error.response.status, error.response.data]);
+    return response;
+  };
+
+
+  return {
+    fetchStudies,
+    createStudy,
+    fetchStudy,
+    deleteStudy,
+    updateStudy,
+  } as const;
+};
