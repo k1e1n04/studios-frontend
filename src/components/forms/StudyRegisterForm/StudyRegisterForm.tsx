@@ -199,8 +199,8 @@ export const StudyRegisterForm: React.FC = () => {
           rules={{
             required: "内容は必須です。",
             maxLength: {
-              value: 10000,
-              message: "内容は10000文字以内で入力してください。",
+              value: 20000,
+              message: "内容は20000文字以内で入力してください。",
             },
           }}
           render={({ field }) => (
