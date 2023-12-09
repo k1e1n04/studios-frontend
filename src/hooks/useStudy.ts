@@ -59,7 +59,7 @@ export const useStudy = () => {
 
   const fetchStudy = useCallback(
     async (id: string | undefined): Promise<StudyResponseDto> => {
-      return  await studyApi
+      return await studyApi
         .get(`/study/${id}`)
         .then((response: AxiosResponse): StudyResponseDto => response.data);
     },
@@ -71,7 +71,7 @@ export const useStudy = () => {
     tags: string[],
     content: string,
   ) => {
-    return  await studyApi
+    return await studyApi
       .post("/study/register", {
         title: title,
         tags: tags,
@@ -104,11 +104,34 @@ export const useStudy = () => {
       .catch((error) => [error.response.status, error.response.data]);
   };
 
+  const fetchReviewStudies = useCallback(
+      async (
+          page: number | null = null,
+          limit: number = 10,
+      ): Promise<StudiesResponseDto> => {
+        return await studyApi
+            .get("/study/review/list", {
+              params: { page, limit },
+            })
+            .then((response: AxiosResponse): StudiesResponseDto => response.data);
+      },
+      [studyApi],
+  );
+
+  const completeStudyReview = async (id: string) => {
+    return await studyApi
+        .put(`/study/review/complete/${id}`)
+        .then((response) => [response.status, response.data])
+        .catch((error) => [error.response.status, error.response.data]);
+  }
+
   return {
     fetchStudies,
     createStudy,
     fetchStudy,
     deleteStudy,
+    fetchReviewStudies,
+    completeStudyReview,
     updateStudy,
   } as const;
 };

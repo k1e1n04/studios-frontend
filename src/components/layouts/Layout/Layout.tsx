@@ -1,6 +1,5 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
@@ -18,8 +17,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import { Link } from "@mui/material";
+import {Box, Link} from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 type Props = {
   children: React.ReactNode;
@@ -156,6 +156,14 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 <AppRegistrationIcon />
               </ListItemIcon>
               <ListItemText primary="学び登録" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem key="復習一覧" disablePadding>
+            <ListItemButton component={RouterLink} to="/studies/review">
+              <ListItemIcon>
+                <RateReviewIcon />
+              </ListItemIcon>
+              <ListItemText primary="復習一覧" />
             </ListItemButton>
           </ListItem>
           <Divider sx={{ mb: "10px" }} />

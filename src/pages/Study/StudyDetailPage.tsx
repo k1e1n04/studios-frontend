@@ -63,9 +63,10 @@ const TagsButton = styled(Button)`
 `;
 
 export const StudyDetailPage: React.FC = () => {
-  const { fetchStudy, deleteStudy } = useStudy();
+  const { fetchStudy, deleteStudy, completeStudyReview } = useStudy();
   const navigate = useNavigate();
   const [studyResponseDto, setStudyResponseDto] = useState<StudyResponseDto>();
+  const [openReviewCompleteModal, setOpenReviewCompleteModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const theme = useTheme();
   // パスパラメーターからidを取得
@@ -101,6 +102,33 @@ export const StudyDetailPage: React.FC = () => {
     navigate("/");
   };
 
+  const reviewCompleteHandler = async () => {
+    if (id === undefined) {
+      navigate("/not_found");
+      return;
+    }
+    await completeStudyReview(id);
+    updateStudyAfterReview();
+  }
+
+  const updateStudyAfterReview = () => {
+    if (studyResponseDto === undefined) {
+      return;
+    }
+    setStudyResponseDto({
+      ...studyResponseDto,
+      number_of_review: studyResponseDto.number_of_review + 1,
+    });
+  }
+
+  const handleOpenReviewCompleteModal = () => {
+    setOpenReviewCompleteModal(true);
+  }
+
+    const handleCloseReviewCompleteModal = () => {
+        setOpenReviewCompleteModal(false);
+    }
+
   const handleOpenDeleteModal = () => {
     setOpenDeleteModal(true);
   };
@@ -125,6 +153,9 @@ export const StudyDetailPage: React.FC = () => {
           </Typography>
           <DateAndDeleteContainer>
             <div>
+                <Typography align="left">
+                    復習回数 {studyResponseDto.number_of_review}
+                </Typography>
               <Typography align="left">
                 投稿日 {studyResponseDto.created_date}
               </Typography>
@@ -166,6 +197,15 @@ export const StudyDetailPage: React.FC = () => {
               __html: convertedContent,
             }}
           />
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            <UpdateButton
+                variant="contained"
+                sx={{ color: theme.palette.secondary.main }}
+                onClick={handleOpenReviewCompleteModal}
+            >
+              復習完了
+            </UpdateButton>
+          </div>
         </StyledContainer>
       ) : (
         <Stack alignItems={"center"}>
@@ -192,6 +232,28 @@ export const StudyDetailPage: React.FC = () => {
           >
             削除
           </DeleteButton>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={openReviewCompleteModal} onClose={handleCloseReviewCompleteModal}>
+        <DialogTitle>復習完了確認</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            復習を完了してもよろしいですか？
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseReviewCompleteModal} color="primary">
+            もう少し復習
+          </Button>
+          <UpdateButton
+              onClick={() => {
+                reviewCompleteHandler();
+                handleCloseReviewCompleteModal();
+              }}
+              variant="contained"
+          >
+            完了
+          </UpdateButton>
         </DialogActions>
       </Dialog>
     </Layout>

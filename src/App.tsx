@@ -8,6 +8,7 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { StudyDetailPage } from "./pages/Study/StudyDetailPage";
 import { StudyUpdatePage } from "./pages/Study/StudyUpdatePage";
 import { TagListPage } from "./pages/Tags/TagsListPage";
+import { StudiesReviewListPage } from "./pages/Study/StudiesReviewListPage.tsx";
 
 function App() {
   const theme = createTheme({
@@ -31,6 +32,7 @@ function App() {
           <Route path="/study/:id" element={<StudyDetailPage />} />
           <Route path="/study/update/:id" element={<StudyUpdatePage />} />
           <Route path="/tags" element={<TagListPage />} />
+          <Route path={"/studies/review"} element={<StudiesReviewListPage />} />
           <Route
             path="/internal_server_error"
             element={<InternalServerErrorPage />}
