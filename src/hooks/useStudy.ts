@@ -48,22 +48,20 @@ export const useStudy = () => {
       page: number | null = null,
       limit: number = 10,
     ): Promise<StudiesResponseDto> => {
-      const studiesResponseDto = await studyApi
+      return await studyApi
         .get("/study/list", {
           params: { tag, title, page, limit },
         })
         .then((response: AxiosResponse): StudiesResponseDto => response.data);
-      return studiesResponseDto;
     },
     [studyApi],
   );
 
   const fetchStudy = useCallback(
     async (id: string | undefined): Promise<StudyResponseDto> => {
-      const studyResponseDto = await studyApi
+      return  await studyApi
         .get(`/study/${id}`)
         .then((response: AxiosResponse): StudyResponseDto => response.data);
-      return studyResponseDto;
     },
     [studyApi],
   );
@@ -73,7 +71,7 @@ export const useStudy = () => {
     tags: string[],
     content: string,
   ) => {
-    const response = await studyApi
+    return  await studyApi
       .post("/study/register", {
         title: title,
         tags: tags,
@@ -81,15 +79,13 @@ export const useStudy = () => {
       })
       .then((response) => [response.status, response.data])
       .catch((error) => [error.response.status, error.response.data]);
-    return response;
   };
 
   const deleteStudy = async (id: string) => {
-    const response = await studyApi
+    return await studyApi
       .delete(`/study/delete/${id}`)
       .then((response) => [response.status, response.data])
       .catch((error) => [error.response.status, error.response.data]);
-    return response;
   };
 
   const updateStudy = async (
@@ -98,7 +94,7 @@ export const useStudy = () => {
     tags: string[],
     content: string,
   ) => {
-    const response = await studyApi
+    return await studyApi
       .put(`/study/update/${id}`, {
         title: title,
         tags: tags,
@@ -106,7 +102,6 @@ export const useStudy = () => {
       })
       .then((response) => [response.status, response.data])
       .catch((error) => [error.response.status, error.response.data]);
-    return response;
   };
 
   return {
