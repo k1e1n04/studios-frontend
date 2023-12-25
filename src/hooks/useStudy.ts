@@ -10,7 +10,7 @@ export const useStudy = () => {
   const studyApi = useMemo((): AxiosInstance => {
     const axiosInstance = axios.create({
       baseURL: import.meta.env.VITE_API_BASE_URL,
-      timeout: 30000,
+      timeout: 15000,
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
         "x-api-key": import.meta.env.VITE_APIGATEWAY_API_KEY,
@@ -20,6 +20,10 @@ export const useStudy = () => {
       (response: AxiosResponse) => response,
       (error: AxiosError<StudyErrorResponseDto>) => {
         if (!error.response) {
+          return Promise.reject(error);
+        }
+        if (error.code === "ECONNABORTED") {
+          navigate("/internal_server_error");
           return Promise.reject(error);
         }
         switch (error.response.status) {
