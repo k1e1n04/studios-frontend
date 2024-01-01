@@ -22,7 +22,7 @@ export const StudiesTableHead: React.FC = () => {
           タグ
         </StyledTableCell>
         <StyledTableCell
-          sx={{ color: theme.palette.secondary.main, width: "60px" }}
+          sx={{ color: theme.palette.secondary.main, width: "100px" }}
         >
           復習回数
         </StyledTableCell>
