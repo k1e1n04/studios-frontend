@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { TagListResponseDto } from "../../types/TagListResponseDto";
 import { useTag } from "../../hooks/useTag";
-import {TagButton} from "../../atoms/TagButton.tsx";
+import {TagButton} from "../../molecules/Study/Tag/TagButton.tsx";
 
 const StyledContainer = styled(Container)`
   width: 100%;

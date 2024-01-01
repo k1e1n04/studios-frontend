@@ -21,7 +21,7 @@ import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { marked } from "marked";
 import {StyledDeleteButton} from "../../atoms/StyledDeleteButton.tsx";
 import {StyledUpdateButton} from "../../atoms/StyledUpdateButton.tsx";
-import {TagButton} from "../../atoms/TagButton.tsx";
+import {TagButton} from "../../molecules/Study/Tag/TagButton.tsx";
 
 const DateAndDeleteContainer = styled.div`
   display: flex;
