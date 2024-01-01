@@ -24,7 +24,7 @@ import { useMarkdown } from "../../hooks/useMarkdown.ts";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { StyledFormErrorText } from "../../atoms/StyledFormErrorText.tsx";
 import { TagInput } from "../../molecules/Study/Tag/TagInput.tsx";
-import {SuggestedTagList} from "../../molecules/Study/Tag/SuggestedTagList.tsx";
+import { SuggestedTagList } from "../../molecules/Study/Tag/SuggestedTagList.tsx";
 
 export const StudyRegisterForm: React.FC = () => {
   const { createStudy } = useStudy();
@@ -165,7 +165,11 @@ export const StudyRegisterForm: React.FC = () => {
           onAdd={handleAddTag}
           handleChange={handleTagChange}
         />
-        <SuggestedTagList suggestedTags={suggestedTags} handleAddTag={handleAddTag} setSuggestedTags={setSuggestedTags}/>
+        <SuggestedTagList
+          suggestedTags={suggestedTags}
+          handleAddTag={handleAddTag}
+          setSuggestedTags={setSuggestedTags}
+        />
         <Button onClick={() => handleAddTag(newTag)}>追加</Button>
         {errors.tags?.message && (
           <StyledFormErrorText>{errors.tags.message}</StyledFormErrorText>
