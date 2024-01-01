@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { TagListResponseDto } from "../../types/TagListResponseDto";
 import { useTag } from "../../hooks/useTag";
+import {TagButton} from "../../atoms/TagButton.tsx";
 
 const StyledContainer = styled(Container)`
   width: 100%;
@@ -62,11 +63,6 @@ export const TagListPage: React.FC = () => {
   const handleCloseActionModal = () => {
     setOpenActionModal(false);
     setSelectedTagName("");
-  };
-
-  const handleOpenActionModal = (tagName: string) => {
-    setOpenActionModal(true);
-    setSelectedTagName(tagName);
   };
 
   const tagShowRelatedItemsHandler = () => {
@@ -132,16 +128,7 @@ export const TagListPage: React.FC = () => {
         )}
         <TagsContainer>
           {tagListResponseDto?.tags.map((tag) => (
-            <Button
-              key={tag.name}
-              variant="outlined"
-              sx={{
-                m: 1,
-              }}
-              onClick={() => handleOpenActionModal(tag.name)}
-            >
-              {tag.name}
-            </Button>
+            <TagButton tag={tag.name} />
           ))}
         </TagsContainer>
         <Dialog open={openActionModal} onClose={handleCloseActionModal}>

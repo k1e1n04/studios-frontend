@@ -15,11 +15,13 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import styled from "styled-components";
 import Prism from "prismjs";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { marked } from "marked";
+import {StyledDeleteButton} from "../../atoms/StyledDeleteButton.tsx";
+import {StyledUpdateButton} from "../../atoms/StyledUpdateButton.tsx";
+import {TagButton} from "../../atoms/TagButton.tsx";
 
 const DateAndDeleteContainer = styled.div`
   display: flex;
@@ -30,36 +32,6 @@ const DateAndDeleteContainer = styled.div`
 const ButtonsContainer = styled.div`
   display: flex;
   gap: 10px; // ボタン間の隙間
-`;
-
-const DeleteButton = styled(Button)`
-  background-color: #f06060;
-  color: white;
-
-  &:hover {
-    background-color: #fabebb;
-  }
-`;
-
-const UpdateButton = styled(Button)`
-  background-color: #659cba;
-  color: white;
-
-  &:hover {
-    background-color: #74a6c1;
-    color: white;
-  }
-`;
-
-const TagsButton = styled(Button)`
-  background-color: ${grey[500]};
-  color: white;
-  margin: 2px;
-
-  &:hover {
-    background-color: ${grey[300]};
-    color: white;
-  }
 `;
 
 export const StudyDetailPage: React.FC = () => {
@@ -164,31 +136,20 @@ export const StudyDetailPage: React.FC = () => {
               </Typography>
             </div>
             <ButtonsContainer>
-              <UpdateButton
+              <StyledUpdateButton
                 variant="contained"
                 sx={{ color: theme.palette.secondary.main }}
                 href={`/study/update/${id}`}
               >
                 更新
-              </UpdateButton>
-              <DeleteButton onClick={handleOpenDeleteModal} variant="contained">
+              </StyledUpdateButton>
+              <StyledDeleteButton onClick={handleOpenDeleteModal} variant="contained">
                 削除
-              </DeleteButton>
+              </StyledDeleteButton>
             </ButtonsContainer>
           </DateAndDeleteContainer>
           {studyResponseDto.tags.map((tag) => (
-            <TagsButton
-              key={tag.id}
-              variant="contained"
-              sx={{
-                backgroundColor: grey[500],
-                color: theme.palette.secondary.main,
-                mt: 2,
-              }}
-              href={`/?tags=${tag.name}`}
-            >
-              {tag.name}
-            </TagsButton>
+            <TagButton tag={tag.name} />
           ))}
           <div
             className="markdown"
@@ -204,13 +165,13 @@ export const StudyDetailPage: React.FC = () => {
               marginTop: "20px",
             }}
           >
-            <UpdateButton
+            <StyledUpdateButton
               variant="contained"
               sx={{ color: theme.palette.secondary.main }}
               onClick={handleOpenReviewCompleteModal}
             >
               復習完了
-            </UpdateButton>
+            </StyledUpdateButton>
           </div>
         </StyledContainer>
       ) : (
@@ -229,7 +190,7 @@ export const StudyDetailPage: React.FC = () => {
           <Button onClick={handleCloseDeleteModal} color="primary">
             キャンセル
           </Button>
-          <DeleteButton
+          <StyledDeleteButton
             onClick={() => {
               studyDeleteHandler();
               handleCloseDeleteModal();
@@ -237,7 +198,7 @@ export const StudyDetailPage: React.FC = () => {
             variant="contained"
           >
             削除
-          </DeleteButton>
+          </StyledDeleteButton>
         </DialogActions>
       </Dialog>
       <Dialog
@@ -254,7 +215,7 @@ export const StudyDetailPage: React.FC = () => {
           <Button onClick={handleCloseReviewCompleteModal} color="primary">
             もう少し復習
           </Button>
-          <UpdateButton
+          <StyledUpdateButton
             onClick={() => {
               reviewCompleteHandler();
               handleCloseReviewCompleteModal();
@@ -262,7 +223,7 @@ export const StudyDetailPage: React.FC = () => {
             variant="contained"
           >
             完了
-          </UpdateButton>
+          </StyledUpdateButton>
         </DialogActions>
       </Dialog>
     </Layout>
