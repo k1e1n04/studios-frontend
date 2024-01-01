@@ -2,10 +2,12 @@ import { Container } from "@mui/material";
 import styled from "styled-components";
 import { grey } from "@mui/material/colors";
 
+/**
+ * スタイルを適用したコンテナ
+ */
 export const StyledContainer = styled(Container)`
   max-width: 1000px;
   margin: 0 auto;
-  max-width: 1000px; // 最大幅を設定
   padding: 5%;
   background-color: #fff;
   border-radius: 10px;

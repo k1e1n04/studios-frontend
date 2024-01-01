@@ -6,6 +6,13 @@ type Props = {
   setSearchTarget: React.Dispatch<React.SetStateAction<string>>;
 };
 
+/**
+ * 検索用テキストフィールド
+ * @param label ラベル
+ * @param searchTarget 検索対象
+ * @param setSearchTarget 検索対象のセッター
+ * @constructor
+ */
 export const SearchTextField: React.FC<Props> = ({
   label,
   searchTarget,

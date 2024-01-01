@@ -2,7 +2,6 @@ import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -17,9 +16,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import {Box, Link} from "@mui/material";
+import { Box, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import RateReviewIcon from '@mui/icons-material/RateReview';
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import { CustomAppBar } from "../molecules/AppBar.tsx";
+import { StyledDrawerHeader } from "../atoms/StyledDrawerHeader.tsx";
 
 type Props = {
   children: React.ReactNode;
@@ -54,36 +55,6 @@ const Main = styled("main", {
   }),
 }));
 
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop: string) => prop !== "open",
-})<AppBarProps>(({ theme, open }) => ({
-  transition: theme.transitions.create(["margin", "width"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
-}));
-
 export const Layout: React.FC<Props> = ({ children }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -99,7 +70,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <CustomAppBar position="fixed" open={open} drawerWidth={drawerWidth}>
         <Toolbar>
           <IconButton
             color="secondary"
@@ -116,7 +87,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             </Link>
           </Typography>
         </Toolbar>
-      </AppBar>
+      </CustomAppBar>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -130,7 +101,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
         anchor="left"
         open={open}
       >
-        <DrawerHeader>
+        <StyledDrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -138,7 +109,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
               <ChevronRightIcon />
             )}
           </IconButton>
-        </DrawerHeader>
+        </StyledDrawerHeader>
         <Divider />
         <List>
           <StyledDiv>学び管理</StyledDiv>
@@ -179,7 +150,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
         </List>
       </Drawer>
       <Main open={open}>
-        <DrawerHeader />
+        <StyledDrawerHeader />
         {children}
       </Main>
     </Box>

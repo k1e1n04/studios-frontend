@@ -17,12 +17,12 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { Layout } from "../../components/layouts/Layout/Layout";
+import { Layout } from "../../templates/Layout.tsx";
 import { useTheme } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { StyledContainer } from "../../components/containers/StyledContrainer";
-import { SearchTextField } from "../../components/inputs/SerachTextFiled";
+import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
+import { SearchTextField } from "../../atoms/SerachTextFiled.tsx";
 
 const StyledTableCell = styled(TableCell)`
   overflow: hidden;

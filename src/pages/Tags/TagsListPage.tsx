@@ -14,7 +14,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { Layout } from "../../components/layouts/Layout/Layout";
+import { Layout } from "../../templates/Layout.tsx";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";

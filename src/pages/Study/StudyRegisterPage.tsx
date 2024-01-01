@@ -1,5 +1,5 @@
-import { StudyRegisterForm } from "../../components/forms/StudyRegisterForm/StudyRegisterForm";
-import { Layout } from "../../components/layouts/Layout/Layout";
+import { StudyRegisterForm } from "../../organisms/Study/StudyRegisterForm.tsx";
+import { Layout } from "../../templates/Layout.tsx";
 
 export const StudyRegisterPage: React.FC = () => {
   return (

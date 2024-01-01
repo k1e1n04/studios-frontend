@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Layout } from "../../components/layouts/Layout/Layout";
+import { Layout } from "../../templates/Layout.tsx";
 import { useStudy } from "../../hooks/useStudy";
 import { StudyResponseDto } from "../../types/StudyResponseDto";
 import { useTheme } from "@mui/material/styles";
@@ -18,7 +18,7 @@ import {
 import { grey } from "@mui/material/colors";
 import styled from "styled-components";
 import Prism from "prismjs";
-import { StyledContainer } from "../../components/containers/StyledContrainer";
+import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { marked } from "marked";
 
 const DateAndDeleteContainer = styled.div`
@@ -109,7 +109,7 @@ export const StudyDetailPage: React.FC = () => {
     }
     await completeStudyReview(id);
     updateStudyAfterReview();
-  }
+  };
 
   const updateStudyAfterReview = () => {
     if (studyResponseDto === undefined) {
@@ -119,15 +119,15 @@ export const StudyDetailPage: React.FC = () => {
       ...studyResponseDto,
       number_of_review: studyResponseDto.number_of_review + 1,
     });
-  }
+  };
 
   const handleOpenReviewCompleteModal = () => {
     setOpenReviewCompleteModal(true);
-  }
+  };
 
-    const handleCloseReviewCompleteModal = () => {
-        setOpenReviewCompleteModal(false);
-    }
+  const handleCloseReviewCompleteModal = () => {
+    setOpenReviewCompleteModal(false);
+  };
 
   const handleOpenDeleteModal = () => {
     setOpenDeleteModal(true);
@@ -153,9 +153,9 @@ export const StudyDetailPage: React.FC = () => {
           </Typography>
           <DateAndDeleteContainer>
             <div>
-                <Typography align="left">
-                    復習回数 {studyResponseDto.number_of_review}
-                </Typography>
+              <Typography align="left">
+                復習回数 {studyResponseDto.number_of_review}
+              </Typography>
               <Typography align="left">
                 投稿日 {studyResponseDto.created_date}
               </Typography>
@@ -197,11 +197,17 @@ export const StudyDetailPage: React.FC = () => {
               __html: convertedContent,
             }}
           />
-          <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "20px",
+            }}
+          >
             <UpdateButton
-                variant="contained"
-                sx={{ color: theme.palette.secondary.main }}
-                onClick={handleOpenReviewCompleteModal}
+              variant="contained"
+              sx={{ color: theme.palette.secondary.main }}
+              onClick={handleOpenReviewCompleteModal}
             >
               復習完了
             </UpdateButton>
@@ -234,7 +240,10 @@ export const StudyDetailPage: React.FC = () => {
           </DeleteButton>
         </DialogActions>
       </Dialog>
-      <Dialog open={openReviewCompleteModal} onClose={handleCloseReviewCompleteModal}>
+      <Dialog
+        open={openReviewCompleteModal}
+        onClose={handleCloseReviewCompleteModal}
+      >
         <DialogTitle>復習完了確認</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -246,11 +255,11 @@ export const StudyDetailPage: React.FC = () => {
             もう少し復習
           </Button>
           <UpdateButton
-              onClick={() => {
-                reviewCompleteHandler();
-                handleCloseReviewCompleteModal();
-              }}
-              variant="contained"
+            onClick={() => {
+              reviewCompleteHandler();
+              handleCloseReviewCompleteModal();
+            }}
+            variant="contained"
           >
             完了
           </UpdateButton>

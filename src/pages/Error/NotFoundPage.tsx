@@ -1,5 +1,5 @@
 import { Alert } from "@mui/material";
-import { Layout } from "../../components/layouts/Layout/Layout";
+import { Layout } from "../../templates/Layout.tsx";
 
 export const NotFoundPage: React.FC = () => {
   return (

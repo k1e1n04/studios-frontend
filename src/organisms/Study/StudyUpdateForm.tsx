@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { StudyRegisterFormInput } from "../../../types/StudyRegisterFormInput";
+import { StudyRegisterFormInput } from "../../types/StudyRegisterFormInput.ts";
 import {
   Controller,
   SubmitHandler,
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import { useStudy } from "../../../hooks/useStudy";
-import { StudyErrorResponseDto } from "../../../types/StudyErrorResponseDto";
+import { useStudy } from "../../hooks/useStudy.ts";
+import { StudyErrorResponseDto } from "../../types/StudyErrorResponseDto.ts";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {
@@ -20,17 +20,13 @@ import {
   useTheme,
 } from "@mui/material";
 import ReactMde from "react-mde";
-import styled from "styled-components";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import "prismjs/themes/prism-tomorrow.css";
-import { useTag } from "../../../hooks/useTag";
-import { useMarkdown } from "../../../hooks/useMarkdown";
-import { StyledContainer } from "../../containers/StyledContrainer";
-
-const ErrorText = styled.p`
-  color: red;
-  font-size: 12px;
-`;
+import { useTag } from "../../hooks/useTag.ts";
+import { useMarkdown } from "../../hooks/useMarkdown.ts";
+import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
+import { StyledFormErrorText } from "../../atoms/StyledFormErrorText.tsx";
+import { TagInput } from "../../molecules/Study/Tag/TagInput.tsx";
 
 export const StudyUpdateForm: React.FC = () => {
   const { updateStudy, fetchStudy } = useStudy();
@@ -180,7 +176,7 @@ export const StudyUpdateForm: React.FC = () => {
               )}
             ></Controller>
             {errors.title?.message && (
-              <ErrorText>{errors.title.message}</ErrorText>
+              <StyledFormErrorText>{errors.title.message}</StyledFormErrorText>
             )}
             {fields.map((item, index) => (
               <div key={item.id}>
@@ -193,17 +189,10 @@ export const StudyUpdateForm: React.FC = () => {
                 <Button onClick={() => remove(index)}>削除</Button>
               </div>
             ))}
-            <TextField
-              value={newTag}
-              variant={"standard"}
-              placeholder={"タグを追加"}
-              onChange={(e) => handleTagChange(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleAddTag(newTag);
-                  e.preventDefault();
-                }
-              }}
+            <TagInput
+              newTag={newTag}
+              onAdd={handleAddTag}
+              handleChange={handleTagChange}
             />
             <div>
               {suggestedTags.map((tag, index) => (
@@ -226,7 +215,7 @@ export const StudyUpdateForm: React.FC = () => {
             </div>
             <Button onClick={() => handleAddTag(newTag)}>追加</Button>
             {errors.tags?.message && (
-              <ErrorText>{errors.tags.message}</ErrorText>
+              <StyledFormErrorText>{errors.tags.message}</StyledFormErrorText>
             )}
             <Controller
               name="content"
@@ -252,7 +241,9 @@ export const StudyUpdateForm: React.FC = () => {
               )}
             />
             {errors.content?.message && (
-              <ErrorText>{errors.content.message}</ErrorText>
+              <StyledFormErrorText>
+                {errors.content.message}
+              </StyledFormErrorText>
             )}
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button

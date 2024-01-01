@@ -16,10 +16,10 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { Layout } from "../../components/layouts/Layout/Layout";
+import { Layout } from "../../templates/Layout.tsx";
 import { useTheme } from "@mui/material/styles";
 import styled from "styled-components";
-import { StyledContainer } from "../../components/containers/StyledContrainer";
+import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 
 const StyledTableCell = styled(TableCell)`
   overflow: hidden;
@@ -115,7 +115,7 @@ export const StudiesReviewListPage: React.FC = () => {
                   タグ
                 </StyledTableCell>
                 <StyledTableCell
-                    sx={{ color: theme.palette.secondary.main, width: "100px" }}
+                  sx={{ color: theme.palette.secondary.main, width: "100px" }}
                 >
                   復習回数
                 </StyledTableCell>
