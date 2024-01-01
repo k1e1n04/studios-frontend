@@ -22,7 +22,7 @@ import { useTheme } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
-import { SearchTextField } from "../../atoms/SerachTextFiled.tsx";
+import { SearchTextField } from "../../molecules/SerachTextFiled.tsx";
 
 const StyledTableCell = styled(TableCell)`
   overflow: hidden;

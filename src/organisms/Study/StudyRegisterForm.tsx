@@ -24,6 +24,7 @@ import { useMarkdown } from "../../hooks/useMarkdown.ts";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { StyledFormErrorText } from "../../atoms/StyledFormErrorText.tsx";
 import { TagInput } from "../../molecules/Study/Tag/TagInput.tsx";
+import {SuggestedTagList} from "../../molecules/Study/Tag/SuggestedTagList.tsx";
 
 export const StudyRegisterForm: React.FC = () => {
   const { createStudy } = useStudy();
@@ -164,24 +165,7 @@ export const StudyRegisterForm: React.FC = () => {
           onAdd={handleAddTag}
           handleChange={handleTagChange}
         />
-        <div>
-          {suggestedTags.map((tag, index) => (
-            <Button
-              key={index}
-              onClick={() => {
-                handleAddTag(tag);
-                setSuggestedTags([]); // サジェッションをクリア
-              }}
-              sx={{
-                cursor: "pointer",
-                border: (theme) => `1px solid ${theme.palette.primary.main}`,
-                margin: "2px",
-              }}
-            >
-              {tag}
-            </Button>
-          ))}
-        </div>
+        <SuggestedTagList suggestedTags={suggestedTags} handleAddTag={handleAddTag} setSuggestedTags={setSuggestedTags}/>
         <Button onClick={() => handleAddTag(newTag)}>追加</Button>
         {errors.tags?.message && (
           <StyledFormErrorText>{errors.tags.message}</StyledFormErrorText>
