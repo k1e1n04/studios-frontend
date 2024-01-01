@@ -22,6 +22,11 @@ export const StudiesTableHead: React.FC = () => {
           タグ
         </StyledTableCell>
         <StyledTableCell
+          sx={{ color: theme.palette.secondary.main, width: "60px" }}
+        >
+          復習回数
+        </StyledTableCell>
+        <StyledTableCell
           sx={{ color: theme.palette.secondary.main, width: "120px" }}
           align="right"
         >
