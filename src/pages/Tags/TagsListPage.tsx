@@ -3,11 +3,6 @@ import {
   Button,
   CircularProgress,
   Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Grid,
   Stack,
   TextField,
@@ -16,7 +11,6 @@ import {
 } from "@mui/material";
 import { Layout } from "../../templates/Layout.tsx";
 import { useTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { TagListResponseDto } from "../../types/TagListResponseDto";
 import { useTag } from "../../hooks/useTag";
@@ -47,26 +41,14 @@ const TagsContainer = styled.div`
 export const TagListPage: React.FC = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const navigate = useNavigate();
   const [tagListResponseDto, setTagListResponseDto] =
     useState<TagListResponseDto>();
   const { fetchTags } = useTag();
-  const [openActionModal, setOpenActionModal] = useState(false);
-  const [selectedTagName, setSelectedTagName] = useState<string>("");
   const [searchTag, setSearchTag] = useState<string>("");
 
   const handleSearch = async () => {
     const tagListResponseDto = await fetchTags(searchTag);
     setTagListResponseDto(tagListResponseDto);
-  };
-
-  const handleCloseActionModal = () => {
-    setOpenActionModal(false);
-    setSelectedTagName("");
-  };
-
-  const tagShowRelatedItemsHandler = () => {
-    navigate(`/?tags=${selectedTagName}`);
   };
 
   useEffect(() => {
@@ -131,28 +113,6 @@ export const TagListPage: React.FC = () => {
             <TagButton tag={tag.name} />
           ))}
         </TagsContainer>
-        <Dialog open={openActionModal} onClose={handleCloseActionModal}>
-          <DialogTitle>アクション</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              「{selectedTagName}」タグに
-              <br />
-              どのアクションを実行しますか？
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseActionModal} color="primary">
-              キャンセル
-            </Button>
-            <Button
-              onClick={tagShowRelatedItemsHandler}
-              variant="contained"
-              sx={{ color: "white" }}
-            >
-              関連する投稿を表示
-            </Button>
-          </DialogActions>
-        </Dialog>
       </StyledContainer>
     </Layout>
   );
