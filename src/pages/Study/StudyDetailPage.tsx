@@ -5,20 +5,14 @@ import { StudyResponseDto } from "../../types/StudyResponseDto";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  Button,
   CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Stack,
 } from "@mui/material";
 import Prism from "prismjs";
 import { marked } from "marked";
-import { StyledDeleteButton } from "../../atoms/StyledDeleteButton.tsx";
-import { StyledUpdateButton } from "../../atoms/StyledUpdateButton.tsx";
 import { StudyDetail } from "../../organisms/Study/StudyDetail.tsx";
+import { DeleteDialog } from "../../molecules/DeleteDialog.tsx";
+import { ConfirmDialog } from "../../molecules/ConfirmDialog.tsx";
 
 /**
  * 学習詳細ページ
@@ -55,6 +49,9 @@ export const StudyDetailPage: React.FC = () => {
     Prism.highlightAll();
   }, [convertedContent]); // 依存配列に変換結果を追加
 
+  /**
+   * 学習削除ハンドラー
+   */
   const studyDeleteHandler = async () => {
     if (id === undefined) {
       navigate("/not_found");
@@ -64,6 +61,9 @@ export const StudyDetailPage: React.FC = () => {
     navigate("/");
   };
 
+  /**
+   * 復習完了ハンドラー
+   */
   const reviewCompleteHandler = async () => {
     if (id === undefined) {
       navigate("/not_found");
@@ -73,6 +73,9 @@ export const StudyDetailPage: React.FC = () => {
     updateStudyAfterReview();
   };
 
+  /**
+   * 復習完了後の学習情報を更新
+   */
   const updateStudyAfterReview = () => {
     if (studyResponseDto === undefined) {
       return;
@@ -83,18 +86,30 @@ export const StudyDetailPage: React.FC = () => {
     });
   };
 
+  /**
+   * 復習完了モーダルを開くハンドラー
+   */
   const handleOpenReviewCompleteModal = () => {
     setOpenReviewCompleteModal(true);
   };
 
+  /**
+   * 復習完了モーダルを閉じるハンドラー
+   */
   const handleCloseReviewCompleteModal = () => {
     setOpenReviewCompleteModal(false);
   };
 
+  /**
+   * 削除モーダルを開くハンドラー
+   */
   const handleOpenDeleteModal = () => {
     setOpenDeleteModal(true);
   };
 
+  /**
+   * 削除モーダルを閉じるハンドラー
+   */
   const handleCloseDeleteModal = () => {
     setOpenDeleteModal(false);
   };
@@ -114,53 +129,18 @@ export const StudyDetailPage: React.FC = () => {
           <CircularProgress disableShrink />
         </Stack>
       )}
-      <Dialog open={openDeleteModal} onClose={handleCloseDeleteModal}>
-        <DialogTitle>削除確認</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            本当に削除してもよろしいですか？
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDeleteModal} color="primary">
-            キャンセル
-          </Button>
-          <StyledDeleteButton
-            onClick={() => {
-              studyDeleteHandler();
-              handleCloseDeleteModal();
-            }}
-            variant="contained"
-          >
-            削除
-          </StyledDeleteButton>
-        </DialogActions>
-      </Dialog>
-      <Dialog
+      <DeleteDialog
+        open={openDeleteModal}
+        handleClose={handleCloseDeleteModal}
+        handleDelete={studyDeleteHandler}
+      />
+      <ConfirmDialog
+        title={"復習完了確認"}
+        content={"復習を完了してもよろしいですか？"}
         open={openReviewCompleteModal}
-        onClose={handleCloseReviewCompleteModal}
-      >
-        <DialogTitle>復習完了確認</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            復習を完了してもよろしいですか？
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseReviewCompleteModal} color="primary">
-            もう少し復習
-          </Button>
-          <StyledUpdateButton
-            onClick={() => {
-              reviewCompleteHandler();
-              handleCloseReviewCompleteModal();
-            }}
-            variant="contained"
-          >
-            完了
-          </StyledUpdateButton>
-        </DialogActions>
-      </Dialog>
+        handleClose={handleCloseReviewCompleteModal}
+        handleConfirm={reviewCompleteHandler}
+      />
     </Layout>
   );
 };
