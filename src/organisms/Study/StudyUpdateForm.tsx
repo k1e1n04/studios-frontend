@@ -200,7 +200,6 @@ export const StudyUpdateForm: React.FC = () => {
               handleAddTag={handleAddTag}
               setSuggestedTags={setSuggestedTags}
             />
-            <Button onClick={() => handleAddTag(newTag)}>追加</Button>
             {errors.tags?.message && (
               <StyledFormErrorText>{errors.tags.message}</StyledFormErrorText>
             )}
