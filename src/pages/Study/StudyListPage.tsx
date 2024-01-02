@@ -157,6 +157,9 @@ export const StudyListPage: React.FC = () => {
             次へ
           </Button>
         </Box>
+        <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
+          {pageNumber}/{totalPages}ページ
+        </Typography>
       </StyledContainer>
     </Layout>
   );
