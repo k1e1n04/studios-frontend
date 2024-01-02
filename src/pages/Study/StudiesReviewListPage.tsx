@@ -14,6 +14,10 @@ import { useTheme } from "@mui/material/styles";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { StudiesTable } from "../../organisms/Study/StudiesTable.tsx";
 
+/**
+ * 復習一覧ページ
+ * @constructor
+ */
 export const StudiesReviewListPage: React.FC = () => {
   const { fetchReviewStudies } = useStudy();
   const [studyResponseDtos, setStudyResponseDtos] =

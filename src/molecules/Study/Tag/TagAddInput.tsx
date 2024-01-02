@@ -13,7 +13,11 @@ type Props = {
  * @param handleChange タグ入力欄の変更ハンドラー
  * @constructor
  */
-export const TagInput: React.FC<Props> = ({ newTag, onAdd, handleChange }) => (
+export const TagAddInput: React.FC<Props> = ({
+  newTag,
+  onAdd,
+  handleChange,
+}) => (
   <>
     <TextField
       variant={"standard"}

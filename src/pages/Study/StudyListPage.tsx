@@ -16,7 +16,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { SearchTextField } from "../../molecules/SerachTextFiled.tsx";
 import { StudiesTable } from "../../organisms/Study/StudiesTable.tsx";
+import { SeachButton } from "../../atoms/SearchButton.tsx";
 
+/**
+ * 学習一覧ページ
+ * @constructor
+ */
 export const StudyListPage: React.FC = () => {
   const { fetchStudies } = useStudy();
   const [studyResponseDtos, setStudyResponseDtos] =
@@ -91,7 +96,7 @@ export const StudyListPage: React.FC = () => {
       setPageElements(studiesResponseDto.page.pageElements);
       setPageNumber(studiesResponseDto.page.pageNumber);
     })();
-  }, [fetchStudies, queryTags, queryTitle]);
+  }, [fetchStudies, pageNumber, queryTags, queryTitle]);
 
   return (
     <Layout>
@@ -123,14 +128,7 @@ export const StudyListPage: React.FC = () => {
             />
           </Grid>
           <Grid item xs={12} md={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSearch}
-              sx={{ width: "100%", color: theme.palette.secondary.main }}
-            >
-              検索
-            </Button>
+            <SeachButton handleSearch={handleSearch} theme={theme} />
           </Grid>
         </Grid>
         <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>

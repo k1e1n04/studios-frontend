@@ -13,27 +13,17 @@ import {
   DialogContentText,
   DialogTitle,
   Stack,
-  Typography,
 } from "@mui/material";
-import styled from "styled-components";
 import Prism from "prismjs";
-import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { marked } from "marked";
-import {StyledDeleteButton} from "../../atoms/StyledDeleteButton.tsx";
-import {StyledUpdateButton} from "../../atoms/StyledUpdateButton.tsx";
-import {TagButton} from "../../molecules/Study/Tag/TagButton.tsx";
+import { StyledDeleteButton } from "../../atoms/StyledDeleteButton.tsx";
+import { StyledUpdateButton } from "../../atoms/StyledUpdateButton.tsx";
+import { StudyDetail } from "../../organisms/Study/StudyDetail.tsx";
 
-const DateAndDeleteContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const ButtonsContainer = styled.div`
-  display: flex;
-  gap: 10px; // ボタン間の隙間
-`;
-
+/**
+ * 学習詳細ページ
+ * @constructor
+ */
 export const StudyDetailPage: React.FC = () => {
   const { fetchStudy, deleteStudy, completeStudyReview } = useStudy();
   const navigate = useNavigate();
@@ -112,68 +102,13 @@ export const StudyDetailPage: React.FC = () => {
   return (
     <Layout>
       {studyResponseDto ? (
-        <StyledContainer>
-          <Typography
-            variant="h4"
-            sx={{
-              fontWeight: "bold",
-              mb: 3,
-              borderBottom: "1px rgb(0 0 0 / 12%) solid",
-            }}
-          >
-            {studyResponseDto.title}
-          </Typography>
-          <DateAndDeleteContainer>
-            <div>
-              <Typography align="left">
-                復習回数 {studyResponseDto.number_of_review}
-              </Typography>
-              <Typography align="left">
-                投稿日 {studyResponseDto.created_date}
-              </Typography>
-              <Typography align="left">
-                更新日 {studyResponseDto.updated_date}
-              </Typography>
-            </div>
-            <ButtonsContainer>
-              <StyledUpdateButton
-                variant="contained"
-                sx={{ color: theme.palette.secondary.main }}
-                href={`/study/update/${id}`}
-              >
-                更新
-              </StyledUpdateButton>
-              <StyledDeleteButton onClick={handleOpenDeleteModal} variant="contained">
-                削除
-              </StyledDeleteButton>
-            </ButtonsContainer>
-          </DateAndDeleteContainer>
-          {studyResponseDto.tags.map((tag) => (
-            <TagButton tag={tag.name} />
-          ))}
-          <div
-            className="markdown"
-            style={{ marginTop: "20px" }}
-            dangerouslySetInnerHTML={{
-              __html: convertedContent,
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "20px",
-            }}
-          >
-            <StyledUpdateButton
-              variant="contained"
-              sx={{ color: theme.palette.secondary.main }}
-              onClick={handleOpenReviewCompleteModal}
-            >
-              復習完了
-            </StyledUpdateButton>
-          </div>
-        </StyledContainer>
+        <StudyDetail
+          studyResponseDto={studyResponseDto}
+          handleOpenDeleteModal={handleOpenDeleteModal}
+          convertedContent={convertedContent}
+          handleOpenReviewCompleteModal={handleOpenReviewCompleteModal}
+          theme={theme}
+        />
       ) : (
         <Stack alignItems={"center"}>
           <CircularProgress disableShrink />

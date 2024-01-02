@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import {
-  Button,
   CircularProgress,
-  Container,
   Grid,
   Stack,
-  TextField,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -14,30 +11,20 @@ import { useTheme } from "@mui/material/styles";
 import styled from "styled-components";
 import { TagListResponseDto } from "../../types/TagListResponseDto";
 import { useTag } from "../../hooks/useTag";
-import {TagButton} from "../../molecules/Study/Tag/TagButton.tsx";
-
-const StyledContainer = styled(Container)`
-  width: 100%;
-  max-width: 90vw;
-  margin: 0 auto;
-  padding: 5%;
-  background-color: #fff;
-  border-radius: 10px;
-
-  @media (min-width: 768px) and (max-width: 1024px) {
-    padding: 4%;
-  }
-
-  @media (max-width: 767px) {
-    padding: 3%;
-  }
-`;
+import { TagButton } from "../../molecules/Study/Tag/TagButton.tsx";
+import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
+import { SeachButton } from "../../atoms/SearchButton.tsx";
+import { SearchTextField } from "../../molecules/SerachTextFiled.tsx";
 
 const TagsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
+/**
+ * タグ一覧ページ
+ * @constructor
+ */
 export const TagListPage: React.FC = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -74,33 +61,14 @@ export const TagListPage: React.FC = () => {
         </Typography>
         <Grid container spacing={2} sx={{ marginBottom: 2 }}>
           <Grid item xs={6} md={3}>
-            <TextField
-              label="タグで検索"
-              variant="outlined"
-              value={searchTag}
-              onChange={(e) => setSearchTag(e.target.value)}
-              sx={{ width: "100%", backgroundColor: "#fff" }}
-              InputProps={{
-                sx: {
-                  height: "40px",
-                },
-              }}
-              InputLabelProps={{
-                sx: {
-                  fontSize: "0.6rem",
-                },
-              }}
+            <SearchTextField
+              label={"タグで検索"}
+              searchTarget={searchTag}
+              setSearchTarget={setSearchTag}
             />
           </Grid>
           <Grid item xs={12} md={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSearch}
-              sx={{ width: "100%", color: theme.palette.secondary.main }}
-            >
-              検索
-            </Button>
+            <SeachButton handleSearch={handleSearch} theme={theme} />
           </Grid>
         </Grid>
         {!tagListResponseDto && (
@@ -109,9 +77,7 @@ export const TagListPage: React.FC = () => {
           </Stack>
         )}
         <TagsContainer>
-          {tagListResponseDto?.tags.map((tag) => (
-            <TagButton tag={tag.name} />
-          ))}
+          {tagListResponseDto?.tags.map((tag) => <TagButton tag={tag.name} />)}
         </TagsContainer>
       </StyledContainer>
     </Layout>

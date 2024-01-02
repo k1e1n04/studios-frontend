@@ -23,7 +23,7 @@ import { useTag } from "../../hooks/useTag.ts";
 import { useMarkdown } from "../../hooks/useMarkdown.ts";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { StyledFormErrorText } from "../../atoms/StyledFormErrorText.tsx";
-import { TagInput } from "../../molecules/Study/Tag/TagInput.tsx";
+import { TagAddInput } from "../../molecules/Study/Tag/TagAddInput.tsx";
 import { SuggestedTagList } from "../../molecules/Study/Tag/SuggestedTagList.tsx";
 
 export const StudyRegisterForm: React.FC = () => {
@@ -160,7 +160,7 @@ export const StudyRegisterForm: React.FC = () => {
             <Button onClick={() => remove(index)}>削除</Button>
           </div>
         ))}
-        <TagInput
+        <TagAddInput
           newTag={newTag}
           onAdd={handleAddTag}
           handleChange={handleTagChange}

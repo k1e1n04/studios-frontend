@@ -1,6 +1,10 @@
 import { Alert } from "@mui/material";
 import { Layout } from "../../templates/Layout.tsx";
 
+/**
+ * サーバーエラーページ
+ * @constructor
+ */
 export const InternalServerErrorPage: React.FC = () => {
   return (
     <Layout>
