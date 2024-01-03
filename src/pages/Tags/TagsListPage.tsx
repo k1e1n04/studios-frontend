@@ -3,8 +3,6 @@ import {
   CircularProgress,
   Grid,
   Stack,
-  Typography,
-  useMediaQuery,
 } from "@mui/material";
 import { Layout } from "../../templates/Layout.tsx";
 import { useTheme } from "@mui/material/styles";
@@ -22,7 +20,6 @@ import { FlexContainer } from "../../atoms/FlexContainer.tsx";
  */
 export const TagListPage: React.FC = () => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [tagListResponseDto, setTagListResponseDto] =
     useState<TagListResponseDto>();
   const { fetchTags } = useTag();
