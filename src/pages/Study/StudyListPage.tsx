@@ -101,17 +101,6 @@ export const StudyListPage: React.FC = () => {
   return (
     <Layout>
       <StyledContainer>
-        <Typography
-          variant="h5"
-          align="center"
-          sx={{
-            fontWeight: "bold",
-            mb: 3,
-            fontSize: isSmallScreen ? "1.2rem" : "1.5rem",
-          }}
-        >
-          学び一覧
-        </Typography>
         <Grid container spacing={2} sx={{ marginBottom: 2 }}>
           <Grid item xs={12} md={5}>
             <SearchTextField
@@ -135,7 +124,10 @@ export const StudyListPage: React.FC = () => {
           {pageElements}/{totalStudies}件
         </Typography>
         {studyResponseDtos ? (
-          <StudiesTable studyResponseDtos={studyResponseDtos} />
+          <StudiesTable
+            studyResponseDtos={studyResponseDtos}
+            isSmallScreen={isSmallScreen}
+          />
         ) : (
           <Stack alignItems={"center"} sx={{ mt: "20px" }}>
             <CircularProgress disableShrink />

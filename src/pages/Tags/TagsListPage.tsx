@@ -8,18 +8,13 @@ import {
 } from "@mui/material";
 import { Layout } from "../../templates/Layout.tsx";
 import { useTheme } from "@mui/material/styles";
-import styled from "styled-components";
 import { TagListResponseDto } from "../../types/TagListResponseDto";
 import { useTag } from "../../hooks/useTag";
 import { TagButton } from "../../molecules/Study/Tag/TagButton.tsx";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { SeachButton } from "../../atoms/SearchButton.tsx";
 import { SearchTextField } from "../../molecules/SerachTextFiled.tsx";
-
-const TagsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
+import { FlexContainer } from "../../atoms/FlexContainer.tsx";
 
 /**
  * タグ一覧ページ
@@ -76,9 +71,9 @@ export const TagListPage: React.FC = () => {
             <CircularProgress disableShrink />
           </Stack>
         )}
-        <TagsContainer>
+        <FlexContainer>
           {tagListResponseDto?.tags.map((tag) => <TagButton tag={tag.name} />)}
-        </TagsContainer>
+        </FlexContainer>
       </StyledContainer>
     </Layout>
   );

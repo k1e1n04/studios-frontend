@@ -71,22 +71,14 @@ export const StudiesReviewListPage: React.FC = () => {
   return (
     <Layout>
       <StyledContainer>
-        <Typography
-          variant="h5"
-          align="center"
-          sx={{
-            fontWeight: "bold",
-            mb: 3,
-            fontSize: isSmallScreen ? "1.2rem" : "1.5rem",
-          }}
-        >
-          復習一覧
-        </Typography>
         <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
           {pageElements}/{totalStudies}件
         </Typography>
         {studyResponseDtos ? (
-          <StudiesTable studyResponseDtos={studyResponseDtos} />
+          <StudiesTable
+            studyResponseDtos={studyResponseDtos}
+            isSmallScreen={isSmallScreen}
+          />
         ) : (
           <Stack alignItems={"center"} sx={{ mt: "20px" }}>
             <CircularProgress disableShrink />

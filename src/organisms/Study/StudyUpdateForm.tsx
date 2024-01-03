@@ -16,23 +16,21 @@ import {
   CircularProgress,
   Stack,
   TextField,
-  Typography,
   useTheme,
 } from "@mui/material";
-import ReactMde from "react-mde";
 import "react-mde/lib/styles/css/react-mde-all.css";
-import "prismjs/themes/prism-tomorrow.css";
 import { useTag } from "../../hooks/useTag.ts";
-import { useMarkdown } from "../../hooks/useMarkdown.ts";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { StyledFormErrorText } from "../../atoms/StyledFormErrorText.tsx";
 import { TagAddInput } from "../../molecules/Study/Tag/TagAddInput.tsx";
-import { SuggestedTagList } from "../../molecules/Study/Tag/SuggestedTagList.tsx";
+import { CustomRichTextEditor } from "../CustomRichTextEditor.tsx";
+import {TagButton} from "../../molecules/Study/Tag/TagButton.tsx";
+import CloseIcon from "@mui/icons-material/Close";
+import {FlexContainer} from "../../atoms/FlexContainer.tsx";
 
 export const StudyUpdateForm: React.FC = () => {
   const { updateStudy, fetchStudy } = useStudy();
   const { fetchTags } = useTag();
-  const { generateMarkdownPreview } = useMarkdown();
   const [studyErrorResponseDto, setStudyErrorResponseDto] =
     useState<StudyErrorResponseDto>();
   const [suggestedTags, setSuggestedTags] = useState<string[]>([]);
@@ -44,7 +42,6 @@ export const StudyUpdateForm: React.FC = () => {
     handleSubmit,
     setValue,
     watch,
-    register,
     formState: { errors, isSubmitting },
   } = useForm<StudyRegisterFormInput>({
     mode: "onChange",
@@ -60,7 +57,6 @@ export const StudyUpdateForm: React.FC = () => {
     control,
     name: "tags",
   });
-  const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
   // パスパラメーターからidを取得
   const { id } = useParams();
   const theme = useTheme();
@@ -141,9 +137,6 @@ export const StudyUpdateForm: React.FC = () => {
     <>
       {isLoaded ? (
         <StyledContainer>
-          <Typography variant="h5" align="center" sx={{ fontWeight: "bold" }}>
-            学び更新
-          </Typography>
           <Stack
             component={"form"}
             onSubmit={handleSubmit(onSubmit)}
@@ -179,27 +172,23 @@ export const StudyUpdateForm: React.FC = () => {
             {errors.title?.message && (
               <StyledFormErrorText>{errors.title.message}</StyledFormErrorText>
             )}
-            {fields.map((item, index) => (
-              <div key={item.id}>
-                <TextField
-                  {...register(`tags.${index}.name`)}
-                  variant={"standard"}
-                  defaultValue={item.name} // 初期値を設定
-                  required={true}
-                />
-                <Button onClick={() => remove(index)}>削除</Button>
-              </div>
-            ))}
             <TagAddInput
               newTag={newTag}
               onAdd={handleAddTag}
               handleChange={handleTagChange}
-            />
-            <SuggestedTagList
               suggestedTags={suggestedTags}
-              handleAddTag={handleAddTag}
               setSuggestedTags={setSuggestedTags}
             />
+            <FlexContainer>
+              {fields.map((tag, index) => (
+                  <>
+                    <TagButton tag={tag.name} />
+                    <Button onClick={() => remove(index)}>
+                      <CloseIcon />
+                    </Button>
+                  </>
+              ))}
+            </FlexContainer>
             {errors.tags?.message && (
               <StyledFormErrorText>{errors.tags.message}</StyledFormErrorText>
             )}
@@ -214,14 +203,11 @@ export const StudyUpdateForm: React.FC = () => {
                 },
               }}
               render={({ field }) => (
-                <ReactMde
-                  {...field}
-                  selectedTab={selectedTab}
-                  onTabChange={setSelectedTab}
-                  generateMarkdownPreview={generateMarkdownPreview}
-                  onChange={(e) => {
+                <CustomRichTextEditor
+                  content={field.value}
+                  onChange={(content) => {
                     setIsFormChanged(true);
-                    field.onChange(e);
+                    field.onChange(content);
                   }}
                 />
               )}

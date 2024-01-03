@@ -9,7 +9,6 @@ import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 type Props = {
   studyResponseDto: StudyResponseDto;
   handleOpenDeleteModal: () => void;
-  convertedContent: string;
   handleOpenReviewCompleteModal: () => void;
   theme: Theme;
 };
@@ -18,7 +17,6 @@ type Props = {
  * 学習詳細
  * @param studyResponseDto 学習レスポンスDTO
  * @param handleOpenDeleteModal 削除モーダルを開くハンドラー
- * @param convertedContent マークダウンをHTMLに変換した内容
  * @param handleOpenReviewCompleteModal 復習完了モーダルを開くハンドラー
  * @param theme テーマ
  * @constructor
@@ -26,7 +24,6 @@ type Props = {
 export const StudyDetail: React.FC<Props> = ({
   studyResponseDto,
   handleOpenDeleteModal,
-  convertedContent,
   handleOpenReviewCompleteModal,
   theme,
 }) => {
@@ -40,7 +37,7 @@ export const StudyDetail: React.FC<Props> = ({
       {studyResponseDto.tags.map((tag) => (
         <TagButton tag={tag.name} />
       ))}
-      <StudyDetailBody convertedContent={convertedContent} />
+      <StudyDetailBody content={studyResponseDto.content} />
       <StudyDetailFooter
         handleOpenReviewCompleteModal={handleOpenReviewCompleteModal}
         theme={theme}

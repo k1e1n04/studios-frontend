@@ -1,19 +1,22 @@
 import { StudyResponseDto } from "../../types/StudyResponseDto.ts";
-import { Button, TableBody, TableRow, useMediaQuery } from "@mui/material";
+import { Button, TableBody, TableRow } from "@mui/material";
 import { StyledTableCell } from "../../atoms/StyledTableCell.tsx";
 import { useTheme } from "@mui/material/styles";
 
 type Props = {
   studyResponseDtos: StudyResponseDto[];
+  isSmallScreen: boolean;
 };
 
 /**
  * 学習一覧テーブルのボディ
  * @param studyResponseDtos 学習一覧
  */
-export const StudiesTableBody: React.FC<Props> = ({ studyResponseDtos }) => {
+export const StudiesTableBody: React.FC<Props> = ({
+  studyResponseDtos,
+  isSmallScreen,
+}) => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <TableBody>
       {studyResponseDtos.map((studyResponseDto: StudyResponseDto) => (

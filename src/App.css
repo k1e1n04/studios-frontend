@@ -69,15 +69,16 @@
   background-color: hsl(0,0%,8%)!important;
 }
 /* コードブロック表示エリア */
-pre {
-  width: 100%;
-  overflow-x: auto;
-  padding: 7px;
-  background-color: hsl(0,0%,8%)!important;
-  border-radius: 5px;
-  white-space: pre-wrap; 
-  word-wrap: break-word;
-}
+/*pre {*/
+/*  width: 100%;*/
+/*  overflow-x: auto;*/
+/*  padding: 7px;*/
+/*  background-color: hsl(0,0%,8%)!important;*/
+/*  border-radius: 5px;*/
+/*  white-space: pre-wrap; */
+/*  word-wrap: break-word;*/
+/*}*/
+
 /* 引用表示エリア */
 blockquote {
   margin-left: 0!important;

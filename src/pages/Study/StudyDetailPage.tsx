@@ -4,12 +4,7 @@ import { useStudy } from "../../hooks/useStudy";
 import { StudyResponseDto } from "../../types/StudyResponseDto";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  CircularProgress,
-  Stack,
-} from "@mui/material";
-import Prism from "prismjs";
-import { marked } from "marked";
+import { CircularProgress, Stack } from "@mui/material";
 import { StudyDetail } from "../../organisms/Study/StudyDetail.tsx";
 import { DeleteDialog } from "../../molecules/DeleteDialog.tsx";
 import { ConfirmDialog } from "../../molecules/ConfirmDialog.tsx";
@@ -27,7 +22,6 @@ export const StudyDetailPage: React.FC = () => {
   const theme = useTheme();
   // パスパラメーターからidを取得
   const { id } = useParams();
-  const [convertedContent, setConvertedContent] = useState<string>("");
 
   useEffect(() => {
     if (id === undefined) {
@@ -37,17 +31,9 @@ export const StudyDetailPage: React.FC = () => {
     (async () => {
       const study = await fetchStudy(id);
       setStudyResponseDto(study);
-      // マークダウンをHTMLに変換
-      const html = marked(study.content);
-      setConvertedContent(html);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchStudy, id, navigate]);
-
-  // DOMが更新された後にハイライトを再適用
-  useEffect(() => {
-    Prism.highlightAll();
-  }, [convertedContent]); // 依存配列に変換結果を追加
 
   /**
    * 学習削除ハンドラー
@@ -120,7 +106,6 @@ export const StudyDetailPage: React.FC = () => {
         <StudyDetail
           studyResponseDto={studyResponseDto}
           handleOpenDeleteModal={handleOpenDeleteModal}
-          convertedContent={convertedContent}
           handleOpenReviewCompleteModal={handleOpenReviewCompleteModal}
           theme={theme}
         />
