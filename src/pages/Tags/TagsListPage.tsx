@@ -43,17 +43,6 @@ export const TagListPage: React.FC = () => {
   return (
     <Layout>
       <StyledContainer>
-        <Typography
-          variant="h5"
-          align="center"
-          sx={{
-            fontWeight: "bold",
-            mb: 3,
-            fontSize: isSmallScreen ? "1.2rem" : "1.5rem",
-          }}
-        >
-          タグ一覧
-        </Typography>
         <Grid container spacing={2} sx={{ marginBottom: 2 }}>
           <Grid item xs={6} md={3}>
             <SearchTextField
