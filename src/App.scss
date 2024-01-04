@@ -35,10 +35,14 @@
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
-}
-
 p {
   margin: 0;
+}
+
+code {
+  background-color: rgb(247, 248, 249);
+  color: #333;
+  padding: 1px 5px;
+  border-radius: 8px;
+  display: inline-block;
 }
