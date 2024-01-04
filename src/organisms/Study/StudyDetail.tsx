@@ -5,6 +5,7 @@ import { TagButton } from "../../molecules/Study/Tag/TagButton.tsx";
 import { StudyDetailBody } from "../../molecules/Study/StudyDetailBody.tsx";
 import { StudyDetailFooter } from "../../molecules/Study/StudyDetailFooter.tsx";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
+import { CustomTableStyleContainer } from "../../atoms/CustomTableStyleContainer.tsx";
 
 type Props = {
   studyResponseDto: StudyResponseDto;

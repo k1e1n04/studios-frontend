@@ -1,5 +1,6 @@
 import { CodeHighlight } from "@mantine/code-highlight";
 import sanitizeHtml from "sanitize-html";
+import { CustomTableStyleContainer } from "../../atoms/CustomTableStyleContainer.tsx";
 
 type Props = {
   content: string;
@@ -47,8 +48,11 @@ export const StudyDetailBody: React.FC<Props> = ({ content }) => {
   };
 
   return (
-    <div className="study-detail-body" style={{ marginTop: "20px" }}>
+    <CustomTableStyleContainer
+      className="study-detail-body"
+      style={{ marginTop: "20px" }}
+    >
       {renderCodeBlocks()}
-    </div>
+    </CustomTableStyleContainer>
   );
 };
