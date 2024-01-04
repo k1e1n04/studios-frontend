@@ -24,9 +24,9 @@ import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { StyledFormErrorText } from "../../atoms/StyledFormErrorText.tsx";
 import { TagAddInput } from "../../molecules/Study/Tag/TagAddInput.tsx";
 import { CustomRichTextEditor } from "../CustomRichTextEditor.tsx";
-import {TagButton} from "../../molecules/Study/Tag/TagButton.tsx";
+import { TagButton } from "../../molecules/Study/Tag/TagButton.tsx";
 import CloseIcon from "@mui/icons-material/Close";
-import {FlexContainer} from "../../atoms/FlexContainer.tsx";
+import { FlexContainer } from "../../atoms/FlexContainer.tsx";
 
 export const StudyUpdateForm: React.FC = () => {
   const { updateStudy, fetchStudy } = useStudy();
@@ -181,12 +181,12 @@ export const StudyUpdateForm: React.FC = () => {
             />
             <FlexContainer>
               {fields.map((tag, index) => (
-                  <>
-                    <TagButton tag={tag.name} />
-                    <Button onClick={() => remove(index)}>
-                      <CloseIcon />
-                    </Button>
-                  </>
+                <>
+                  <TagButton tag={tag.name} />
+                  <Button onClick={() => remove(index)}>
+                    <CloseIcon />
+                  </Button>
+                </>
               ))}
             </FlexContainer>
             {errors.tags?.message && (
