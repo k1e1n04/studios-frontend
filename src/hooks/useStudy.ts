@@ -75,11 +75,16 @@ export const useStudy = () => {
     tags: string[],
     content: string,
   ) => {
+    // <pre><code>にclassが指定されていない場合、highlight.jsが動作しないため、"language-plaintext"を指定する
+    const contentWithLanguage = content.replace(
+      /<pre><code>/g,
+      '<pre><code class="language-plaintext">',
+    );
     return await studyApi
       .post("/study/register", {
         title: title,
         tags: tags,
-        content: content,
+        content: contentWithLanguage,
       })
       .then((response) => [response.status, response.data])
       .catch((error) => [error.response.status, error.response.data]);
@@ -98,11 +103,16 @@ export const useStudy = () => {
     tags: string[],
     content: string,
   ) => {
+    // <pre><code>にclassが指定されていない場合、highlight.jsが動作しないため、"language-plaintext"を指定する
+    const contentWithLanguage = content.replace(
+        /<pre><code>/g,
+        '<pre><code class="language-plaintext">',
+    );
     return await studyApi
       .put(`/study/update/${id}`, {
         title: title,
         tags: tags,
-        content: content,
+        content: contentWithLanguage,
       })
       .then((response) => [response.status, response.data])
       .catch((error) => [error.response.status, error.response.data]);

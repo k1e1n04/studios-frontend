@@ -20,6 +20,7 @@ import rustLanguageSyntax from "highlight.js/lib/languages/rust";
 import scssLanguageSyntax from "highlight.js/lib/languages/scss";
 import swiftLanguageSyntax from "highlight.js/lib/languages/swift";
 import dartLanguageSyntax from "highlight.js/lib/languages/dart";
+import plainTextLanguageSyntax from "highlight.js/lib/languages/plaintext";
 
 /**
  * lowlightのカスタムフック
@@ -59,6 +60,9 @@ export const useLowlight = () => {
     lowlight.registerLanguage("html", htmlLanguageSyntax);
     lowlight.registerLanguage("css", cssLanguageSyntax);
     lowlight.registerLanguage("scss", scssLanguageSyntax);
+    lowlight.registerLanguage("plaintext", plainTextLanguageSyntax);
+    lowlight.registerLanguage("text", plainTextLanguageSyntax);
+    lowlight.registerLanguage("txt", plainTextLanguageSyntax);
     return lowlight;
   };
 
