@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import "@mantine/core/styles.css";
 import "@mantine/tiptap/styles.css";
-import '@mantine/code-highlight/styles.css';
+import "@mantine/code-highlight/styles.css";
 import { StudyRegisterPage } from "./pages/Study/StudyRegisterPage";
 import { StudyListPage } from "./pages/Study/StudyListPage";
 import { InternalServerErrorPage } from "./pages/Error/InternalServerErrorPage";

@@ -25,43 +25,42 @@ import dartLanguageSyntax from "highlight.js/lib/languages/dart";
  * lowlightのカスタムフック
  */
 export const useLowlight = () => {
+  /**
+   * 言語登録済みのlowlightを取得する
+   */
+  const getLowlight = () => {
+    lowlight.registerLanguage("typescript", tsLanguageSyntax);
+    lowlight.registerLanguage("ts", tsLanguageSyntax);
+    lowlight.registerLanguage("tsx", tsLanguageSyntax);
+    lowlight.registerLanguage("javascript", jsLanguageSyntax);
+    lowlight.registerLanguage("js", jsLanguageSyntax);
+    lowlight.registerLanguage("jsx", jsLanguageSyntax);
+    lowlight.registerLanguage("python", pythonLanguageSyntax);
+    lowlight.registerLanguage("py", pythonLanguageSyntax);
+    lowlight.registerLanguage("go", goLanguageSyntax);
+    lowlight.registerLanguage("ruby", rubyLanguageSyntax);
+    lowlight.registerLanguage("rb", rubyLanguageSyntax);
+    lowlight.registerLanguage("shell", shellLanguageSyntax);
+    lowlight.registerLanguage("sh", shellLanguageSyntax);
+    lowlight.registerLanguage("bash", shellLanguageSyntax);
+    lowlight.registerLanguage("zsh", shellLanguageSyntax);
+    lowlight.registerLanguage("c", cLanguageSyntax);
+    lowlight.registerLanguage("java", javaLanguageSyntax);
+    lowlight.registerLanguage("kotlin", kotlinLanguageSyntax);
+    lowlight.registerLanguage("php", phpLanguageSyntax);
+    lowlight.registerLanguage("rust", rustLanguageSyntax);
+    lowlight.registerLanguage("swift", swiftLanguageSyntax);
+    lowlight.registerLanguage("dart", dartLanguageSyntax);
+    lowlight.registerLanguage("perl", perlLanguageSyntax);
+    lowlight.registerLanguage("json", jsonLanguageSyntax);
+    lowlight.registerLanguage("xml", xmlLanguageSyntax);
+    lowlight.registerLanguage("yaml", yamlLanguageSyntax);
+    lowlight.registerLanguage("sql", sqlLanguageSyntax);
+    lowlight.registerLanguage("html", htmlLanguageSyntax);
+    lowlight.registerLanguage("css", cssLanguageSyntax);
+    lowlight.registerLanguage("scss", scssLanguageSyntax);
+    return lowlight;
+  };
 
-    /**
-     * 言語登録済みのlowlightを取得する
-     */
-    const getLowlight = () => {
-        lowlight.registerLanguage("typescript", tsLanguageSyntax);
-        lowlight.registerLanguage("ts", tsLanguageSyntax);
-        lowlight.registerLanguage("tsx", tsLanguageSyntax);
-        lowlight.registerLanguage("javascript", jsLanguageSyntax);
-        lowlight.registerLanguage("js", jsLanguageSyntax);
-        lowlight.registerLanguage("jsx", jsLanguageSyntax);
-        lowlight.registerLanguage("python", pythonLanguageSyntax);
-        lowlight.registerLanguage("py", pythonLanguageSyntax);
-        lowlight.registerLanguage("go", goLanguageSyntax);
-        lowlight.registerLanguage("ruby", rubyLanguageSyntax);
-        lowlight.registerLanguage("rb", rubyLanguageSyntax);
-        lowlight.registerLanguage("shell", shellLanguageSyntax);
-        lowlight.registerLanguage("sh", shellLanguageSyntax);
-        lowlight.registerLanguage("bash", shellLanguageSyntax);
-        lowlight.registerLanguage("zsh", shellLanguageSyntax);
-        lowlight.registerLanguage("c", cLanguageSyntax);
-        lowlight.registerLanguage("java", javaLanguageSyntax);
-        lowlight.registerLanguage("kotlin", kotlinLanguageSyntax);
-        lowlight.registerLanguage("php", phpLanguageSyntax);
-        lowlight.registerLanguage("rust", rustLanguageSyntax);
-        lowlight.registerLanguage("swift", swiftLanguageSyntax);
-        lowlight.registerLanguage("dart", dartLanguageSyntax);
-        lowlight.registerLanguage("perl", perlLanguageSyntax);
-        lowlight.registerLanguage("json", jsonLanguageSyntax);
-        lowlight.registerLanguage("xml", xmlLanguageSyntax);
-        lowlight.registerLanguage("yaml", yamlLanguageSyntax);
-        lowlight.registerLanguage("sql", sqlLanguageSyntax);
-        lowlight.registerLanguage("html", htmlLanguageSyntax);
-        lowlight.registerLanguage("css", cssLanguageSyntax);
-        lowlight.registerLanguage("scss", scssLanguageSyntax);
-        return lowlight;
-    }
-
-    return { getLowlight } as const;
-}
+  return { getLowlight } as const;
+};
