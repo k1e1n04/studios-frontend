@@ -18,7 +18,6 @@ import {
   TextField,
   useTheme,
 } from "@mui/material";
-import "react-mde/lib/styles/css/react-mde-all.css";
 import { useTag } from "../../hooks/useTag.ts";
 import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
 import { StyledFormErrorText } from "../../atoms/StyledFormErrorText.tsx";

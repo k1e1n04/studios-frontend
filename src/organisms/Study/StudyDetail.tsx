@@ -35,7 +35,7 @@ export const StudyDetail: React.FC<Props> = ({
         theme={theme}
       />
       {studyResponseDto.tags.map((tag) => (
-        <TagButton tag={tag.name} />
+        <TagButton key={tag.id} tag={tag.name} />
       ))}
       <StudyDetailBody content={studyResponseDto.content} />
       <StudyDetailFooter
