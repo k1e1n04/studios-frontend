@@ -36,8 +36,8 @@ export const TagAddInput: React.FC<Props> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
-  const handleClickSuggestedTag = () => {
-    onAdd(newTag);
+  const handleClickSuggestedTag = (tag: string) => {
+    onAdd(tag);
     handleClose();
   }
   return (
