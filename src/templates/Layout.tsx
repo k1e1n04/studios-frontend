@@ -19,7 +19,7 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { Box, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import RateReviewIcon from "@mui/icons-material/RateReview";
-import { CustomAppBar } from "../molecules/AppBar.tsx";
+import { CustomAppBar } from "../molecules/CustomAppBar.tsx";
 import { StyledDrawerHeader } from "../atoms/StyledDrawerHeader.tsx";
 
 type Props = {
@@ -70,10 +70,10 @@ export const Layout: React.FC<Props> = ({ children }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <CustomAppBar position="fixed" open={open} drawerWidth={drawerWidth}>
+      <CustomAppBar position="fixed" open={open} drawerWidth={drawerWidth} color={"secondary"} sx={{boxShadow: "none"}}>
         <Toolbar>
           <IconButton
-            color="secondary"
+            color="primary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -82,7 +82,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <Link href="/" color={"secondary"} underline="none">
+            <Link href="/" color={"primary"} underline="none">
               Studios
             </Link>
           </Typography>
@@ -110,7 +110,6 @@ export const Layout: React.FC<Props> = ({ children }) => {
             )}
           </IconButton>
         </StyledDrawerHeader>
-        <Divider />
         <List>
           <StyledDiv>学び管理</StyledDiv>
           <ListItem key="学び一覧" disablePadding>
