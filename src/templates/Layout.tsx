@@ -81,7 +81,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" sx={{fontWeight: "bold"}}>
             <Link href="/" color={"primary"} underline="none">
               Studios
             </Link>
