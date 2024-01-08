@@ -18,7 +18,11 @@ export const useTag = () => {
     axiosInstance.interceptors.response.use(
       (response: AxiosResponse) => response,
       (error: AxiosError<TagErrorResponseDto>) => {
+        if (axios.isCancel(error)) {
+          navigate("/internal_server_error");
+        }
         if (!error.response) {
+            navigate("/internal_server_error");
           return Promise.reject(error);
         }
         switch (error.response.status) {

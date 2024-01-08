@@ -19,11 +19,14 @@ export const useStudy = () => {
     axiosInstance.interceptors.response.use(
       (response: AxiosResponse) => response,
       (error: AxiosError<StudyErrorResponseDto>) => {
+        if (axios.isCancel(error)) {
+          navigate("/internal_server_error");
+        }
         if (!error.response) {
+          navigate("/internal_server_error");
           return Promise.reject(error);
         }
-        if (error.code === "ECONNABORTED") {
-          navigate("/internal_server_error");
+        if (error.code === "ECONNABORTED" || error.message.includes('timeout')) {
           return Promise.reject(error);
         }
         switch (error.response.status) {
