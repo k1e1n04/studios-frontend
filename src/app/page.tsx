@@ -17,7 +17,7 @@ import { StyledContainer } from "@/atoms/StyledContrainer";
 import { SearchTextField } from "@/molecules/SerachTextFiled";
 import { StudiesTable } from "@/organisms/Study/StudiesTable";
 import { SeachButton } from "@/atoms/SearchButton";
-import { redirect, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 /**

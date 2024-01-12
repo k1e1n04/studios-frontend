@@ -7,8 +7,6 @@ import {
 } from "@mantine/core";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 
-const theme = createTheme();
-
 const ThemeRegistry = ({ children }: { children: React.ReactNode }) => {
   const theme = createTheme({
     palette: {

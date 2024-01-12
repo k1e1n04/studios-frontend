@@ -16,7 +16,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import RateReviewIcon from "@mui/icons-material/RateReview";
 import { CustomAppBar } from "@/molecules/CustomAppBar";
 import { StyledDrawerHeader } from "@/atoms/StyledDrawerHeader";

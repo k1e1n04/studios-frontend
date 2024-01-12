@@ -1,3 +1,4 @@
+"use client";
 import { Alert } from "@mui/material";
 import { Layout } from "@/templates/Layout";
 

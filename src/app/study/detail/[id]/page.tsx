@@ -28,7 +28,7 @@ export default function Page({ params }: { params: { id: string } }) {
       const study = await fetchStudy(params.id);
       setStudyResponseDto(study);
     })();
-  }, [fetchStudy]);
+  }, [fetchStudy, params.id]);
 
   /**
    * 学習削除ハンドラー

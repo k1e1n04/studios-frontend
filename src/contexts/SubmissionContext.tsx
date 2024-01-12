@@ -83,7 +83,7 @@ const useSubmission = () => {
   useEffect(() => {
     window.addEventListener("beforeunload", handleBeforeunload);
     return () => window.removeEventListener("beforeunload", handleBeforeunload);
-  }, [isShowPageLeaveAlert]);
+  }, [isShowPageLeaveAlert, handleBeforeunload]);
 
   return {
     showPageLeaveAlert: () => setShowPageLeaveAlert(true),
