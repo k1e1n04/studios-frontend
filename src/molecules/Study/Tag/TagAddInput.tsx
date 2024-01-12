@@ -6,9 +6,9 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { SuggestedTagList } from "./SuggestedTagList.tsx";
+import { SuggestedTagList } from "@/molecules/Study/Tag/SuggestedTagList";
 import { useState } from "react";
-import { StyledUpdateButton } from "../../../atoms/StyledUpdateButton.tsx";
+import { StyledUpdateButton } from "@/atoms/StyledUpdateButton";
 
 type Props = {
   newTag: string;

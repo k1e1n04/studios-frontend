@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { TagErrorResponseDto } from "../types/TagErrorResponseDto";
-import { TagListResponseDto } from "../types/TagListResponseDto";
+import { TagErrorResponseDto } from "@/types/TagErrorResponseDto";
+import { TagListResponseDto } from "@/types/TagListResponseDto";
 
 export const useTag = () => {
   const navigate = useNavigate();

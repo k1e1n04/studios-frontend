@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { Layout } from "../../templates/Layout.tsx";
-import { useStudy } from "../../hooks/useStudy";
-import { StudyResponseDto } from "../../types/StudyResponseDto";
+import { Layout } from "@/templates/Layout";
+import { useStudy } from "@/hooks/useStudy";
+import { StudyResponseDto } from "@/types/StudyResponseDto";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate, useParams } from "react-router-dom";
 import { CircularProgress, Stack } from "@mui/material";
-import { StudyDetail } from "../../organisms/Study/StudyDetail.tsx";
-import { DeleteDialog } from "../../molecules/DeleteDialog.tsx";
-import { ConfirmDialog } from "../../molecules/ConfirmDialog.tsx";
+import { StudyDetail } from "@/organisms/Study/StudyDetail";
+import { DeleteDialog } from "@/molecules/DeleteDialog";
+import { ConfirmDialog } from "@/molecules/ConfirmDialog";
 
 /**
  * 学習詳細ページ
  * @constructor
  */
-export const StudyDetailPage: React.FC = () => {
+export const Detail: React.FC = () => {
   const { fetchStudy, deleteStudy, completeStudyReview } = useStudy();
   const navigate = useNavigate();
   const [studyResponseDto, setStudyResponseDto] = useState<StudyResponseDto>();

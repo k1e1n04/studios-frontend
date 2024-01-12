@@ -1,6 +1,6 @@
-import { StudyResponseDto } from "../../types/StudyResponseDto.ts";
+import { StudyResponseDto } from "@/types/StudyResponseDto";
 import { Button, TableBody, TableRow } from "@mui/material";
-import { StyledTableCell } from "../../atoms/StyledTableCell.tsx";
+import { StyledTableCell } from "@/atoms/StyledTableCell";
 import { useTheme } from "@mui/material/styles";
 
 type Props = {

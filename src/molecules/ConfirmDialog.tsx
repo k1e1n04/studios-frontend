@@ -6,7 +6,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { StyledUpdateButton } from "../atoms/StyledUpdateButton.tsx";
+import { StyledUpdateButton } from "@/atoms/StyledUpdateButton";
 
 type Props = {
   title: string;

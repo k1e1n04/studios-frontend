@@ -23,8 +23,8 @@ import {
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { Color } from "@tiptap/extension-color";
 import { TextStyle } from "@tiptap/extension-text-style";
-import { useLowlight } from "../hooks/useLowlight.ts";
-import { CustomTableStyleContainer } from "../atoms/CustomTableStyleContainer.tsx";
+import { useLowlight } from "@/hooks/useLowlight";
+import { CustomTableStyleContainer } from "@/atoms/CustomTableStyleContainer";
 
 type Props = {
   content: string;

@@ -1,4 +1,4 @@
-import { StyledUpdateButton } from "../../atoms/StyledUpdateButton.tsx";
+import { StyledUpdateButton } from "@/atoms/StyledUpdateButton";
 import { Theme } from "@mui/material";
 
 type Props = {

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { CircularProgress, Grid, Stack } from "@mui/material";
-import { Layout } from "../../templates/Layout.tsx";
+import { Layout } from "../../../templates/Layout.tsx";
 import { useTheme } from "@mui/material/styles";
-import { TagListResponseDto } from "../../types/TagListResponseDto";
-import { useTag } from "../../hooks/useTag";
-import { TagButton } from "../../molecules/Study/Tag/TagButton.tsx";
-import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
-import { SeachButton } from "../../atoms/SearchButton.tsx";
-import { SearchTextField } from "../../molecules/SerachTextFiled.tsx";
-import { FlexContainer } from "../../atoms/FlexContainer.tsx";
+import { TagListResponseDto } from "../../../types/TagListResponseDto";
+import { useTag } from "../../../hooks/useTag";
+import { TagButton } from "../../../molecules/Study/Tag/TagButton.tsx";
+import { StyledContainer } from "../../../atoms/StyledContrainer.tsx";
+import { SeachButton } from "../../../atoms/SearchButton.tsx";
+import { SearchTextField } from "../../../molecules/SerachTextFiled.tsx";
+import { FlexContainer } from "../../../atoms/FlexContainer.tsx";
 
 /**
  * タグ一覧ページ

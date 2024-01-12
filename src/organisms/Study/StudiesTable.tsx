@@ -1,7 +1,7 @@
-import { StudyResponseDto } from "../../types/StudyResponseDto.ts";
+import { StudyResponseDto } from "@/types/StudyResponseDto";
 import { Paper, Table, TableContainer } from "@mui/material";
-import { StudiesTableHead } from "../../molecules/Study/StudiesTableHead.tsx";
-import { StudiesTableBody } from "../../molecules/Study/StudiesTableBody.tsx";
+import { StudiesTableHead } from "@/molecules/Study/StudiesTableHead";
+import { StudiesTableBody } from "@/molecules/Study/StudiesTableBody";
 
 type Props = {
   studyResponseDtos: StudyResponseDto[];

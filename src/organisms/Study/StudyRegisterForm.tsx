@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
-import { StudyRegisterFormInput } from "../../types/StudyRegisterFormInput.ts";
+import { StudyRegisterFormInput } from "@/types/StudyRegisterFormInput";
 import {
   Controller,
   SubmitHandler,
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import { useStudy } from "../../hooks/useStudy.ts";
-import { StudyErrorResponseDto } from "../../types/StudyErrorResponseDto.ts";
+import { useStudy } from "@/hooks/useStudy";
+import { StudyErrorResponseDto } from "@/types/StudyErrorResponseDto";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Alert, Button, Stack, TextField, useTheme } from "@mui/material";
-import { useTag } from "../../hooks/useTag.ts";
-import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
-import { StyledFormErrorText } from "../../atoms/StyledFormErrorText.tsx";
-import { TagAddInput } from "../../molecules/Study/Tag/TagAddInput.tsx";
-import { CustomRichTextEditor } from "../CustomRichTextEditor.tsx";
-import { TagButton } from "../../molecules/Study/Tag/TagButton.tsx";
-import { FlexContainer } from "../../atoms/FlexContainer.tsx";
+import { useTag } from "@/hooks/useTag";
+import { StyledContainer } from "@/atoms/StyledContrainer";
+import { StyledFormErrorText } from "@/atoms/StyledFormErrorText";
+import { TagAddInput } from "@/molecules/Study/Tag/TagAddInput";
+import { CustomRichTextEditor } from "@/organisms/CustomRichTextEditor";
+import { TagButton } from "@/molecules/Study/Tag/TagButton";
+import { FlexContainer } from "@/atoms/FlexContainer";
 import CloseIcon from "@mui/icons-material/Close";
 
 export const StudyRegisterForm: React.FC = () => {
