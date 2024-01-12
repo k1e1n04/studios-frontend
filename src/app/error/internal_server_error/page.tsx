@@ -5,7 +5,7 @@ import { Layout } from "@/templates/Layout";
  * サーバーエラーページ
  * @constructor
  */
-export const Internal_server_error: React.FC = () => {
+export default function Page() {
   return (
     <Layout>
       <Alert severity="error">サーバーエラーが発生しました。</Alert>

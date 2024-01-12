@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "@mantine/core/styles.css";
+import "@mantine/tiptap/styles.css";
+import "@mantine/code-highlight/styles.css";
+import ThemeRegistry from "@/registry";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Standard Next.js Serverless",
-  description: "This is a standard Next.js serverless app.",
+  title: "Studios",
+  description: "Studios",
 };
 
 export default function RootLayout({
@@ -15,8 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="ja">
+    <body className={inter.className}>
+      <ThemeRegistry>
+        {children}
+      </ThemeRegistry>
+    </body>
     </html>
   );
 }

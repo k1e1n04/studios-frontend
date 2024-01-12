@@ -8,7 +8,6 @@ import {
 } from "react-hook-form";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyErrorResponseDto } from "@/types/StudyErrorResponseDto";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Alert, Button, Stack, TextField, useTheme } from "@mui/material";
 import { useTag } from "@/hooks/useTag";
@@ -19,6 +18,7 @@ import { CustomRichTextEditor } from "@/organisms/CustomRichTextEditor";
 import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import { FlexContainer } from "@/atoms/FlexContainer";
 import CloseIcon from "@mui/icons-material/Close";
+import {useRouter} from "next/navigation";
 
 export const StudyRegisterForm: React.FC = () => {
   const { createStudy } = useStudy();
@@ -28,7 +28,7 @@ export const StudyRegisterForm: React.FC = () => {
   const [suggestedTags, setSuggestedTags] = useState<string[]>([]);
   const [isFormChanged, setIsFormChanged] = useState(false);
   const [newTag, setNewTag] = useState("");
-  const navigate = useNavigate();
+  const router = useRouter();
   const {
     control,
     handleSubmit,
@@ -61,7 +61,7 @@ export const StudyRegisterForm: React.FC = () => {
       return;
     }
     setIsFormChanged(false);
-    navigate("/studies");
+    router.push("/study/list");
   };
 
   const getTagsSuggestions = async (name: string) => {

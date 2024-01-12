@@ -1,20 +1,21 @@
+"use client"
 import { useEffect, useState } from "react";
 import { CircularProgress, Grid, Stack } from "@mui/material";
-import { Layout } from "../../../templates/Layout.tsx";
+import { Layout } from "@/templates/Layout";
 import { useTheme } from "@mui/material/styles";
-import { TagListResponseDto } from "../../../types/TagListResponseDto";
-import { useTag } from "../../../hooks/useTag";
-import { TagButton } from "../../../molecules/Study/Tag/TagButton.tsx";
-import { StyledContainer } from "../../../atoms/StyledContrainer.tsx";
-import { SeachButton } from "../../../atoms/SearchButton.tsx";
-import { SearchTextField } from "../../../molecules/SerachTextFiled.tsx";
-import { FlexContainer } from "../../../atoms/FlexContainer.tsx";
+import { TagListResponseDto } from "@/types/TagListResponseDto";
+import { useTag } from "@/hooks/useTag";
+import { TagButton } from "@/molecules/Study/Tag/TagButton";
+import { StyledContainer } from "@/atoms/StyledContrainer";
+import { SeachButton } from "@/atoms/SearchButton";
+import { SearchTextField } from "@/molecules/SerachTextFiled";
+import { FlexContainer } from "@/atoms/FlexContainer";
 
 /**
  * タグ一覧ページ
  * @constructor
  */
-export const TagListPage: React.FC = () => {
+export default function Page() {
   const theme = useTheme();
   const [tagListResponseDto, setTagListResponseDto] =
     useState<TagListResponseDto>();

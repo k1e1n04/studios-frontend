@@ -1,30 +1,25 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { useCallback, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import { StudyErrorResponseDto } from "@/types/StudyErrorResponseDto";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
 import { StudiesResponseDto } from "@/types/StudiesResponseDto";
+import {redirect} from "next/navigation";
 
 export const useStudy = () => {
-  const navigate = useNavigate();
   const studyApi = useMemo((): AxiosInstance => {
     const axiosInstance = axios.create({
-      baseURL: import.meta.env.VITE_API_BASE_URL,
+      baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
       timeout: 15000,
       headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
-        "x-api-key": import.meta.env.VITE_APIGATEWAY_API_KEY,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+        "x-api-key": process.env.NEXT_PUBLIC_APIGATEWAY_API_KEY,
       },
     });
     axiosInstance.interceptors.response.use(
       (response: AxiosResponse) => response,
       (error: AxiosError<StudyErrorResponseDto>) => {
-        if (axios.isCancel(error)) {
-          navigate("/internal_server_error");
-        }
         if (!error.response) {
-          navigate("/internal_server_error");
-          return Promise.reject(error);
+          redirect("/error/internal_server_error");
         }
         if (error.code === "ECONNABORTED" || error.message.includes('timeout')) {
           return Promise.reject(error);
@@ -33,20 +28,19 @@ export const useStudy = () => {
           case axios.HttpStatusCode.BadRequest:
             break;
           case axios.HttpStatusCode.NotFound:
-            navigate("/not_found");
+            redirect("/error/not_found");
             break;
           case axios.HttpStatusCode.InternalServerError:
-            navigate("/internal_server_error");
+            redirect("/error/internal_server_error");
             break;
           default:
-            navigate("/internal_server_error");
-            break;
+            redirect("/error/internal_server_error");
         }
         return Promise.reject(error);
       },
     );
     return axiosInstance;
-  }, [navigate]);
+  }, []);
 
   const fetchStudies = useCallback(
     async (

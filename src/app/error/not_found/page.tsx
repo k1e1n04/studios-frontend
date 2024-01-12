@@ -5,7 +5,7 @@ import { Layout } from "@/templates/Layout";
  * 404ページ
  * @constructor
  */
-export const Not_found: React.FC = () => {
+export default function Page() {
   return (
     <Layout>
       <Alert severity="warning">お探しのページは存在しません。</Alert>

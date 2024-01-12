@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
@@ -18,7 +19,7 @@ import { StudiesTable } from "@/organisms/Study/StudiesTable";
  * 復習一覧ページ
  * @constructor
  */
-export const List: React.FC = () => {
+export default function Page() {
   const { fetchReviewStudies } = useStudy();
   const [studyResponseDtos, setStudyResponseDtos] =
     useState<StudyResponseDto[]>();

@@ -1,113 +1,159 @@
-import Image from "next/image";
+"use client"
+import { useEffect, useState } from "react";
+import { useStudy } from "@/hooks/useStudy";
+import { StudyResponseDto } from "@/types/StudyResponseDto";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import { Layout } from "@/templates/Layout";
+import { useTheme } from "@mui/material/styles";
+import { StyledContainer } from "@/atoms/StyledContrainer";
+import { SearchTextField } from "@/molecules/SerachTextFiled";
+import { StudiesTable } from "@/organisms/Study/StudiesTable";
+import { SeachButton } from "@/atoms/SearchButton";
+import {redirect, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 
-export default function Home() {
+/**
+ * 学習一覧ページ
+ * @constructor
+ */
+export default function Page() {
+  const { fetchStudies } = useStudy();
+  const [studyResponseDtos, setStudyResponseDtos] =
+    useState<StudyResponseDto[]>();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const queryTags = searchParams.get("tags")
+  const queryTitle = searchParams.get("title")
+  const [searchTitle, setSearchTitle] = useState(queryTitle || "");
+  const [searchTags, setSearchTags] = useState(queryTags || "");
+  // 現在のページ番号
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  // ページの総数
+  const [totalPages, setTotalPages] = useState<number>();
+  // 学習の総数
+  const [totalStudies, setTotalStudies] = useState<number>();
+  // ページ内の表示件数
+  const [pageElements, setPageElements] = useState<number>();
+
+  const limit = 10;
+
+  const handleSearch = async () => {
+    await router.push(`/study/list?tags=${searchTags}&title=${searchTitle}`);
+  };
+
+  // 次へボタンのクリックハンドラー
+  const handleNext = async () => {
+    const studiesResponseDto = await fetchStudies(
+      queryTags === null ? "" : queryTags,
+      queryTitle === null ? "" : queryTitle,
+      pageNumber + 1,
+      limit,
+    );
+
+    setStudyResponseDtos(studiesResponseDto.studies);
+    setTotalPages(studiesResponseDto.page.totalPages);
+    setTotalStudies(studiesResponseDto.page.totalElements);
+    setPageElements(studiesResponseDto.page.pageElements);
+    setPageNumber(studiesResponseDto.page.pageNumber);
+  };
+
+  // 前へボタンのクリックハンドラー
+  const handlePrevious = async () => {
+    const studiesResponseDto = await fetchStudies(
+      queryTags || "",
+      queryTitle || "",
+      pageNumber - 1,
+      limit,
+    );
+
+    setStudyResponseDtos(studiesResponseDto.studies);
+    setTotalPages(studiesResponseDto.page.totalPages);
+    setTotalStudies(studiesResponseDto.page.totalElements);
+    setPageElements(studiesResponseDto.page.pageElements);
+    setPageNumber(studiesResponseDto.page.pageNumber);
+  };
+
+  useEffect(() => {
+    (async () => {
+      const studiesResponseDto = await fetchStudies(
+        queryTags === null ? "" : queryTags,
+        queryTitle === null ? "" : queryTitle,
+        pageNumber,
+        limit,
+      );
+      setStudyResponseDtos(studiesResponseDto.studies);
+      setTotalPages(studiesResponseDto.page.totalPages);
+      setTotalStudies(studiesResponseDto.page.totalElements);
+      setPageElements(studiesResponseDto.page.pageElements);
+      setPageNumber(studiesResponseDto.page.pageNumber);
+    })();
+  }, [fetchStudies, pageNumber, queryTags, queryTitle]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+    <Layout>
+      <StyledContainer>
+        <Grid container spacing={2} sx={{ marginBottom: 2 }}>
+          <Grid item xs={12} md={5}>
+            <SearchTextField
+              label="タイトルで検索"
+              searchTarget={searchTitle}
+              setSearchTarget={setSearchTitle}
             />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <SearchTextField
+              label="タグで検索"
+              searchTarget={searchTags}
+              setSearchTarget={setSearchTags}
+            />
+          </Grid>
+          <Grid item xs={12} md={2}>
+            <SeachButton handleSearch={handleSearch} theme={theme} />
+          </Grid>
+        </Grid>
+        <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
+          {pageElements}/{totalStudies}件
+        </Typography>
+        {studyResponseDtos ? (
+          <StudiesTable
+            studyResponseDtos={studyResponseDtos}
+            isSmallScreen={isSmallScreen}
+          />
+        ) : (
+          <Stack alignItems={"center"} sx={{ mt: "20px" }}>
+            <CircularProgress disableShrink />
+          </Stack>
+        )}
+        <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+          <Button
+            variant="outlined"
+            disabled={pageNumber === 1}
+            onClick={handlePrevious}
+          >
+            前へ
+          </Button>
+          <Button
+            variant="outlined"
+            disabled={pageNumber === totalPages}
+            onClick={handleNext}
+          >
+            次へ
+          </Button>
+        </Box>
+        <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
+          {pageNumber}/{totalPages}ページ
+        </Typography>
+      </StyledContainer>
+    </Layout>
   );
-}
+};

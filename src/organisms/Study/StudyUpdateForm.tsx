@@ -8,7 +8,6 @@ import {
 } from "react-hook-form";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyErrorResponseDto } from "@/types/StudyErrorResponseDto";
-import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {
   Alert,
@@ -26,8 +25,15 @@ import { CustomRichTextEditor } from "@/organisms/CustomRichTextEditor";
 import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { FlexContainer } from "@/atoms/FlexContainer";
+import {useRouter} from "next/navigation";
 
-export const StudyUpdateForm: React.FC = () => {
+type Props = {
+    id: string
+}
+
+export const StudyUpdateForm: React.FC<Props> = ({
+    id
+                                                 }) => {
   const { updateStudy, fetchStudy } = useStudy();
   const { fetchTags } = useTag();
   const [studyErrorResponseDto, setStudyErrorResponseDto] =
@@ -35,7 +41,7 @@ export const StudyUpdateForm: React.FC = () => {
   const [suggestedTags, setSuggestedTags] = useState<string[]>([]);
   const [newTag, setNewTag] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
   const {
     control,
     handleSubmit,
@@ -56,8 +62,6 @@ export const StudyUpdateForm: React.FC = () => {
     control,
     name: "tags",
   });
-  // パスパラメーターからidを取得
-  const { id } = useParams();
   const theme = useTheme();
 
   useEffect(() => {
@@ -77,9 +81,6 @@ export const StudyUpdateForm: React.FC = () => {
   }, [setValue, fetchStudy, id, append]);
 
   const onSubmit: SubmitHandler<StudyRegisterFormInput> = async (data) => {
-    if (id === undefined) {
-      return;
-    }
     const distinctTags = Array.from(new Set(data.tags.map((tag) => tag.name)));
     const [status, resData] = await updateStudy(
       id,
@@ -92,7 +93,7 @@ export const StudyUpdateForm: React.FC = () => {
       return;
     }
     setIsFormChanged(false);
-    navigate(`/study/${id}`);
+    await router.push(`/study/detail/${id}`);
   };
 
   const getTagsSuggestions = async (query: string) => {
