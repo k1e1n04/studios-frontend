@@ -1,48 +1,23 @@
-# standard-nextjs-serverless
+# StudiosFrontend
 
-Next.js を用いたサーバーレスアプリケーションの標準リポジトリです。
+Studios のフロントエンドです。
 
-- standard-echo-serverless
-- standard-cdk-serverless
-
-を用いて開発する際に使用します。
-
-## 技術要素
-
-| 項目       | バージョン |
-| ---------- | ---------- |
-| Node.js    | 20.8.1     |
-| npm        | 10.1.0     |
-| Next.js    | 13.5.6     |
-| React      | 18         |
-| TypeScript | 5          |
-| Tailwind   | 3.0.0      |
-| react-dom  | 18         |
-
-## 環境構築
-
-### アプリケーションの初期化
-
+## 開発環境
+### クローン
 ```bash
-npm install
+$ git clone https://github.com/k1e1n04/studios-frontend.git
 ```
 
-### ローカルサーバーの起動
-
+### パッケージのインストール
 ```bash
-npm run dev
+$ cd studios-frontend
+$ yarn
 ```
 
-[http://localhost:3000](http://localhost:3000)でアクセスできます。
-
-## ビルド
-
+### 開発サーバーの起動
 ```bash
-npm run build
+$ yarn dev
 ```
 
 ## デプロイ
-
-Amplify に従う。
-コンソールからはブランチベースでデプロイすることができる。
-タグを用いる場合は GitHub Actions 等の CI/CD ツールを用いる。
+main ブランチに push すると自動で Amplify にデプロイされます。
