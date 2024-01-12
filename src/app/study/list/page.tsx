@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
@@ -17,8 +17,8 @@ import { StyledContainer } from "@/atoms/StyledContrainer";
 import { SearchTextField } from "@/molecules/SerachTextFiled";
 import { StudiesTable } from "@/organisms/Study/StudiesTable";
 import { SeachButton } from "@/atoms/SearchButton";
-import {redirect, useSearchParams} from "next/navigation";
-import {useRouter} from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 /**
  * 学習一覧ページ
@@ -32,8 +32,8 @@ export default function Page() {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const searchParams = useSearchParams();
   const router = useRouter();
-  const queryTags = searchParams.get("tags")
-  const queryTitle = searchParams.get("title")
+  const queryTags = searchParams.get("tags");
+  const queryTitle = searchParams.get("title");
   const [searchTitle, setSearchTitle] = useState(queryTitle || "");
   const [searchTags, setSearchTags] = useState(queryTags || "");
   // 現在のページ番号
@@ -156,4 +156,4 @@ export default function Page() {
       </StyledContainer>
     </Layout>
   );
-};
+}

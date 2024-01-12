@@ -18,7 +18,7 @@ import { CustomRichTextEditor } from "@/organisms/CustomRichTextEditor";
 import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import { FlexContainer } from "@/atoms/FlexContainer";
 import CloseIcon from "@mui/icons-material/Close";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const StudyRegisterForm: React.FC = () => {
   const { createStudy } = useStudy();

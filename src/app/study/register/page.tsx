@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { StudyRegisterForm } from "@/organisms/Study/StudyRegisterForm";
 import { Layout } from "@/templates/Layout";
 
@@ -12,4 +12,4 @@ export default function Page() {
       <StudyRegisterForm />
     </Layout>
   );
-};
+}

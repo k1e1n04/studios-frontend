@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { CircularProgress, Grid, Stack } from "@mui/material";
 import { Layout } from "@/templates/Layout";
@@ -60,4 +60,4 @@ export default function Page() {
       </StyledContainer>
     </Layout>
   );
-};
+}

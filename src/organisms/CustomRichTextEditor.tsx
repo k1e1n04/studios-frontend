@@ -54,7 +54,7 @@ export const CustomRichTextEditor: React.FC<Props> = ({
       TextStyle,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       StarterKit.configure({ codeBlock: false }),
-      CodeBlockLowlight.configure({ lowlight, defaultLanguage: 'plaintext' }),
+      CodeBlockLowlight.configure({ lowlight, defaultLanguage: "plaintext" }),
       TableExtension.configure({
         resizable: true,
       }),

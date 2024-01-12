@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { Layout } from "@/templates/Layout";
 import { useStudy } from "@/hooks/useStudy";
@@ -8,13 +8,13 @@ import { CircularProgress, Stack } from "@mui/material";
 import { StudyDetail } from "@/organisms/Study/StudyDetail";
 import { DeleteDialog } from "@/molecules/DeleteDialog";
 import { ConfirmDialog } from "@/molecules/ConfirmDialog";
-import {useRouter, useSearchParams} from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 /**
  * 学習詳細ページ
  * @constructor
  */
-export default function Page({ params }: { params: { id: string }}) {
+export default function Page({ params }: { params: { id: string } }) {
   const { fetchStudy, deleteStudy, completeStudyReview } = useStudy();
   const searchParams = useSearchParams();
   const [studyResponseDto, setStudyResponseDto] = useState<StudyResponseDto>();
@@ -115,4 +115,4 @@ export default function Page({ params }: { params: { id: string }}) {
       />
     </Layout>
   );
-};
+}

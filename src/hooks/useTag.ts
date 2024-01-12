@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { useCallback, useMemo } from "react";
 import { TagErrorResponseDto } from "@/types/TagErrorResponseDto";
 import { TagListResponseDto } from "@/types/TagListResponseDto";
-import {redirect} from "next/navigation";
+import { redirect } from "next/navigation";
 
 export const useTag = () => {
   const tagApi = useMemo((): AxiosInstance => {

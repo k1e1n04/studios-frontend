@@ -11,4 +11,4 @@ export default function Page() {
       <Alert severity="error">サーバーエラーが発生しました。</Alert>
     </Layout>
   );
-};
+}

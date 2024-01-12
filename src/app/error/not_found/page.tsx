@@ -11,4 +11,4 @@ export default function Page() {
       <Alert severity="warning">お探しのページは存在しません。</Alert>
     </Layout>
   );
-};
+}

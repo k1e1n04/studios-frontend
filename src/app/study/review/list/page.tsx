@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
@@ -104,4 +104,4 @@ export default function Page() {
       </StyledContainer>
     </Layout>
   );
-};
+}

@@ -3,7 +3,7 @@ import { useCallback, useMemo } from "react";
 import { StudyErrorResponseDto } from "@/types/StudyErrorResponseDto";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
 import { StudiesResponseDto } from "@/types/StudiesResponseDto";
-import {redirect} from "next/navigation";
+import { redirect } from "next/navigation";
 
 export const useStudy = () => {
   const studyApi = useMemo((): AxiosInstance => {
@@ -21,7 +21,10 @@ export const useStudy = () => {
         if (!error.response) {
           redirect("/error/internal_server_error");
         }
-        if (error.code === "ECONNABORTED" || error.message.includes('timeout')) {
+        if (
+          error.code === "ECONNABORTED" ||
+          error.message.includes("timeout")
+        ) {
           return Promise.reject(error);
         }
         switch (error.response.status) {
@@ -102,8 +105,8 @@ export const useStudy = () => {
   ) => {
     // <pre><code>にclassが指定されていない場合、highlight.jsが動作しないため、"language-plaintext"を指定する
     const contentWithLanguage = content.replace(
-        /<pre><code>/g,
-        '<pre><code class="language-plaintext">',
+      /<pre><code>/g,
+      '<pre><code class="language-plaintext">',
     );
     return await studyApi
       .put(`/study/update/${id}`, {

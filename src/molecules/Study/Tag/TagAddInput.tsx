@@ -39,7 +39,7 @@ export const TagAddInput: React.FC<Props> = ({
   const handleClickSuggestedTag = (tag: string) => {
     onAdd(tag);
     handleClose();
-  }
+  };
   return (
     <>
       <Button onClick={() => setOpen(true)} sx={{ width: "100px" }}>

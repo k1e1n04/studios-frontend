@@ -25,15 +25,13 @@ import { CustomRichTextEditor } from "@/organisms/CustomRichTextEditor";
 import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { FlexContainer } from "@/atoms/FlexContainer";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type Props = {
-    id: string
-}
+  id: string;
+};
 
-export const StudyUpdateForm: React.FC<Props> = ({
-    id
-                                                 }) => {
+export const StudyUpdateForm: React.FC<Props> = ({ id }) => {
   const { updateStudy, fetchStudy } = useStudy();
   const { fetchTags } = useTag();
   const [studyErrorResponseDto, setStudyErrorResponseDto] =
