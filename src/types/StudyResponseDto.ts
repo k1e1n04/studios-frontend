@@ -1,4 +1,4 @@
-import { TagResponseDto } from "./TagResponseDto.ts";
+import { TagResponseDto } from "@/types/TagResponseDto";
 
 export type StudyResponseDto = {
   id: string;

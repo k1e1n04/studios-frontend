@@ -1,61 +1,48 @@
+"use client";
 import { useEffect, useState } from "react";
-import { Layout } from "../../templates/Layout.tsx";
-import { useStudy } from "../../hooks/useStudy";
-import { StudyResponseDto } from "../../types/StudyResponseDto";
+import { Layout } from "@/templates/Layout";
+import { useStudy } from "@/hooks/useStudy";
+import { StudyResponseDto } from "@/types/StudyResponseDto";
 import { useTheme } from "@mui/material/styles";
-import { useNavigate, useParams } from "react-router-dom";
 import { CircularProgress, Stack } from "@mui/material";
-import { StudyDetail } from "../../organisms/Study/StudyDetail.tsx";
-import { DeleteDialog } from "../../molecules/DeleteDialog.tsx";
-import { ConfirmDialog } from "../../molecules/ConfirmDialog.tsx";
+import { StudyDetail } from "@/organisms/Study/StudyDetail";
+import { DeleteDialog } from "@/molecules/DeleteDialog";
+import { ConfirmDialog } from "@/molecules/ConfirmDialog";
+import { useRouter, useSearchParams } from "next/navigation";
 
 /**
  * 学習詳細ページ
  * @constructor
  */
-export const StudyDetailPage: React.FC = () => {
+export default function Page({ params }: { params: { id: string } }) {
   const { fetchStudy, deleteStudy, completeStudyReview } = useStudy();
-  const navigate = useNavigate();
+  const searchParams = useSearchParams();
   const [studyResponseDto, setStudyResponseDto] = useState<StudyResponseDto>();
   const [openReviewCompleteModal, setOpenReviewCompleteModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const theme = useTheme();
-  // パスパラメーターからidを取得
-  const { id } = useParams();
+  const router = useRouter();
 
   useEffect(() => {
-    if (id === undefined) {
-      navigate("/not_found");
-      return;
-    }
     (async () => {
-      const study = await fetchStudy(id);
+      const study = await fetchStudy(params.id);
       setStudyResponseDto(study);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchStudy, id, navigate]);
+  }, [fetchStudy, params.id]);
 
   /**
    * 学習削除ハンドラー
    */
   const studyDeleteHandler = async () => {
-    if (id === undefined) {
-      navigate("/not_found");
-      return;
-    }
-    await deleteStudy(id);
-    navigate("/");
+    await deleteStudy(params.id);
+    router.push("/study/list");
   };
 
   /**
    * 復習完了ハンドラー
    */
   const reviewCompleteHandler = async () => {
-    if (id === undefined) {
-      navigate("/not_found");
-      return;
-    }
-    await completeStudyReview(id);
+    await completeStudyReview(params.id);
     updateStudyAfterReview();
   };
 
@@ -128,4 +115,4 @@ export const StudyDetailPage: React.FC = () => {
       />
     </Layout>
   );
-};
+}

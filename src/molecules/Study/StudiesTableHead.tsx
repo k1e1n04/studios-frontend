@@ -1,5 +1,5 @@
 import { TableHead, TableRow } from "@mui/material";
-import { StyledTableCell } from "../../atoms/StyledTableCell.tsx";
+import { StyledTableCell } from "@/atoms/StyledTableCell";
 import { useTheme } from "@mui/material/styles";
 
 /**

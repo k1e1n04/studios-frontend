@@ -23,8 +23,8 @@ import {
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { Color } from "@tiptap/extension-color";
 import { TextStyle } from "@tiptap/extension-text-style";
-import { useLowlight } from "../hooks/useLowlight.ts";
-import { CustomTableStyleContainer } from "../atoms/CustomTableStyleContainer.tsx";
+import { useLowlight } from "@/hooks/useLowlight";
+import { CustomTableStyleContainer } from "@/atoms/CustomTableStyleContainer";
 
 type Props = {
   content: string;
@@ -54,7 +54,7 @@ export const CustomRichTextEditor: React.FC<Props> = ({
       TextStyle,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       StarterKit.configure({ codeBlock: false }),
-      CodeBlockLowlight.configure({ lowlight, defaultLanguage: 'plaintext' }),
+      CodeBlockLowlight.configure({ lowlight, defaultLanguage: "plaintext" }),
       TableExtension.configure({
         resizable: true,
       }),

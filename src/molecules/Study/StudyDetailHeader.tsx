@@ -1,9 +1,9 @@
-import { StyledDetailHeaderContainer } from "../../atoms/StyledDetailHeaderContainer.tsx";
+import { StyledDetailHeaderContainer } from "@/atoms/StyledDetailHeaderContainer";
 import { Theme, Typography } from "@mui/material";
-import { StyledUpdateButton } from "../../atoms/StyledUpdateButton.tsx";
-import { StyledDeleteButton } from "../../atoms/StyledDeleteButton.tsx";
-import { StudyResponseDto } from "../../types/StudyResponseDto.ts";
-import { ButtonsVerticalContainer } from "../../atoms/ButtonsVerticalContainer.tsx";
+import { StyledUpdateButton } from "@/atoms/StyledUpdateButton";
+import { StyledDeleteButton } from "@/atoms/StyledDeleteButton";
+import { StudyResponseDto } from "@/types/StudyResponseDto";
+import { ButtonsVerticalContainer } from "@/atoms/ButtonsVerticalContainer";
 
 type Props = {
   studyResponseDto: StudyResponseDto;

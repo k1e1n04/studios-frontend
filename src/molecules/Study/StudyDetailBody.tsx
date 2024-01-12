@@ -1,6 +1,6 @@
 import { CodeHighlight } from "@mantine/code-highlight";
 import sanitizeHtml from "sanitize-html";
-import { CustomTableStyleContainer } from "../../atoms/CustomTableStyleContainer.tsx";
+import { CustomTableStyleContainer } from "@/atoms/CustomTableStyleContainer";
 
 type Props = {
   content: string;

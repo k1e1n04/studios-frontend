@@ -1,6 +1,7 @@
+"use client";
 import { useEffect, useState } from "react";
-import { useStudy } from "../../hooks/useStudy";
-import { StudyResponseDto } from "../../types/StudyResponseDto";
+import { useStudy } from "@/hooks/useStudy";
+import { StudyResponseDto } from "@/types/StudyResponseDto";
 import {
   Box,
   Button,
@@ -10,29 +11,29 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { Layout } from "../../templates/Layout.tsx";
+import { Layout } from "@/templates/Layout";
 import { useTheme } from "@mui/material/styles";
-import { useLocation, useNavigate } from "react-router-dom";
-import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
-import { SearchTextField } from "../../molecules/SerachTextFiled.tsx";
-import { StudiesTable } from "../../organisms/Study/StudiesTable.tsx";
-import { SeachButton } from "../../atoms/SearchButton.tsx";
+import { StyledContainer } from "@/atoms/StyledContrainer";
+import { SearchTextField } from "@/molecules/SerachTextFiled";
+import { StudiesTable } from "@/organisms/Study/StudiesTable";
+import { SeachButton } from "@/atoms/SearchButton";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 /**
  * 学習一覧ページ
  * @constructor
  */
-export const StudyListPage: React.FC = () => {
+export default function Page() {
   const { fetchStudies } = useStudy();
   const [studyResponseDtos, setStudyResponseDtos] =
     useState<StudyResponseDto[]>();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const location = useLocation();
-  const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
-  const queryTags = queryParams.get("tags");
-  const queryTitle = queryParams.get("title");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const queryTags = searchParams.get("tags");
+  const queryTitle = searchParams.get("title");
   const [searchTitle, setSearchTitle] = useState(queryTitle || "");
   const [searchTags, setSearchTags] = useState(queryTags || "");
   // 現在のページ番号
@@ -46,8 +47,8 @@ export const StudyListPage: React.FC = () => {
 
   const limit = 10;
 
-  const handleSearch = () => {
-    navigate(`/?tags=${searchTags}&title=${searchTitle}`);
+  const handleSearch = async () => {
+    await router.push(`/study/list?tags=${searchTags}&title=${searchTitle}`);
   };
 
   // 次へボタンのクリックハンドラー
@@ -155,4 +156,4 @@ export const StudyListPage: React.FC = () => {
       </StyledContainer>
     </Layout>
   );
-};
+}

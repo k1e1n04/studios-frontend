@@ -6,7 +6,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { StyledDeleteButton } from "../atoms/StyledDeleteButton.tsx";
+import { StyledDeleteButton } from "@/atoms/StyledDeleteButton";
 
 type Props = {
   open: boolean;

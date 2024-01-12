@@ -1,5 +1,5 @@
 import { StudyResponseDto } from "./StudyResponseDto";
-import { PageResponseDto } from "./PageResponseDto.ts";
+import { PageResponseDto } from "@/types/PageResponseDto";
 
 export type StudiesResponseDto = {
   studies: StudyResponseDto[];

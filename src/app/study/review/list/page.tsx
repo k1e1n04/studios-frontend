@@ -1,6 +1,7 @@
+"use client";
 import { useEffect, useState } from "react";
-import { useStudy } from "../../hooks/useStudy";
-import { StudyResponseDto } from "../../types/StudyResponseDto";
+import { useStudy } from "@/hooks/useStudy";
+import { StudyResponseDto } from "@/types/StudyResponseDto";
 import {
   Box,
   Button,
@@ -9,16 +10,16 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { Layout } from "../../templates/Layout.tsx";
+import { Layout } from "@/templates/Layout";
 import { useTheme } from "@mui/material/styles";
-import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
-import { StudiesTable } from "../../organisms/Study/StudiesTable.tsx";
+import { StyledContainer } from "@/atoms/StyledContrainer";
+import { StudiesTable } from "@/organisms/Study/StudiesTable";
 
 /**
  * 復習一覧ページ
  * @constructor
  */
-export const StudiesReviewListPage: React.FC = () => {
+export default function Page() {
   const { fetchReviewStudies } = useStudy();
   const [studyResponseDtos, setStudyResponseDtos] =
     useState<StudyResponseDto[]>();
@@ -103,4 +104,4 @@ export const StudiesReviewListPage: React.FC = () => {
       </StyledContainer>
     </Layout>
   );
-};
+}

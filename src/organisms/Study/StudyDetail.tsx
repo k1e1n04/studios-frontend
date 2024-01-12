@@ -1,10 +1,10 @@
-import { StudyDetailHeader } from "../../molecules/Study/StudyDetailHeader.tsx";
+import { StudyDetailHeader } from "@/molecules/Study/StudyDetailHeader";
 import { Theme } from "@mui/material";
-import { StudyResponseDto } from "../../types/StudyResponseDto.ts";
-import { TagButton } from "../../molecules/Study/Tag/TagButton.tsx";
-import { StudyDetailBody } from "../../molecules/Study/StudyDetailBody.tsx";
-import { StudyDetailFooter } from "../../molecules/Study/StudyDetailFooter.tsx";
-import { StyledContainer } from "../../atoms/StyledContrainer.tsx";
+import { StudyResponseDto } from "@/types/StudyResponseDto";
+import { TagButton } from "@/molecules/Study/Tag/TagButton";
+import { StudyDetailBody } from "@/molecules/Study/StudyDetailBody";
+import { StudyDetailFooter } from "@/molecules/Study/StudyDetailFooter";
+import { StyledContainer } from "@/atoms/StyledContrainer";
 
 type Props = {
   studyResponseDto: StudyResponseDto;

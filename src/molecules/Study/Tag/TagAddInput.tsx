@@ -6,9 +6,9 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { SuggestedTagList } from "./SuggestedTagList.tsx";
+import { SuggestedTagList } from "@/molecules/Study/Tag/SuggestedTagList";
 import { useState } from "react";
-import { StyledUpdateButton } from "../../../atoms/StyledUpdateButton.tsx";
+import { StyledUpdateButton } from "@/atoms/StyledUpdateButton";
 
 type Props = {
   newTag: string;
@@ -39,7 +39,7 @@ export const TagAddInput: React.FC<Props> = ({
   const handleClickSuggestedTag = (tag: string) => {
     onAdd(tag);
     handleClose();
-  }
+  };
   return (
     <>
       <Button onClick={() => setOpen(true)} sx={{ width: "100px" }}>

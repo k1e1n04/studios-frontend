@@ -16,11 +16,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import { Box, Link } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Box } from "@mui/material";
 import RateReviewIcon from "@mui/icons-material/RateReview";
-import { CustomAppBar } from "../molecules/CustomAppBar.tsx";
-import { StyledDrawerHeader } from "../atoms/StyledDrawerHeader.tsx";
+import { CustomAppBar } from "@/molecules/CustomAppBar";
+import { StyledDrawerHeader } from "@/atoms/StyledDrawerHeader";
+import Link from "next/link";
 
 type Props = {
   children: React.ReactNode;
@@ -70,7 +70,13 @@ export const Layout: React.FC<Props> = ({ children }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <CustomAppBar position="fixed" open={open} drawerWidth={drawerWidth} color={"secondary"} sx={{boxShadow: "none"}}>
+      <CustomAppBar
+        position="fixed"
+        open={open}
+        drawerWidth={drawerWidth}
+        color={"secondary"}
+        sx={{ boxShadow: "none" }}
+      >
         <Toolbar>
           <IconButton
             color="primary"
@@ -81,8 +87,14 @@ export const Layout: React.FC<Props> = ({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{fontWeight: "bold"}}>
-            <Link href="/" color={"primary"} underline="none">
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ fontWeight: "bold" }}
+            color="primary"
+          >
+            <Link href="/" color="primary">
               Studios
             </Link>
           </Typography>
@@ -113,37 +125,49 @@ export const Layout: React.FC<Props> = ({ children }) => {
         <List>
           <StyledDiv>学び管理</StyledDiv>
           <ListItem key="学び一覧" disablePadding>
-            <ListItemButton component={RouterLink} to="/">
-              <ListItemIcon>
-                <FormatListBulletedIcon />
-              </ListItemIcon>
-              <ListItemText primary="学び一覧" />
+            <ListItemButton>
+              <Link href="/study/list" passHref style={{ display: "flex" }}>
+                <ListItemIcon>
+                  <FormatListBulletedIcon />
+                </ListItemIcon>
+                <ListItemText primary="学び一覧" />
+              </Link>
             </ListItemButton>
           </ListItem>
           <ListItem key="学び登録" disablePadding>
-            <ListItemButton component={RouterLink} to="/study/create">
-              <ListItemIcon>
-                <AppRegistrationIcon />
-              </ListItemIcon>
-              <ListItemText primary="学び登録" />
+            <ListItemButton>
+              <Link href="/study/register" passHref style={{ display: "flex" }}>
+                <ListItemIcon>
+                  <AppRegistrationIcon />
+                </ListItemIcon>
+                <ListItemText primary="学び登録" />
+              </Link>
             </ListItemButton>
           </ListItem>
           <ListItem key="復習一覧" disablePadding>
-            <ListItemButton component={RouterLink} to="/studies/review">
-              <ListItemIcon>
-                <RateReviewIcon />
-              </ListItemIcon>
-              <ListItemText primary="復習一覧" />
+            <ListItemButton>
+              <Link
+                href="/study/review/list"
+                passHref
+                style={{ display: "flex" }}
+              >
+                <ListItemIcon>
+                  <RateReviewIcon />
+                </ListItemIcon>
+                <ListItemText primary="復習一覧" />
+              </Link>
             </ListItemButton>
           </ListItem>
           <Divider sx={{ mb: "10px" }} />
           <StyledDiv>タグ管理</StyledDiv>
           <ListItem key="タグ一覧" disablePadding>
-            <ListItemButton component={RouterLink} to="/tags">
-              <ListItemIcon>
-                <FormatListBulletedIcon />
-              </ListItemIcon>
-              <ListItemText primary="タグ一覧" />
+            <ListItemButton>
+              <Link href="/study/tag/list" passHref style={{ display: "flex" }}>
+                <ListItemIcon>
+                  <FormatListBulletedIcon />
+                </ListItemIcon>
+                <ListItemText primary="タグ一覧" />
+              </Link>
             </ListItemButton>
           </ListItem>
         </List>
