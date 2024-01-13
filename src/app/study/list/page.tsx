@@ -4,7 +4,6 @@ import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
 import {
   Box,
-  Button,
   CircularProgress,
   Grid,
   Stack,
@@ -47,8 +46,8 @@ export default function Page() {
 
   const limit = 10;
 
-  const handleSearch = async () => {
-    await router.push(`/study/list?tags=${searchTags}&title=${searchTitle}`);
+  const handleSearch = () => {
+    router.push(`/study/list?tags=${searchTags}&title=${searchTitle}`);
   };
 
   // 次へボタンのクリックハンドラー
@@ -135,24 +134,24 @@ export default function Page() {
           </Stack>
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-          <Button
-            variant="outlined"
+          <button
+            className="border border-gray-300 py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={pageNumber === 1}
             onClick={handlePrevious}
           >
             前へ
-          </Button>
-          <Button
-            variant="outlined"
+          </button>
+          <button
+            className="border border-gray-300 py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={pageNumber === totalPages}
             onClick={handleNext}
           >
             次へ
-          </Button>
+          </button>
         </Box>
-        <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
-          {pageNumber}/{totalPages}ページ
-        </Typography>
+        <div className="text-right mt-2 text-base">
+          {pageNumber}/{totalPages} ページ
+        </div>
       </StyledContainer>
     </Layout>
   );

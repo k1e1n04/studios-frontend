@@ -1,159 +1,114 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useStudy } from "@/hooks/useStudy";
-import { StudyResponseDto } from "@/types/StudyResponseDto";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  Stack,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
-import { Layout } from "@/templates/Layout";
-import { useTheme } from "@mui/material/styles";
-import { StyledContainer } from "@/atoms/StyledContrainer";
-import { SearchTextField } from "@/molecules/SerachTextFiled";
-import { StudiesTable } from "@/organisms/Study/StudiesTable";
-import { SeachButton } from "@/atoms/SearchButton";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
+import { CustomDrawer } from "@/organisms/NoAuthRequired/Top/CustomDrawer";
+
+const navigation = [
+  { name: "Product", href: "#" },
+  { name: "Features", href: "#" },
+  { name: "Marketplace", href: "#" },
+  { name: "Privacy Policy", href: "#" },
+];
 
 /**
- * 学習一覧ページ
+ * トップページ
  * @constructor
  */
 export default function Page() {
-  const { fetchStudies } = useStudy();
-  const [studyResponseDtos, setStudyResponseDtos] =
-    useState<StudyResponseDto[]>();
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const queryTags = searchParams.get("tags");
-  const queryTitle = searchParams.get("title");
-  const [searchTitle, setSearchTitle] = useState(queryTitle || "");
-  const [searchTags, setSearchTags] = useState(queryTags || "");
-  // 現在のページ番号
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  // ページの総数
-  const [totalPages, setTotalPages] = useState<number>();
-  // 学習の総数
-  const [totalStudies, setTotalStudies] = useState<number>();
-  // ページ内の表示件数
-  const [pageElements, setPageElements] = useState<number>();
-
-  const limit = 10;
-
-  const handleSearch = async () => {
-    await router.push(`/study/list?tags=${searchTags}&title=${searchTitle}`);
-  };
-
-  // 次へボタンのクリックハンドラー
-  const handleNext = async () => {
-    const studiesResponseDto = await fetchStudies(
-      queryTags === null ? "" : queryTags,
-      queryTitle === null ? "" : queryTitle,
-      pageNumber + 1,
-      limit,
-    );
-
-    setStudyResponseDtos(studiesResponseDto.studies);
-    setTotalPages(studiesResponseDto.page.totalPages);
-    setTotalStudies(studiesResponseDto.page.totalElements);
-    setPageElements(studiesResponseDto.page.pageElements);
-    setPageNumber(studiesResponseDto.page.pageNumber);
-  };
-
-  // 前へボタンのクリックハンドラー
-  const handlePrevious = async () => {
-    const studiesResponseDto = await fetchStudies(
-      queryTags || "",
-      queryTitle || "",
-      pageNumber - 1,
-      limit,
-    );
-
-    setStudyResponseDtos(studiesResponseDto.studies);
-    setTotalPages(studiesResponseDto.page.totalPages);
-    setTotalStudies(studiesResponseDto.page.totalElements);
-    setPageElements(studiesResponseDto.page.pageElements);
-    setPageNumber(studiesResponseDto.page.pageNumber);
-  };
-
-  useEffect(() => {
-    (async () => {
-      const studiesResponseDto = await fetchStudies(
-        queryTags === null ? "" : queryTags,
-        queryTitle === null ? "" : queryTitle,
-        pageNumber,
-        limit,
-      );
-      setStudyResponseDtos(studiesResponseDto.studies);
-      setTotalPages(studiesResponseDto.page.totalPages);
-      setTotalStudies(studiesResponseDto.page.totalElements);
-      setPageElements(studiesResponseDto.page.pageElements);
-      setPageNumber(studiesResponseDto.page.pageNumber);
-    })();
-  }, [fetchStudies, pageNumber, queryTags, queryTitle]);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <Layout>
-      <StyledContainer>
-        <Grid container spacing={2} sx={{ marginBottom: 2 }}>
-          <Grid item xs={12} md={5}>
-            <SearchTextField
-              label="タイトルで検索"
-              searchTarget={searchTitle}
-              setSearchTarget={setSearchTitle}
-            />
-          </Grid>
-          <Grid item xs={12} md={5}>
-            <SearchTextField
-              label="タグで検索"
-              searchTarget={searchTags}
-              setSearchTarget={setSearchTags}
-            />
-          </Grid>
-          <Grid item xs={12} md={2}>
-            <SeachButton handleSearch={handleSearch} theme={theme} />
-          </Grid>
-        </Grid>
-        <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
-          {pageElements}/{totalStudies}件
-        </Typography>
-        {studyResponseDtos ? (
-          <StudiesTable
-            studyResponseDtos={studyResponseDtos}
-            isSmallScreen={isSmallScreen}
+    <div className="bg-white">
+      <header className="absolute inset-x-0 top-0 z-50">
+        <nav
+          className="flex items-center justify-between p-6 lg:px-8"
+          aria-label="Global"
+        >
+          <div className="flex lg:flex-1">
+            <a href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only">Your Company</span>
+              <img className="h-8 w-auto" src="./favicon.ico" alt="" />
+            </a>
+          </div>
+          <div className="flex lg:hidden">
+            <button
+              type="button"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              onClick={() => setMobileMenuOpen(true)}
+            >
+              <span className="sr-only">Open main menu</span>
+              <MenuIcon className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="hidden lg:flex lg:gap-x-12">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a
+              href="/study/list"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              ログイン <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </nav>
+        <CustomDrawer
+          navigation={navigation}
+          open={mobileMenuOpen}
+          setOpen={setMobileMenuOpen}
+        />
+      </header>
+
+      <div className="relative isolate px-6 pt-14 lg:px-8 min-h-screen">
+        <div
+          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          aria-hidden="true"
+        >
+          <div
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#81C7D4] to-[#B2EBF2] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style={{
+              clipPath:
+                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+            }}
           />
-        ) : (
-          <Stack alignItems={"center"} sx={{ mt: "20px" }}>
-            <CircularProgress disableShrink />
-          </Stack>
-        )}
-        <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-          <Button
-            variant="outlined"
-            disabled={pageNumber === 1}
-            onClick={handlePrevious}
-          >
-            前へ
-          </Button>
-          <Button
-            variant="outlined"
-            disabled={pageNumber === totalPages}
-            onClick={handleNext}
-          >
-            次へ
-          </Button>
-        </Box>
-        <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
-          {pageNumber}/{totalPages}ページ
-        </Typography>
-      </StyledContainer>
-    </Layout>
+        </div>
+        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+              Announcing our next round of funding.{" "}
+              <a href="#" className="font-semibold text-indigo-600">
+                <span className="absolute inset-0" aria-hidden="true" />
+                Read more <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </div>
+          <div className="text-center">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+              Studios
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Studiosは、日々の学びを「Study」として記録し、創造性を育む「Studio」の役割を担います。
+              学習の一歩一歩を記録することで、自分自身の成長を実感し、新たな可能性に挑戦する勇気を与えてくれます。
+            </p>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <a
+                href="/study/list"
+                className="rounded-md bg-primary-blue px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#558BA8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#659CBA]"
+              >
+                サインアップ
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

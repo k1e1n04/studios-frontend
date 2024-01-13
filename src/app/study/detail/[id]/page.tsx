@@ -16,7 +16,6 @@ import { useRouter, useSearchParams } from "next/navigation";
  */
 export default function Page({ params }: { params: { id: string } }) {
   const { fetchStudy, deleteStudy, completeStudyReview } = useStudy();
-  const searchParams = useSearchParams();
   const [studyResponseDto, setStudyResponseDto] = useState<StudyResponseDto>();
   const [openReviewCompleteModal, setOpenReviewCompleteModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);

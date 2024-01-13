@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
@@ -94,7 +95,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             sx={{ fontWeight: "bold" }}
             color="primary"
           >
-            <Link href="/" color="primary">
+            <Link href="/study/list" color="primary">
               Studios
             </Link>
           </Typography>

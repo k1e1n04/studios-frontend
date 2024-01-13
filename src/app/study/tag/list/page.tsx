@@ -55,7 +55,9 @@ export default function Page() {
           </Stack>
         )}
         <FlexContainer>
-          {tagListResponseDto?.tags.map((tag) => <TagButton key={tag.name} tag={tag.name} />)}
+          {tagListResponseDto?.tags.map((tag) => (
+            <TagButton key={tag.name} tag={tag.name} />
+          ))}
         </FlexContainer>
       </StyledContainer>
     </Layout>
