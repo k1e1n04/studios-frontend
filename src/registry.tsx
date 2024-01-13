@@ -20,10 +20,10 @@ const ThemeRegistry = ({ children }: { children: React.ReactNode }) => {
   });
   const mantineTheme = mantineCreateTheme({
     colors: {
-      "ocean-blue": [
-        "#7AD1DD",
-        "#5FCCDB",
-        "#44CADC",
+      "primary": [
+        "#659CBA",
+        "#507C94",
+        "#F5F5F5",
         "#2AC9DE",
         "#1AC2D9",
         "#11B7CD",

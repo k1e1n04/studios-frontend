@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         primary: {
           blue: "#659CBA",
+          blueHover: "#4D7F9E",
           grey: "#F5F5F5",
         },
       },

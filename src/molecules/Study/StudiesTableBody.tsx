@@ -11,6 +11,7 @@ type Props = {
 /**
  * 学習一覧テーブルのボディ
  * @param studyResponseDtos 学習一覧
+ * @param isSmallScreen スクリーンサイズが小さいかどうか
  */
 export const StudiesTableBody: React.FC<Props> = ({
   studyResponseDtos,

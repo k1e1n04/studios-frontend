@@ -1,23 +1,20 @@
-import { Button, Theme } from "@mui/material";
+import { Button } from '@mantine/core';
 
 type Props = {
-  handleSearch: () => void;
-  theme: Theme;
+  handleSearch?: () => void;
 };
 
 /**
  * 検索ボタン
  * @param handleSearch 検索ボタンのクリックハンドラー
- * @param theme テーマ
  * @constructor
  */
-export const SeachButton: React.FC<Props> = ({ handleSearch, theme }) => {
+export const SeachButton: React.FC<Props> = ({ handleSearch}) => {
   return (
     <Button
-      variant="contained"
-      color="primary"
       onClick={handleSearch}
-      sx={{ width: "100%", color: theme.palette.secondary.main }}
+      color="primary.0"
+      variant="filled"
     >
       検索
     </Button>

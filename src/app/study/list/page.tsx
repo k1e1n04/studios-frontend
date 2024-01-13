@@ -117,7 +117,7 @@ export default function Page() {
             />
           </Grid>
           <Grid item xs={12} md={2}>
-            <SeachButton handleSearch={handleSearch} theme={theme} />
+            <SeachButton handleSearch={handleSearch}/>
           </Grid>
         </Grid>
         <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
@@ -135,14 +135,14 @@ export default function Page() {
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
           <button
-            className="border border-gray-300 py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+            className="border border-gray-300 py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed text-primary-blue"
             disabled={pageNumber === 1}
             onClick={handlePrevious}
           >
             前へ
           </button>
           <button
-            className="border border-gray-300 py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+            className="border border-gray-300 py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed text-primary-blue"
             disabled={pageNumber === totalPages}
             onClick={handleNext}
           >

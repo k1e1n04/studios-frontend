@@ -46,7 +46,7 @@ export default function Page() {
             />
           </Grid>
           <Grid item xs={12} md={2}>
-            <SeachButton handleSearch={handleSearch} theme={theme} />
+            <SeachButton handleSearch={handleSearch}/>
           </Grid>
         </Grid>
         {!tagListResponseDto && (
