@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@mantine/core";
 import React from "react";
+import Link from "next/link";
 
 type Props = {
   children: React.ReactNode;
@@ -14,7 +15,11 @@ type Props = {
  * @param onClick クリックハンドラー
  * @param disabled ボタンの無効化
  */
-export const StyledWhiteButton: React.FC<Props> = ({ children, onClick, disabled = false }) => {
+export const StyledWhiteButton: React.FC<Props> = ({
+  children,
+  onClick,
+  disabled = false,
+}) => {
   return (
     <Button
       onClick={onClick}

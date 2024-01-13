@@ -9,7 +9,11 @@ type Props = {
 /**
  * スタイルを適用したMantineのプライマリーボタン
  */
-export const StyledPrimaryButton: React.FC<Props> = ({ children, onClick, disabled = false }) => {
+export const StyledPrimaryButton: React.FC<Props> = ({
+  children,
+  onClick,
+  disabled = false,
+}) => {
   return (
     <Button
       onClick={onClick}

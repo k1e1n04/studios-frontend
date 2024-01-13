@@ -1,7 +1,7 @@
 import { StudyResponseDto } from "@/types/StudyResponseDto";
 import { TableBody, TableRow } from "@mui/material";
 import { StyledTableCell } from "@/atoms/StyledTableCell";
-import {StyledPrimaryButton} from "@/atoms/StyledPrimaryButton";
+import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";
 import Link from "next/link";
 
 type Props = {
@@ -12,9 +12,7 @@ type Props = {
  * 学習一覧テーブルのボディ
  * @param studyResponseDtos 学習一覧
  */
-export const StudiesTableBody: React.FC<Props> = ({
-  studyResponseDtos,
-}) => {
+export const StudiesTableBody: React.FC<Props> = ({ studyResponseDtos }) => {
   return (
     <TableBody>
       {studyResponseDtos.map((studyResponseDto: StudyResponseDto) => (
@@ -23,11 +21,8 @@ export const StudiesTableBody: React.FC<Props> = ({
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
           <StyledTableCell scope="row">
-            <StyledPrimaryButton
-            >
-              <Link href={`/study/detail/${studyResponseDto.id}`}>
-                詳細
-              </Link>
+            <StyledPrimaryButton>
+              <Link href={`/study/detail/${studyResponseDto.id}`}>詳細</Link>
             </StyledPrimaryButton>
           </StyledTableCell>
           <StyledTableCell>{studyResponseDto.title}</StyledTableCell>

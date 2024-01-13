@@ -2,16 +2,11 @@
 import { useEffect, useState } from "react";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
-import {
-  Box,
-  CircularProgress,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import { Layout } from "@/templates/Layout";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { StudiesTable } from "@/organisms/Study/StudiesTable";
-import {StyledWhiteButton} from "@/atoms/StyledWhiteButton";
+import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
 
 /**
  * 復習一覧ページ
@@ -72,9 +67,7 @@ export default function Page() {
           {pageElements}/{totalStudies}件
         </Typography>
         {studyResponseDtos ? (
-          <StudiesTable
-            studyResponseDtos={studyResponseDtos}
-          />
+          <StudiesTable studyResponseDtos={studyResponseDtos} />
         ) : (
           <Stack alignItems={"center"} sx={{ mt: "20px" }}>
             <CircularProgress disableShrink />
