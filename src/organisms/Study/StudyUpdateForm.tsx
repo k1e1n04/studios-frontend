@@ -26,6 +26,7 @@ import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { FlexContainer } from "@/atoms/FlexContainer";
 import { useRouter } from "next/navigation";
+import { TextInput } from "@mantine/core";
 
 type Props = {
   id: string;
@@ -155,10 +156,9 @@ export const StudyUpdateForm: React.FC<Props> = ({ id }) => {
                 },
               }}
               render={({ field }) => (
-                <TextField
+                <TextInput
                   {...field}
-                  variant="standard"
-                  label="タイトル"
+                  placeholder="タイトル"
                   error={!!errors.title}
                   onChange={(e) => {
                     setIsFormChanged(true);

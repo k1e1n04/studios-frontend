@@ -19,7 +19,7 @@ export const StyledPrimaryButton: React.FC<Props> = ({
       onClick={onClick}
       color="primary.0"
       disabled={disabled}
-      style={{ margin: "0.1rem" }}
+      style={{ margin: "0.1rem", backgroundColor: "#659CBA" }}
     >
       {children}
     </Button>

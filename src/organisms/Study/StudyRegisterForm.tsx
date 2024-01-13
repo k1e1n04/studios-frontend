@@ -9,7 +9,7 @@ import {
 import { useStudy } from "@/hooks/useStudy";
 import { StudyErrorResponseDto } from "@/types/StudyErrorResponseDto";
 import axios from "axios";
-import { Alert, Button, Stack, TextField, useTheme } from "@mui/material";
+import { Alert, Button, Stack, useTheme } from "@mui/material";
 import { useTag } from "@/hooks/useTag";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { StyledFormErrorText } from "@/atoms/StyledFormErrorText";
@@ -19,6 +19,7 @@ import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import { FlexContainer } from "@/atoms/FlexContainer";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/navigation";
+import { TextInput } from "@mantine/core";
 
 export const StudyRegisterForm: React.FC = () => {
   const { createStudy } = useStudy();
@@ -122,10 +123,9 @@ export const StudyRegisterForm: React.FC = () => {
             },
           }}
           render={({ field }) => (
-            <TextField
+            <TextInput
               {...field}
-              variant="standard"
-              label="タイトル"
+              placeholder="タイトル"
               error={!!errors.title}
               onChange={(e) => {
                 setIsFormChanged(true);
