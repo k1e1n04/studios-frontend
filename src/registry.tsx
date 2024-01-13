@@ -20,7 +20,7 @@ const ThemeRegistry = ({ children }: { children: React.ReactNode }) => {
   });
   const mantineTheme = mantineCreateTheme({
     colors: {
-      "primary": [
+      primary: [
         "#659CBA",
         "#507C94",
         "#F5F5F5",
@@ -31,6 +31,18 @@ const ThemeRegistry = ({ children }: { children: React.ReactNode }) => {
         "#0E99AC",
         "#128797",
         "#147885",
+      ],
+      delete: [
+        "#F06060",
+        "#D64C4C",
+        "#C03838",
+        "#A62424",
+        "#8E1010",
+        "#7A0000",
+        "#660000",
+        "#520000",
+        "#3E0000",
+        "#2A0000",
       ],
     },
   });

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { SuggestedTagList } from "@/molecules/Study/Tag/SuggestedTagList";
 import { useState } from "react";
-import { StyledUpdateButton } from "@/atoms/StyledUpdateButton";
+import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";
 
 type Props = {
   newTag: string;
@@ -70,15 +70,14 @@ export const TagAddInput: React.FC<Props> = ({
           <Button onClick={handleClose} color="primary">
             キャンセル
           </Button>
-          <StyledUpdateButton
+          <StyledPrimaryButton
             onClick={() => {
               onAdd(newTag);
               handleClose();
             }}
-            variant="contained"
           >
             追加
-          </StyledUpdateButton>
+          </StyledPrimaryButton>
         </DialogActions>
       </Dialog>
     </>

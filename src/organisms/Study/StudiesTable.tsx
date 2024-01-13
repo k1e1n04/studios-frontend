@@ -5,7 +5,6 @@ import { StudiesTableBody } from "@/molecules/Study/StudiesTableBody";
 
 type Props = {
   studyResponseDtos: StudyResponseDto[];
-  isSmallScreen: boolean;
 };
 
 /**
@@ -15,7 +14,6 @@ type Props = {
  */
 export const StudiesTable: React.FC<Props> = ({
   studyResponseDtos,
-  isSmallScreen,
 }) => {
   return (
     <TableContainer component={Paper}>
@@ -24,7 +22,6 @@ export const StudiesTable: React.FC<Props> = ({
         {studyResponseDtos && (
           <StudiesTableBody
             studyResponseDtos={studyResponseDtos}
-            isSmallScreen={isSmallScreen}
           />
         )}
       </Table>

@@ -6,7 +6,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { StyledUpdateButton } from "@/atoms/StyledUpdateButton";
+import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";
 
 type Props = {
   title: string;
@@ -42,15 +42,14 @@ export const ConfirmDialog: React.FC<Props> = ({
         <Button onClick={handleClose} color="primary">
           キャンセル
         </Button>
-        <StyledUpdateButton
+        <StyledPrimaryButton
           onClick={() => {
             handleConfirm();
             handleClose();
           }}
-          variant="contained"
         >
           OK
-        </StyledUpdateButton>
+        </StyledPrimaryButton>
       </DialogActions>
     </Dialog>
   );

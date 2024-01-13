@@ -4,16 +4,14 @@ import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
 import {
   Box,
-  Button,
   CircularProgress,
   Stack,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import { Layout } from "@/templates/Layout";
-import { useTheme } from "@mui/material/styles";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { StudiesTable } from "@/organisms/Study/StudiesTable";
+import {StyledWhiteButton} from "@/atoms/StyledWhiteButton";
 
 /**
  * 復習一覧ページ
@@ -23,8 +21,6 @@ export default function Page() {
   const { fetchReviewStudies } = useStudy();
   const [studyResponseDtos, setStudyResponseDtos] =
     useState<StudyResponseDto[]>();
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   // 現在のページ番号
   const [pageNumber, setPageNumber] = useState<number>(1);
   // ページの総数
@@ -78,7 +74,6 @@ export default function Page() {
         {studyResponseDtos ? (
           <StudiesTable
             studyResponseDtos={studyResponseDtos}
-            isSmallScreen={isSmallScreen}
           />
         ) : (
           <Stack alignItems={"center"} sx={{ mt: "20px" }}>
@@ -86,20 +81,18 @@ export default function Page() {
           </Stack>
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-          <Button
-            variant="outlined"
+          <StyledWhiteButton
             disabled={pageNumber === 1}
             onClick={handlePrevious}
           >
             前へ
-          </Button>
-          <Button
-            variant="outlined"
+          </StyledWhiteButton>
+          <StyledWhiteButton
             disabled={pageNumber === totalPages}
             onClick={handleNext}
           >
             次へ
-          </Button>
+          </StyledWhiteButton>
         </Box>
       </StyledContainer>
     </Layout>

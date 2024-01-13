@@ -1,5 +1,4 @@
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -7,6 +6,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { StyledDeleteButton } from "@/atoms/StyledDeleteButton";
+import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
 
 type Props = {
   open: boolean;
@@ -33,15 +33,12 @@ export const DeleteDialog: React.FC<Props> = ({
         <DialogContentText>本当に削除してもよろしいですか？</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          キャンセル
-        </Button>
+        <StyledWhiteButton onClick={handleClose}>キャンセル</StyledWhiteButton>
         <StyledDeleteButton
           onClick={() => {
             handleDelete();
             handleClose();
           }}
-          variant="contained"
         >
           削除
         </StyledDeleteButton>

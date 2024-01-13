@@ -1,9 +1,10 @@
 import { StyledDetailHeaderContainer } from "@/atoms/StyledDetailHeaderContainer";
 import { Theme, Typography } from "@mui/material";
-import { StyledUpdateButton } from "@/atoms/StyledUpdateButton";
+import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";
 import { StyledDeleteButton } from "@/atoms/StyledDeleteButton";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
 import { ButtonsVerticalContainer } from "@/atoms/ButtonsVerticalContainer";
+import Link from "next/link";
 
 type Props = {
   studyResponseDto: StudyResponseDto;
@@ -48,17 +49,10 @@ export const StudyDetailHeader: React.FC<Props> = ({
           </Typography>
         </div>
         <ButtonsVerticalContainer>
-          <StyledUpdateButton
-            variant="contained"
-            sx={{ color: theme.palette.secondary.main }}
-            href={`/study/update/${studyResponseDto.id}`}
-          >
-            更新
-          </StyledUpdateButton>
-          <StyledDeleteButton
-            onClick={handleOpenDeleteModal}
-            variant="contained"
-          >
+          <StyledPrimaryButton>
+            <Link href={`/study/update/${studyResponseDto.id}`}>更新</Link>
+          </StyledPrimaryButton>
+          <StyledDeleteButton onClick={handleOpenDeleteModal}>
             削除
           </StyledDeleteButton>
         </ButtonsVerticalContainer>

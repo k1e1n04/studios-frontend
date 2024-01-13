@@ -1,4 +1,4 @@
-import { StyledUpdateButton } from "@/atoms/StyledUpdateButton";
+import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";
 import { Theme } from "@mui/material";
 
 type Props = {
@@ -24,13 +24,9 @@ export const StudyDetailFooter: React.FC<Props> = ({
         marginTop: "20px",
       }}
     >
-      <StyledUpdateButton
-        variant="contained"
-        sx={{ color: theme.palette.secondary.main }}
-        onClick={handleOpenReviewCompleteModal}
-      >
+      <StyledPrimaryButton onClick={handleOpenReviewCompleteModal}>
         復習完了
-      </StyledUpdateButton>
+      </StyledPrimaryButton>
     </div>
   );
 };

@@ -16,7 +16,6 @@ import { FlexContainer } from "@/atoms/FlexContainer";
  * @constructor
  */
 export default function Page() {
-  const theme = useTheme();
   const [tagListResponseDto, setTagListResponseDto] =
     useState<TagListResponseDto>();
   const { fetchTags } = useTag();
@@ -46,7 +45,7 @@ export default function Page() {
             />
           </Grid>
           <Grid item xs={12} md={2}>
-            <SeachButton handleSearch={handleSearch}/>
+            <SeachButton handleSearch={handleSearch} />
           </Grid>
         </Grid>
         {!tagListResponseDto && (

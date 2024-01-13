@@ -18,6 +18,7 @@ import { StudiesTable } from "@/organisms/Study/StudiesTable";
 import { SeachButton } from "@/atoms/SearchButton";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import {StyledWhiteButton} from "@/atoms/StyledWhiteButton";
 
 /**
  * 学習一覧ページ
@@ -117,7 +118,7 @@ export default function Page() {
             />
           </Grid>
           <Grid item xs={12} md={2}>
-            <SeachButton handleSearch={handleSearch}/>
+            <SeachButton handleSearch={handleSearch} />
           </Grid>
         </Grid>
         <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
@@ -126,7 +127,6 @@ export default function Page() {
         {studyResponseDtos ? (
           <StudiesTable
             studyResponseDtos={studyResponseDtos}
-            isSmallScreen={isSmallScreen}
           />
         ) : (
           <Stack alignItems={"center"} sx={{ mt: "20px" }}>
@@ -134,20 +134,18 @@ export default function Page() {
           </Stack>
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-          <button
-            className="border border-gray-300 py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed text-primary-blue"
+          <StyledWhiteButton
             disabled={pageNumber === 1}
             onClick={handlePrevious}
           >
             前へ
-          </button>
-          <button
-            className="border border-gray-300 py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed text-primary-blue"
+          </StyledWhiteButton>
+          <StyledWhiteButton
             disabled={pageNumber === totalPages}
             onClick={handleNext}
           >
             次へ
-          </button>
+          </StyledWhiteButton>
         </Box>
         <div className="text-right mt-2 text-base">
           {pageNumber}/{totalPages} ページ

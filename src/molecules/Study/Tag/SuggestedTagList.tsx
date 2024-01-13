@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
 
 type Props = {
   suggestedTags: string[];
@@ -21,20 +21,15 @@ export const SuggestedTagList: React.FC<Props> = ({
   return (
     <div>
       {suggestedTags.map((tag, index) => (
-        <Button
+        <StyledWhiteButton
           key={index}
           onClick={() => {
             handleAddTag(tag);
             setSuggestedTags([]);
           }}
-          sx={{
-            cursor: "pointer",
-            border: (theme) => `1px solid ${theme.palette.primary.main}`,
-            margin: "2px",
-          }}
         >
           {tag}
-        </Button>
+        </StyledWhiteButton>
       ))}
     </div>
   );

@@ -1,24 +1,20 @@
-import { Button } from "@mui/material";
+import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
+import React from "react";
+import Link from "next/link";
 
 type Props = {
   tag: string;
 };
 
 /**
- * MUIのタグボタン
+ * タグボタン
+ * NOTE: タグボタンはタグのリンクを提供する
  * @param tag タグ
  */
 export const TagButton: React.FC<Props> = ({ tag }) => {
   return (
-    <Button
-      key={tag}
-      variant="outlined"
-      sx={{
-        m: 1,
-      }}
-      href={`/?tags=${tag}`}
-    >
-      {tag}
-    </Button>
+    <StyledWhiteButton key={tag}>
+      <Link href={`/study/list/?tags=${tag}`}>{tag}</Link>
+    </StyledWhiteButton>
   );
 };
