@@ -8,7 +8,6 @@ import {
   Grid,
   Stack,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import { Layout } from "@/templates/Layout";
 import { useTheme } from "@mui/material/styles";
@@ -29,7 +28,6 @@ export default function Page() {
   const [studyResponseDtos, setStudyResponseDtos] =
     useState<StudyResponseDto[]>();
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const searchParams = useSearchParams();
   const router = useRouter();
   const queryTags = searchParams.get("tags");

@@ -1,5 +1,5 @@
 import { StyledDetailHeaderContainer } from "@/atoms/StyledDetailHeaderContainer";
-import { Theme, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";
 import { StyledDeleteButton } from "@/atoms/StyledDeleteButton";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
@@ -9,20 +9,17 @@ import Link from "next/link";
 type Props = {
   studyResponseDto: StudyResponseDto;
   handleOpenDeleteModal: () => void;
-  theme: Theme;
 };
 
 /**
  * 学習詳細のヘッダー
  * @param studyResponseDto 学習レスポンスDTO
  * @param handleOpenDeleteModal 削除モーダルを開くハンドラー
- * @param theme テーマ
  * @constructor
  */
 export const StudyDetailHeader: React.FC<Props> = ({
   studyResponseDto,
   handleOpenDeleteModal,
-  theme,
 }) => {
   return (
     <>

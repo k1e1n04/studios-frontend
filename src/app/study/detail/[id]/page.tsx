@@ -3,12 +3,11 @@ import { useEffect, useState } from "react";
 import { Layout } from "@/templates/Layout";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
-import { useTheme } from "@mui/material/styles";
 import { CircularProgress, Stack } from "@mui/material";
 import { StudyDetail } from "@/organisms/Study/StudyDetail";
 import { DeleteDialog } from "@/molecules/DeleteDialog";
 import { ConfirmDialog } from "@/molecules/ConfirmDialog";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 /**
  * 学習詳細ページ
@@ -19,7 +18,6 @@ export default function Page({ params }: { params: { id: string } }) {
   const [studyResponseDto, setStudyResponseDto] = useState<StudyResponseDto>();
   const [openReviewCompleteModal, setOpenReviewCompleteModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const theme = useTheme();
   const router = useRouter();
 
   useEffect(() => {
@@ -93,7 +91,6 @@ export default function Page({ params }: { params: { id: string } }) {
           studyResponseDto={studyResponseDto}
           handleOpenDeleteModal={handleOpenDeleteModal}
           handleOpenReviewCompleteModal={handleOpenReviewCompleteModal}
-          theme={theme}
         />
       ) : (
         <Stack alignItems={"center"}>

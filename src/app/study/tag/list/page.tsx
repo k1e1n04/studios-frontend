@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { CircularProgress, Grid, Stack } from "@mui/material";
 import { Layout } from "@/templates/Layout";
-import { useTheme } from "@mui/material/styles";
 import { TagListResponseDto } from "@/types/TagListResponseDto";
 import { useTag } from "@/hooks/useTag";
 import { TagButton } from "@/molecules/Study/Tag/TagButton";
