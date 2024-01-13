@@ -313,7 +313,7 @@
     clsx "2.0.0"
     highlight.js "^11.9.0"
 
-"@mantine/core@^7.3.2":
+"@mantine/core@^7.4.1":
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/@mantine/core/-/core-7.4.1.tgz#4eac7922ea02a465ab1493fcf8cbcd4a85893733"
   integrity sha512-crz9BemmwR8V/h6db9FgznCp0Ssp6rCUYkBBO4JprpH8NDSEblHyWcZZo43IuA1vZptp8eyrhRNJ4nfe8CAYFQ==
@@ -325,12 +325,12 @@
     react-textarea-autosize "8.5.3"
     type-fest "^3.13.1"
 
-"@mantine/hooks@^7.3.2":
+"@mantine/hooks@^7.4.1":
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-7.4.1.tgz#af10daadf5df28446134a3147f098c8a0c56973f"
   integrity sha512-7gV9YR+xZ1L69MGVaSNwV0gaxIz4bCZuGxXTtnuaamDcO/4YiNDtmvdD7/jC/RTa1iJMnZ6YiYrcPXLOn+8saQ==
 
-"@mantine/tiptap@^7.3.2":
+"@mantine/tiptap@^7.4.1":
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/@mantine/tiptap/-/tiptap-7.4.1.tgz#14dc5499bee07a5a60e0c48de86804301e580001"
   integrity sha512-2xu+NVuxO8Ffj2BcZy9QVoPB/AFD6GXSimGn4K03Lx6C/cXNdYNhj1cTvbJERswG/wzHcbk0NZFBGOnI1nNFbQ==
