@@ -7,16 +7,16 @@ import { Container } from "@mantine/core";
  */
 export const SmallFormContainer = styled(Container)`
   max-width: 500px;
-  margin: 100px auto;
-  padding: 7%;
+  margin: 0 auto;
+  padding: 15% 5% 5% 5%;
   background-color: #fff;
   border-radius: 10px;
 
   @media (min-width: 768px) and (max-width: 1024px) {
-    padding: 6%;
+    padding: 30% 6% 6% 6%;
   }
 
   @media (max-width: 767px) {
-    padding: 5%;
+    padding: 40% 5% 5% 5%;
   }
 `;

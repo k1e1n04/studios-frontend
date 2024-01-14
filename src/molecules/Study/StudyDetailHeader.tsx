@@ -46,11 +46,9 @@ export const StudyDetailHeader: React.FC<Props> = ({
           </Typography>
         </div>
         <ButtonsVerticalContainer>
-            <Link href={`/study/update/${studyResponseDto.id}`}>
-              <StyledPrimaryButton>
-                更新
-              </StyledPrimaryButton>
-            </Link>
+          <Link href={`/study/update/${studyResponseDto.id}`}>
+            <StyledPrimaryButton>更新</StyledPrimaryButton>
+          </Link>
           <StyledDeleteButton onClick={handleOpenDeleteModal}>
             削除
           </StyledDeleteButton>

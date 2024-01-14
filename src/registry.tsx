@@ -2,7 +2,7 @@
 
 import { createTheme, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import {RecoilRoot} from "recoil";
+import { RecoilRoot } from "recoil";
 
 const ThemeRegistry = ({ children }: { children: React.ReactNode }) => {
   const theme = createTheme({
@@ -17,11 +17,11 @@ const ThemeRegistry = ({ children }: { children: React.ReactNode }) => {
   });
 
   return (
-      <RecoilRoot>
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </AppRouterCacheProvider>
-      </RecoilRoot>
+    <RecoilRoot>
+      <AppRouterCacheProvider>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      </AppRouterCacheProvider>
+    </RecoilRoot>
   );
 };
 

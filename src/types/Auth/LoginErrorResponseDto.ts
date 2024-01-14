@@ -2,5 +2,5 @@
  * ログインエラーレスポンスDTO
  */
 export type LoginErrorResponseDto = {
-    message: string;
-}
+  message: string;
+};

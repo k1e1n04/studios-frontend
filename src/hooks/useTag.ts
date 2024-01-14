@@ -2,10 +2,10 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { useCallback, useMemo } from "react";
 import { TagErrorResponseDto } from "@/types/Study/TagErrorResponseDto";
 import { TagListResponseDto } from "@/types/Study/TagListResponseDto";
-import { useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const useTag = () => {
-    const router = useRouter();
+  const router = useRouter();
 
   const tagApi = useMemo((): AxiosInstance => {
     const axiosInstance = axios.create({
@@ -22,19 +22,19 @@ export const useTag = () => {
         if (!error.response) {
           router.push("/error/internal_server_error");
         } else {
-            switch (error.response.status) {
-              case axios.HttpStatusCode.BadRequest:
-                break;
-              case axios.HttpStatusCode.NotFound:
-                router.push("/error/not_found");
-                break;
-              case axios.HttpStatusCode.InternalServerError:
-                router.push("/error/internal_server_error");
-                break;
-              default:
-                router.push("/error/internal_server_error");
-                break;
-            }
+          switch (error.response.status) {
+            case axios.HttpStatusCode.BadRequest:
+              break;
+            case axios.HttpStatusCode.NotFound:
+              router.push("/error/not_found");
+              break;
+            case axios.HttpStatusCode.InternalServerError:
+              router.push("/error/internal_server_error");
+              break;
+            default:
+              router.push("/error/internal_server_error");
+              break;
+          }
         }
         return Promise.reject(error);
       },
