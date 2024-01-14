@@ -21,9 +21,11 @@ export const StudiesTableBody: React.FC<Props> = ({ studyResponseDtos }) => {
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
           <StyledTableCell scope="row">
-            <StyledPrimaryButton>
-              <Link href={`/study/detail/${studyResponseDto.id}`}>詳細</Link>
-            </StyledPrimaryButton>
+            <Link href={`/study/detail/${studyResponseDto.id}`}>
+              <StyledPrimaryButton>
+                詳細
+              </StyledPrimaryButton>
+            </Link>
           </StyledTableCell>
           <StyledTableCell>{studyResponseDto.title}</StyledTableCell>
           <StyledTableCell>

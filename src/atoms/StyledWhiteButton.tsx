@@ -1,34 +1,28 @@
 "use client";
-import { Button } from "@mantine/core";
-import React from "react";
-import Link from "next/link";
+import {Button, ButtonProps, createPolymorphicComponent} from "@mantine/core";
+import styled from '@emotion/styled';
 
-type Props = {
-  children: React.ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-};
+const _StyledWhiteButton = styled(Button)`
+    margin: 0.1rem;
+    color: #659CBA;
+    border-color: #659CBA;
+    background-color: white;
+    &:hover {
+        background-color: #659CBA;
+        color: white;
+    }
+  
+    &:disabled {
+        opacity: 0.5;
+    }
+  
+    &:disabled:hover {
+        background-color: white;
+        color: #659CBA;
+    }
+`;
 
 /**
  * スタイルを適用したMantineのWhiteボタン
- * @param children ボタンの中身
- * @param onClick クリックハンドラー
- * @param disabled ボタンの無効化
  */
-export const StyledWhiteButton: React.FC<Props> = ({
-  children,
-  onClick,
-  disabled = false,
-}) => {
-  return (
-    <Button
-      onClick={onClick}
-      variant="outline"
-      color="primary.0"
-      style={{ margin: "0.1rem" }}
-      disabled={disabled}
-    >
-      {children}
-    </Button>
-  );
-};
+export const StyledWhiteButton = createPolymorphicComponent<'button', ButtonProps>(_StyledWhiteButton);

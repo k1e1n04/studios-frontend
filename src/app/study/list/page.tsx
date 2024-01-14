@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
 import { Box, CircularProgress, Grid, Stack, Typography } from "@mui/material";
@@ -8,7 +8,7 @@ import { useTheme } from "@mui/material/styles";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { SearchTextField } from "@/molecules/SerachTextFiled";
 import { StudiesTable } from "@/organisms/Study/StudiesTable";
-import { SeachButton } from "@/atoms/SearchButton";
+import { SearchButton } from "@/atoms/SearchButton";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
@@ -110,7 +110,7 @@ export default function Page() {
             />
           </Grid>
           <Grid item xs={12} md={2}>
-            <SeachButton handleSearch={handleSearch} />
+            <SearchButton handleSearch={handleSearch} />
           </Grid>
         </Grid>
         <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>

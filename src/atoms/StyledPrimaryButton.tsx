@@ -1,27 +1,22 @@
-import { Button } from "@mantine/core";
+import {Button, ButtonProps, createPolymorphicComponent} from "@mantine/core";
 import React from "react";
+import styled from "@emotion/styled";
 
-type Props = {
-  children: React.ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-};
+const _StyledPrimaryButton = styled(Button)`
+    margin: 0.1rem;
+    background-color: #659cba;
+    &:hover {
+        background-color: #659cba;
+    }
+    &:disabled {
+        opacity: 0.5;
+    }
+    &:disabled:hover {
+        background-color: #659cba;
+    }
+    `;
+
 /**
  * スタイルを適用したMantineのプライマリーボタン
  */
-export const StyledPrimaryButton: React.FC<Props> = ({
-  children,
-  onClick,
-  disabled = false,
-}) => {
-  return (
-    <Button
-      onClick={onClick}
-      color="primary.0"
-      disabled={disabled}
-      style={{ margin: "0.1rem", backgroundColor: "#659CBA" }}
-    >
-      {children}
-    </Button>
-  );
-};
+export const StyledPrimaryButton = createPolymorphicComponent<'button', ButtonProps>(_StyledPrimaryButton);

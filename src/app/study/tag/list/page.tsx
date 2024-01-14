@@ -6,7 +6,7 @@ import { TagListResponseDto } from "@/types/TagListResponseDto";
 import { useTag } from "@/hooks/useTag";
 import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import { StyledContainer } from "@/atoms/StyledContrainer";
-import { SeachButton } from "@/atoms/SearchButton";
+import { SearchButton } from "@/atoms/SearchButton";
 import { SearchTextField } from "@/molecules/SerachTextFiled";
 import { FlexContainer } from "@/atoms/FlexContainer";
 
@@ -44,7 +44,7 @@ export default function Page() {
             />
           </Grid>
           <Grid item xs={12} md={2}>
-            <SeachButton handleSearch={handleSearch} />
+            <SearchButton handleSearch={handleSearch} />
           </Grid>
         </Grid>
         {!tagListResponseDto && (

@@ -9,7 +9,7 @@ type Props = {
  * @param handleSearch 検索ボタンのクリックハンドラー
  * @constructor
  */
-export const SeachButton: React.FC<Props> = ({ handleSearch }) => {
+export const SearchButton: React.FC<Props> = ({ handleSearch }) => {
   return (
     <Button
       onClick={handleSearch}
