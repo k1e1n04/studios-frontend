@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { StyledContainer } from "@/atoms/StyledContrainer";
 import { useAuth } from "@/hooks/useAuth";
 import { LoginFormInput } from "@/types/Auth/LoginFormInput";
 import { LoginErrorResponseDto } from "@/types/Auth/LoginErrorResponseDto";
