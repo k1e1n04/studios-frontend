@@ -1,19 +1,19 @@
-# StudiosFrontend
+# StudyoFrontend
 
-Studios のフロントエンドです。
+Studyo のフロントエンドです。
 
 ## 開発環境
 
 ### クローン
 
 ```bash
-$ git clone https://github.com/k1e1n04/studios-frontend.git
+$ git clone https://github.com/k1e1n04/studyo-frontend.git
 ```
 
 ### パッケージのインストール
 
 ```bash
-$ cd studios-frontend
+$ cd studyo-frontend
 $ yarn
 ```
 

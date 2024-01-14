@@ -96,7 +96,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             color="primary"
           >
             <Link href="/study/list" color="primary">
-              Studios
+              Studyo
             </Link>
           </Typography>
         </Toolbar>

@@ -13,8 +13,8 @@ import {
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Studios",
-  description: "Studios",
+  title: "Studyo",
+  description: "Studyo",
 };
 
 export default function RootLayout({
@@ -54,7 +54,7 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <meta charSet="utf-8" />
-        <title>Studios</title>
+        <title>Studyo</title>
         <ColorSchemeScript />
       </head>
       <body className={inter.className}>

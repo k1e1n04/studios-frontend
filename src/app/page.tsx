@@ -92,10 +92,10 @@ export default function Page() {
           </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Studios
+              Studyo
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Studiosは、日々の学びを「Study」として記録し、創造性を育む「Studio」の役割を担います。
+              Studyoは、日々の学びを「Study」として記録し、創造性を育む「Studio」の役割を担います。
               学習の一歩一歩を記録することで、自分自身の成長を実感し、新たな可能性に挑戦する勇気を与えてくれます。
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">

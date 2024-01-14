@@ -3,9 +3,11 @@ import { useCallback, useMemo } from "react";
 import { StudyErrorResponseDto } from "@/types/StudyErrorResponseDto";
 import { StudyResponseDto } from "@/types/StudyResponseDto";
 import { StudiesResponseDto } from "@/types/StudiesResponseDto";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const useStudy = () => {
+  const router = useRouter();
+
   const studyApi = useMemo((): AxiosInstance => {
     const axiosInstance = axios.create({
       baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -19,7 +21,7 @@ export const useStudy = () => {
       (response: AxiosResponse) => response,
       (error: AxiosError<StudyErrorResponseDto>) => {
         if (!error.response) {
-          redirect("/error/internal_server_error");
+          router.push("/error/internal_server_error");
         }
         if (
           error.code === "ECONNABORTED" ||
@@ -27,17 +29,19 @@ export const useStudy = () => {
         ) {
           return Promise.reject(error);
         }
-        switch (error.response.status) {
-          case axios.HttpStatusCode.BadRequest:
-            break;
-          case axios.HttpStatusCode.NotFound:
-            redirect("/error/not_found");
-            break;
-          case axios.HttpStatusCode.InternalServerError:
-            redirect("/error/internal_server_error");
-            break;
-          default:
-            redirect("/error/internal_server_error");
+        if (error.response) {
+          switch (error.response.status) {
+            case axios.HttpStatusCode.BadRequest:
+              break;
+            case axios.HttpStatusCode.NotFound:
+              router.push("/error/not_found");
+              break;
+            case axios.HttpStatusCode.InternalServerError:
+              router.push("/error/internal_server_error");
+              break;
+            default:
+              router.push("/error/internal_server_error");
+          }
         }
         return Promise.reject(error);
       },
