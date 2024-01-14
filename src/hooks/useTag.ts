@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { useCallback, useMemo } from "react";
-import { TagErrorResponseDto } from "@/types/TagErrorResponseDto";
-import { TagListResponseDto } from "@/types/TagListResponseDto";
+import { TagErrorResponseDto } from "@/types/Study/TagErrorResponseDto";
+import { TagListResponseDto } from "@/types/Study/TagListResponseDto";
 import { useRouter} from "next/navigation";
 
 export const useTag = () => {

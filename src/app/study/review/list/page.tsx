@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useStudy } from "@/hooks/useStudy";
-import { StudyResponseDto } from "@/types/StudyResponseDto";
+import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import { Layout } from "@/templates/Layout";
 import { StyledContainer } from "@/atoms/StyledContrainer";

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useStudy } from "@/hooks/useStudy";
-import { StudyResponseDto } from "@/types/StudyResponseDto";
+import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { Box, CircularProgress, Grid, Stack, Typography } from "@mui/material";
 import { Layout } from "@/templates/Layout";
 import { useTheme } from "@mui/material/styles";

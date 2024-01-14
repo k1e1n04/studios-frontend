@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Layout } from "@/templates/Layout";
 import { useStudy } from "@/hooks/useStudy";
-import { StudyResponseDto } from "@/types/StudyResponseDto";
+import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { CircularProgress, Stack } from "@mui/material";
 import { StudyDetail } from "@/organisms/Study/StudyDetail";
 import { DeleteDialog } from "@/molecules/DeleteDialog";

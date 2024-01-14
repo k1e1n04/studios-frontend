@@ -1,5 +1,5 @@
 import { StudyDetailHeader } from "@/molecules/Study/StudyDetailHeader";
-import { StudyResponseDto } from "@/types/StudyResponseDto";
+import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import { StudyDetailBody } from "@/molecules/Study/StudyDetailBody";
 import { StudyDetailFooter } from "@/molecules/Study/StudyDetailFooter";

@@ -2,7 +2,7 @@ import { StyledDetailHeaderContainer } from "@/atoms/StyledDetailHeaderContainer
 import { Typography } from "@mui/material";
 import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";
 import { StyledDeleteButton } from "@/atoms/StyledDeleteButton";
-import { StudyResponseDto } from "@/types/StudyResponseDto";
+import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { ButtonsVerticalContainer } from "@/atoms/ButtonsVerticalContainer";
 import Link from "next/link";
 

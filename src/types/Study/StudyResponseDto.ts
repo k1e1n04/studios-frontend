@@ -1,4 +1,4 @@
-import { TagResponseDto } from "@/types/TagResponseDto";
+import { TagResponseDto } from "@/types/Study/TagResponseDto";
 
 export type StudyResponseDto = {
   id: string;

@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { useCallback, useMemo } from "react";
-import { StudyErrorResponseDto } from "@/types/StudyErrorResponseDto";
-import { StudyResponseDto } from "@/types/StudyResponseDto";
-import { StudiesResponseDto } from "@/types/StudiesResponseDto";
+import { StudyErrorResponseDto } from "@/types/Study/StudyErrorResponseDto";
+import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
+import { StudiesResponseDto } from "@/types/Study/StudiesResponseDto";
 import { useRouter } from "next/navigation";
 
 export const useStudy = () => {

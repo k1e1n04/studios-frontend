@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StudyRegisterFormInput } from "@/types/StudyRegisterFormInput";
+import { StudyRegisterFormInput } from "@/types/Study/StudyRegisterFormInput";
 import {
   Controller,
   SubmitHandler,
@@ -7,7 +7,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { useStudy } from "@/hooks/useStudy";
-import { StudyErrorResponseDto } from "@/types/StudyErrorResponseDto";
+import { StudyErrorResponseDto } from "@/types/Study/StudyErrorResponseDto";
 import axios from "axios";
 import { Alert, Button, Stack, useTheme } from "@mui/material";
 import { useTag } from "@/hooks/useTag";

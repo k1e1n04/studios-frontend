@@ -1,4 +1,4 @@
-import { StudyResponseDto } from "@/types/StudyResponseDto";
+import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { TableBody, TableRow } from "@mui/material";
 import { StyledTableCell } from "@/atoms/StyledTableCell";
 import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";

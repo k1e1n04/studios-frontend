@@ -1,4 +1,4 @@
-import { StudyResponseDto } from "@/types/StudyResponseDto";
+import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { Paper, Table, TableContainer } from "@mui/material";
 import { StudiesTableHead } from "@/molecules/Study/StudiesTableHead";
 import { StudiesTableBody } from "@/molecules/Study/StudiesTableBody";
