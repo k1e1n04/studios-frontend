@@ -1,7 +1,9 @@
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
-import { Paper, Table, TableContainer } from "@mui/material";
 import { StudiesTableHead } from "@/molecules/Study/StudiesTableHead";
 import { StudiesTableBody } from "@/molecules/Study/StudiesTableBody";
+import { Table } from "@mantine/core";
+import {css} from "@emotion/react";
+import styled from "@emotion/styled";
 
 type Props = {
   studyResponseDtos: StudyResponseDto[];
@@ -13,14 +15,24 @@ type Props = {
  * @param
  */
 export const StudiesTable: React.FC<Props> = ({ studyResponseDtos }) => {
+    const StyledTableContainer = styled(Table.ScrollContainer)`
+        border-radius: 10px;
+        overflow: hidden;
+        .scrollbar {
+          .corner {
+            background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+            opacity: 1;
+          }
+        }
+    `;
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <StyledTableContainer minWidth="900px">
+      <Table withTableBorder >
         <StudiesTableHead />
         {studyResponseDtos && (
           <StudiesTableBody studyResponseDtos={studyResponseDtos} />
         )}
       </Table>
-    </TableContainer>
+    </StyledTableContainer>
   );
 };

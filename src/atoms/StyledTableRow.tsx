@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import { TableCell } from "@mui/material";
+import { Table } from "@mantine/core";
 
 /**
- * スタイルを適用したMUIのテーブルセル
+ * スタイルを適用したMantineのテーブルセル
  */
-export const StyledTableCell = styled(TableCell)`
+export const StyledTableRow = styled(Table.Td)`
   overflow: hidden;
   textoverflow: ellipsis;
   whitespace: nowrap;

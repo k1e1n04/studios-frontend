@@ -1,44 +1,32 @@
-import { TableHead, TableRow } from "@mui/material";
-import { StyledTableCell } from "@/atoms/StyledTableCell";
-import { useTheme } from "@mui/material/styles";
+import { StyledTableRow } from "@/atoms/StyledTableRow";
+import { Table } from "@mantine/core";
+import { StyledTableTh } from "@/atoms/StyledTableTh";
 
 /**
  * 学習一覧テーブルのヘッダー
  */
 export const StudiesTableHead: React.FC = () => {
-  const theme = useTheme();
   return (
-    <TableHead sx={{ backgroundColor: theme.palette.primary.main }}>
-      <TableRow>
-        <StyledTableCell
-          sx={{ color: theme.palette.secondary.main, width: "60px" }}
-        ></StyledTableCell>
-        <StyledTableCell sx={{ color: theme.palette.secondary.main }}>
-          タイトル
-        </StyledTableCell>
-        <StyledTableCell
-          sx={{ color: theme.palette.secondary.main, width: "150px" }}
-        >
-          タグ
-        </StyledTableCell>
-        <StyledTableCell
-          sx={{ color: theme.palette.secondary.main, width: "100px" }}
-        >
-          復習回数
-        </StyledTableCell>
-        <StyledTableCell
-          sx={{ color: theme.palette.secondary.main, width: "120px" }}
-          align="right"
-        >
-          作成日
-        </StyledTableCell>
-        <StyledTableCell
-          sx={{ color: theme.palette.secondary.main, width: "120px" }}
-          align="right"
-        >
-          更新日
-        </StyledTableCell>
-      </TableRow>
-    </TableHead>
+      <Table.Thead style={{ backgroundColor: "#659cba", color: "white"}}>
+        <Table.Tr>
+          <StyledTableTh style={{ width: "60px"}}>
+          </StyledTableTh>
+          <StyledTableTh style={{ width: "300px" }}>
+            タイトル
+          </StyledTableTh>
+          <StyledTableTh style={{ width: "150px" }}>
+            タグ
+          </StyledTableTh>
+          <StyledTableTh style={{ width: "100px" }}>
+            復習回数
+          </StyledTableTh>
+          <StyledTableTh style={{ width: "120x" }}>
+            作成日
+          </StyledTableTh>
+          <StyledTableTh style={{ width: "120px" }}>
+            更新日
+          </StyledTableTh>
+        </Table.Tr>
+      </Table.Thead>
   );
 };

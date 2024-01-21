@@ -126,50 +126,62 @@ export const Layout: React.FC<Props> = ({ children }) => {
         <List>
           <StyledDiv>学び管理</StyledDiv>
           <ListItem key="学び一覧" disablePadding>
-            <ListItemButton>
-              <Link href="/study/list" passHref style={{ display: "flex" }}>
+            <Link
+              href="/study/list"
+              passHref
+              style={{ display: "flex", width: "100%" }}
+            >
+              <ListItemButton>
                 <ListItemIcon>
                   <FormatListBulletedIcon />
                 </ListItemIcon>
                 <ListItemText primary="学び一覧" />
-              </Link>
-            </ListItemButton>
+              </ListItemButton>
+            </Link>
           </ListItem>
           <ListItem key="学び登録" disablePadding>
-            <ListItemButton>
-              <Link href="/study/register" passHref style={{ display: "flex" }}>
+            <Link
+              href="/study/register"
+              passHref
+              style={{ display: "flex", width: "100%" }}
+            >
+              <ListItemButton>
                 <ListItemIcon>
                   <AppRegistrationIcon />
                 </ListItemIcon>
                 <ListItemText primary="学び登録" />
-              </Link>
-            </ListItemButton>
+              </ListItemButton>
+            </Link>
           </ListItem>
           <ListItem key="復習一覧" disablePadding>
-            <ListItemButton>
-              <Link
-                href="/study/review/list"
-                passHref
-                style={{ display: "flex" }}
-              >
+            <Link
+              href="/study/review/list"
+              passHref
+              style={{ display: "flex", width: "100%" }}
+            >
+              <ListItemButton>
                 <ListItemIcon>
                   <RateReviewIcon />
                 </ListItemIcon>
                 <ListItemText primary="復習一覧" />
-              </Link>
-            </ListItemButton>
+              </ListItemButton>
+            </Link>
           </ListItem>
           <Divider sx={{ mb: "10px" }} />
           <StyledDiv>タグ管理</StyledDiv>
           <ListItem key="タグ一覧" disablePadding>
-            <ListItemButton>
-              <Link href="/study/tag/list" passHref style={{ display: "flex" }}>
+            <Link
+              href="/study/tag/list"
+              passHref
+              style={{ display: "flex", width: "100%" }}
+            >
+              <ListItemButton>
                 <ListItemIcon>
                   <FormatListBulletedIcon />
                 </ListItemIcon>
                 <ListItemText primary="タグ一覧" />
-              </Link>
-            </ListItemButton>
+              </ListItemButton>
+            </Link>
           </ListItem>
         </List>
       </Drawer>

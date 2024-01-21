@@ -1,7 +1,7 @@
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
-import { TableBody, TableRow } from "@mui/material";
-import { StyledTableCell } from "@/atoms/StyledTableCell";
+import { StyledTableRow } from "@/atoms/StyledTableRow";
 import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";
+import { Table } from '@mantine/core';
 import Link from "next/link";
 
 type Props = {
@@ -14,32 +14,31 @@ type Props = {
  */
 export const StudiesTableBody: React.FC<Props> = ({ studyResponseDtos }) => {
   return (
-    <TableBody>
+    <Table.Tbody>
       {studyResponseDtos.map((studyResponseDto: StudyResponseDto) => (
-        <TableRow
+        <Table.Tr
           key={studyResponseDto.id}
-          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
-          <StyledTableCell scope="row">
+          <StyledTableRow>
             <Link href={`/study/detail/${studyResponseDto.id}`}>
               <StyledPrimaryButton>詳細</StyledPrimaryButton>
             </Link>
-          </StyledTableCell>
-          <StyledTableCell>{studyResponseDto.title}</StyledTableCell>
-          <StyledTableCell>
+          </StyledTableRow>
+          <StyledTableRow>{studyResponseDto.title}</StyledTableRow>
+          <StyledTableRow>
             {studyResponseDto.tags.map((tag) => tag.name).join(", ")}
-          </StyledTableCell>
-          <StyledTableCell align="right">
+          </StyledTableRow>
+          <StyledTableRow>
             {studyResponseDto.number_of_review} 回
-          </StyledTableCell>
-          <StyledTableCell align="right">
+          </StyledTableRow>
+          <StyledTableRow>
             {studyResponseDto.created_date}
-          </StyledTableCell>
-          <StyledTableCell align="right">
+          </StyledTableRow>
+          <StyledTableRow>
             {studyResponseDto.updated_date}
-          </StyledTableCell>
-        </TableRow>
+          </StyledTableRow>
+        </Table.Tr>
       ))}
-    </TableBody>
+    </Table.Tbody>
   );
 };
