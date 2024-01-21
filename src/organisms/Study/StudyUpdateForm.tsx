@@ -12,8 +12,6 @@ import axios from "axios";
 import {
   Alert,
   Button,
-  CircularProgress,
-  Stack,
   useTheme,
 } from "@mui/material";
 import { useTag } from "@/hooks/useTag";
@@ -26,6 +24,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { FlexContainer } from "@/atoms/FlexContainer";
 import { useRouter } from "next/navigation";
 import { TextInput } from "@mantine/core";
+import {Loader,Stack} from "@mantine/core";
 
 type Props = {
   id: string;
@@ -138,8 +137,7 @@ export const StudyUpdateForm: React.FC<Props> = ({ id }) => {
           <Stack
             component={"form"}
             onSubmit={handleSubmit(onSubmit)}
-            spacing={2}
-            direction="column"
+            gap="md"
           >
             {studyErrorResponseDto && (
               <Alert severity="warning">{studyErrorResponseDto.message}</Alert>
@@ -232,8 +230,8 @@ export const StudyUpdateForm: React.FC<Props> = ({ id }) => {
           </Stack>
         </StyledContainer>
       ) : (
-        <Stack alignItems={"center"}>
-          <CircularProgress disableShrink />
+        <Stack align="center">
+          <Loader color="primary.0" />
         </Stack>
       )}
     </>

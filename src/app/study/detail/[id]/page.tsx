@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { Layout } from "@/templates/Layout";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
-import { CircularProgress, Stack } from "@mui/material";
 import { StudyDetail } from "@/organisms/Study/StudyDetail";
 import { DeleteDialog } from "@/molecules/DeleteDialog";
 import { ConfirmDialog } from "@/molecules/ConfirmDialog";
 import { useRouter } from "next/navigation";
+import { Loader, Stack } from "@mantine/core";
 
 /**
  * 学習詳細ページ
@@ -93,8 +93,8 @@ export default function Page({ params }: { params: { id: string } }) {
           handleOpenReviewCompleteModal={handleOpenReviewCompleteModal}
         />
       ) : (
-        <Stack alignItems={"center"}>
-          <CircularProgress disableShrink />
+        <Stack align="center">
+          <Loader color="primary.0" />
         </Stack>
       )}
       <DeleteDialog

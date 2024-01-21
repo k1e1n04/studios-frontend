@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
-import { Box, CircularProgress, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { Layout } from "@/templates/Layout";
 import { useTheme } from "@mui/material/styles";
 import { StyledContainer } from "@/atoms/StyledContrainer";
@@ -12,6 +12,7 @@ import { SearchButton } from "@/atoms/SearchButton";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
+import {Loader, Stack} from "@mantine/core";
 
 /**
  * 学習一覧ページ
@@ -119,8 +120,12 @@ export default function Page() {
         {studyResponseDtos ? (
           <StudiesTable studyResponseDtos={studyResponseDtos} />
         ) : (
-          <Stack alignItems={"center"} sx={{ mt: "20px" }}>
-            <CircularProgress disableShrink />
+          <Stack align="center" style={
+            {
+              marginTop: "20px"
+            }
+          }>
+            <Loader color="primary.0" />
           </Stack>
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>

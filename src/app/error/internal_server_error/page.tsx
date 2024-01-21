@@ -1,5 +1,5 @@
 "use client";
-import { Alert } from "@mui/material";
+import { Alert } from "@mantine/core";
 import { Layout } from "@/templates/Layout";
 
 /**
@@ -9,7 +9,7 @@ import { Layout } from "@/templates/Layout";
 export default function Page() {
   return (
     <Layout>
-      <Alert severity="error">サーバーエラーが発生しました。</Alert>
+      <Alert color="red">サーバーエラーが発生しました。</Alert>
     </Layout>
   );
 }

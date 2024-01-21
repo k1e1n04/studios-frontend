@@ -2,11 +2,12 @@
 import { useEffect, useState } from "react";
 import { useStudy } from "@/hooks/useStudy";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
-import { Box, CircularProgress, Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Layout } from "@/templates/Layout";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { StudiesTable } from "@/organisms/Study/StudiesTable";
 import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
+import {Loader, Stack} from "@mantine/core";
 
 /**
  * 復習一覧ページ
@@ -69,8 +70,8 @@ export default function Page() {
         {studyResponseDtos ? (
           <StudiesTable studyResponseDtos={studyResponseDtos} />
         ) : (
-          <Stack alignItems={"center"} sx={{ mt: "20px" }}>
-            <CircularProgress disableShrink />
+          <Stack align="center" style={{ marginTop: "20px" }}>
+            <Loader color="primary.0" />
           </Stack>
         )}
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>

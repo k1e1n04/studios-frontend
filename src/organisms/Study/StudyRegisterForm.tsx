@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StudyRegisterFormInput } from "@/types/Study/StudyRegisterFormInput";
 import {
   Controller,
@@ -9,7 +9,7 @@ import {
 import { useStudy } from "@/hooks/useStudy";
 import { StudyErrorResponseDto } from "@/types/Study/StudyErrorResponseDto";
 import axios from "axios";
-import { Alert, Button, Stack, useTheme } from "@mui/material";
+import { Alert, Button, useTheme } from "@mui/material";
 import { useTag } from "@/hooks/useTag";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { StyledFormErrorText } from "@/atoms/StyledFormErrorText";
@@ -19,7 +19,7 @@ import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import { FlexContainer } from "@/atoms/FlexContainer";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/navigation";
-import { TextInput } from "@mantine/core";
+import { TextInput, Stack } from "@mantine/core";
 
 export const StudyRegisterForm: React.FC = () => {
   const { createStudy } = useStudy();
@@ -106,8 +106,7 @@ export const StudyRegisterForm: React.FC = () => {
       <Stack
         component={"form"}
         onSubmit={handleSubmit(onSubmit)}
-        spacing={2}
-        direction="column"
+        gap="md"
       >
         {studyErrorResponseDto && (
           <Alert severity="warning">{studyErrorResponseDto.message}</Alert>

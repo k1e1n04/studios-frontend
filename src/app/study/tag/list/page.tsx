@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { CircularProgress, Grid, Stack } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Layout } from "@/templates/Layout";
 import { TagListResponseDto } from "@/types/Study/TagListResponseDto";
 import { useTag } from "@/hooks/useTag";
@@ -9,6 +9,7 @@ import { StyledContainer } from "@/atoms/StyledContrainer";
 import { SearchButton } from "@/atoms/SearchButton";
 import { SearchTextField } from "@/molecules/SerachTextFiled";
 import { FlexContainer } from "@/atoms/FlexContainer";
+import {Loader, Stack} from "@mantine/core";
 
 /**
  * タグ一覧ページ
@@ -48,8 +49,8 @@ export default function Page() {
           </Grid>
         </Grid>
         {!tagListResponseDto && (
-          <Stack alignItems={"center"}>
-            <CircularProgress disableShrink />
+          <Stack align="center">
+            <Loader color="primary.0" />
           </Stack>
         )}
         <FlexContainer>
