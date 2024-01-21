@@ -14,6 +14,7 @@ export const LoginForm: React.FC = () => {
     control,
     handleSubmit,
     formState: { errors },
+      watch
   } = useForm<LoginFormInput>({
     defaultValues: {
       email: "",
@@ -23,8 +24,10 @@ export const LoginForm: React.FC = () => {
 
   const [loginErrorResponseDto, setLoginErrorResponseDto] =
     useState<LoginErrorResponseDto>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { login } = useAuth();
   const onSubmit: SubmitHandler<LoginFormInput> = async (data) => {
+    setIsSubmitting(true);
     const [statusCode, responseDate] = await login(data.email, data.password);
     if (
       statusCode === axios.HttpStatusCode.BadRequest ||
@@ -32,7 +35,12 @@ export const LoginForm: React.FC = () => {
     ) {
       setLoginErrorResponseDto(responseDate);
     }
+    setIsSubmitting(false);
   };
+
+  const email = watch("email", "");
+  const password = watch("password", "");
+  const isFormComplete = email && password;
   return (
       <SmallFormContainer>
         <Stack component={"form"} onSubmit={handleSubmit(onSubmit)}>
@@ -54,7 +62,8 @@ export const LoginForm: React.FC = () => {
             render={({ field }) => (
               <TextInput
                 {...field}
-                placeholder="メールアドレス"
+                label="メールアドレス"
+                placeholder="example@example.com"
                 error={!!errors.email}
               />
             )}
@@ -79,8 +88,9 @@ export const LoginForm: React.FC = () => {
             render={({ field }) => (
               <TextInput
                 {...field}
-                placeholder="パスワード"
+                label="パスワード"
                 error={!!errors.password}
+                type="password"
               />
             )}
           ></Controller>
@@ -88,10 +98,10 @@ export const LoginForm: React.FC = () => {
             <StyledFormErrorText>{errors.password.message}</StyledFormErrorText>
           )}
           <StyledPrimaryButton
-            disabled={Object.keys(errors).length > 0}
+            disabled={Object.keys(errors).length > 0 || !isFormComplete || isSubmitting}
             type="submit"
           >
-            ログイン
+            {isSubmitting ? "ログイン中..." : "ログイン"}
           </StyledPrimaryButton>
         </Stack>
       </SmallFormContainer>

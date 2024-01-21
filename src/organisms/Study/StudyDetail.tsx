@@ -4,6 +4,7 @@ import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import { StudyDetailBody } from "@/molecules/Study/StudyDetailBody";
 import { StudyDetailFooter } from "@/molecules/Study/StudyDetailFooter";
 import { StyledContainer } from "@/atoms/StyledContrainer";
+import React from "react";
 
 type Props = {
   studyResponseDto: StudyResponseDto;

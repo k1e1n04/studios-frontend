@@ -1,5 +1,5 @@
 import { StyledDetailHeaderContainer } from "@/atoms/StyledDetailHeaderContainer";
-import { Typography } from "@mui/material";
+import { Text, Title } from '@mantine/core';
 import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";
 import { StyledDeleteButton } from "@/atoms/StyledDeleteButton";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
@@ -23,27 +23,21 @@ export const StudyDetailHeader: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: "bold",
-          mb: 3,
-          borderBottom: "1px rgb(0 0 0 / 12%) solid",
-        }}
+      <Title order={1}
       >
         {studyResponseDto.title}
-      </Typography>
+      </Title>
       <StyledDetailHeaderContainer>
         <div>
-          <Typography align="left">
+          <Text className="text-left">
             復習回数 {studyResponseDto.number_of_review}
-          </Typography>
-          <Typography align="left">
+          </Text>
+          <Text className="text-left">
             投稿日 {studyResponseDto.created_date}
-          </Typography>
-          <Typography align="left">
+          </Text>
+          <Text className="text-left">
             更新日 {studyResponseDto.updated_date}
-          </Typography>
+          </Text>
         </div>
         <ButtonsVerticalContainer>
           <Link href={`/study/update/${studyResponseDto.id}`}>

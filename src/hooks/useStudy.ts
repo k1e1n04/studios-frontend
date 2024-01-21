@@ -47,7 +47,7 @@ export const useStudy = () => {
       },
     );
     return axiosInstance;
-  }, []);
+  }, [router]);
 
   const fetchStudies = useCallback(
     async (

@@ -1,5 +1,4 @@
 import { Button, ButtonProps, createPolymorphicComponent } from "@mantine/core";
-import React from "react";
 import styled from "@emotion/styled";
 
 const _StyledPrimaryButton = styled(Button)`

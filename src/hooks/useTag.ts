@@ -40,16 +40,15 @@ export const useTag = () => {
       },
     );
     return axiosInstance;
-  }, []);
+  }, [router]);
 
   const fetchTags = useCallback(
     async (tag: string | null = null): Promise<TagListResponseDto> => {
-      const tagsList = await tagApi
+      return  await tagApi
         .get("/tag/list", {
           params: { tag },
         })
         .then((response: AxiosResponse): TagListResponseDto => response.data);
-      return tagsList;
     },
     [tagApi],
   );

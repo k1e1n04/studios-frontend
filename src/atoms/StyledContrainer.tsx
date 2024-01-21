@@ -1,6 +1,5 @@
-import { Container } from "@mui/material";
-import styled from "styled-components";
-import { grey } from "@mui/material/colors";
+import { Container } from "@mantine/core";
+import styled from "@emotion/styled";
 
 /**
  * スタイルを適用したコンテナ
@@ -15,16 +14,16 @@ export const StyledContainer = styled(Container)`
   .markdown table {
     border-collapse: collapse;
     border-spacing: 0;
-    border: 1px solid ${grey[300]};
+    border: 1px solid rgb(204, 204, 204);
   }
 
   .markdown th {
-    border: 1px solid ${grey[300]};
+    border: 1px solid rgb(204, 204, 204);
     padding: 5px;
   }
 
   .markdown td {
-    border: 1px solid ${grey[300]};
+    border: 1px solid rgb(204, 204, 204);
     padding: 5px;
   }
 

@@ -6,6 +6,7 @@ import { LoginResponseDto } from "@/types/Auth/LoginResponseDto";
 import { setCookie } from "cookies-next";
 import { useRecoilState } from "recoil";
 import { isLoggedInAtom } from "@/states/isLoggedInAtom";
+import {SignupResponseDto} from "@/types/Auth/SignupResponseDto";
 
 export const useAuth = () => {
   const router = useRouter();
@@ -78,7 +79,37 @@ export const useAuth = () => {
     },
     [authApi],
   );
+
+  const signup = useCallback(
+    async (
+      username: string,
+      email: string,
+      agreeToTerms: boolean,
+      password: string,
+      passwordConfirm: string,
+    ) => {
+      return await authApi
+        .post("/auth/signup", {
+          username,
+          email,
+          "agree_to_terms": agreeToTerms,
+          password,
+          "password_confirm": passwordConfirm,
+        })
+        .then(
+          async (
+            response: AxiosResponse<SignupResponseDto>,
+          ): Promise<(number | SignupResponseDto)[]> => {
+            router.push("/auth/signup/success");
+            return [response.status, response.data];
+          },
+        )
+        .catch((error) => [error.response.status, error.response.data]);
+    },
+    [authApi],
+  );
   return {
     login,
+    signup,
   } as const;
 };
