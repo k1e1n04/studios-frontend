@@ -5,6 +5,7 @@ import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { StudiesResponseDto } from "@/types/Study/StudiesResponseDto";
 import { useRouter } from "next/navigation";
 import { views } from "@/constants/views";
+import { getCookie } from "cookies-next";
 
 export const useStudy = () => {
   const router = useRouter();
@@ -14,7 +15,7 @@ export const useStudy = () => {
       baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
       timeout: 15000,
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
+        Authorization: `Bearer ${getCookie("accessToken")}`,
         "x-api-key": process.env.NEXT_PUBLIC_APIGATEWAY_API_KEY,
       },
     });

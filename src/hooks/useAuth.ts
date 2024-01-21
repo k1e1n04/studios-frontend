@@ -73,10 +73,10 @@ export const useAuth = () => {
           async (
             response: AxiosResponse<LoginResponseDto>,
           ): Promise<(number | LoginResponseDto)[]> => {
-            setCookie("accessToken", "response.data.access_token", {
+            setCookie("accessToken", response.data.access_token, {
               secure: true,
             });
-            setCookie("refreshToken", "response.data.refresh_token", {
+            setCookie("refreshToken", response.data.refresh_token, {
               secure: true,
             });
             setIsLoggedIn(true);
