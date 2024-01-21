@@ -11,15 +11,15 @@ export const isLoggedInAtom = atom<boolean | DefaultValue>({
 });
 
 export function useInitializeLoggedIn() {
-  const setLoggedIn = useSetRecoilState(isLoggedInAtom);
+  const setIsLoggedIn = useSetRecoilState(isLoggedInAtom);
 
   useEffect(() => {
     const initialize = async () => {
       const isLoggedIn = hasCookie("accessToken");
 
-      setLoggedIn(isLoggedIn);
+      setIsLoggedIn(isLoggedIn);
     };
 
     void initialize();
-  }, [setLoggedIn]);
+  }, [setIsLoggedIn]);
 }

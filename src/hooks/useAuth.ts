@@ -3,15 +3,15 @@ import { useCallback, useMemo } from "react";
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { StudyErrorResponseDto } from "@/types/Study/StudyErrorResponseDto";
 import { LoginResponseDto } from "@/types/Auth/LoginResponseDto";
-import { setCookie } from "cookies-next";
-import { useRecoilState } from "recoil";
+import { setCookie, deleteCookie } from "cookies-next";
+import { useSetRecoilState } from "recoil";
 import { isLoggedInAtom } from "@/states/isLoggedInAtom";
 import { SignupResponseDto } from "@/types/Auth/SignupResponseDto";
 import { views } from "@/constants/views";
 
 export const useAuth = () => {
   const router = useRouter();
-  const [isLoggedIn, setLoggedIn] = useRecoilState(isLoggedInAtom);
+  const setIsLoggedIn = useSetRecoilState(isLoggedInAtom);
 
   const authApi = useMemo((): AxiosInstance => {
     const axiosInstance = axios.create({
@@ -56,6 +56,12 @@ export const useAuth = () => {
     return axiosInstance;
   }, []);
 
+  /**
+   * ログイン
+   *
+   * @param email メールアドレス
+   * @param password パスワード
+   */
   const login = useCallback(
     async (email: string, password: string) => {
       return await authApi
@@ -73,7 +79,7 @@ export const useAuth = () => {
             setCookie("refreshToken", "response.data.refresh_token", {
               secure: true,
             });
-            setLoggedIn(true);
+            setIsLoggedIn(true);
             router.push(views.STUDY_LIST.path);
             return [response.status, response.data];
           },
@@ -83,6 +89,15 @@ export const useAuth = () => {
     [authApi],
   );
 
+  /**
+   * サインアップ
+   *
+   * @param username ユーザー名
+   * @param email メールアドレス
+   * @param agreeToTerms 利用規約に同意するか
+   * @param password パスワード
+   * @param passwordConfirm パスワード（確認）
+   */
   const signup = useCallback(
     async (
       username: string,
@@ -111,8 +126,19 @@ export const useAuth = () => {
     },
     [authApi],
   );
+
+  /**
+   * ログアウト
+   */
+  const logout = () => {
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
+    setIsLoggedIn(false);
+    router.push(views.AUTH_LOGIN.path);
+  };
   return {
     login,
     signup,
+    logout,
   } as const;
 };

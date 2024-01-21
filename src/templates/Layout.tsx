@@ -22,6 +22,10 @@ import { CustomAppBar } from "@/molecules/CustomAppBar";
 import { StyledDrawerHeader } from "@/atoms/StyledDrawerHeader";
 import Link from "next/link";
 import { views } from "@/constants/views";
+import { useRecoilState } from "recoil";
+import { isLoggedInAtom, useInitializeLoggedIn } from "@/states/isLoggedInAtom";
+import { useRouter } from "next/navigation";
+import { LogoutButton } from "@/molecules/Auth/LogoutButton";
 
 type Props = {
   children: React.ReactNode;
@@ -59,6 +63,7 @@ const Main = styled("main", {
 export const Layout: React.FC<Props> = ({ children }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const router = useRouter();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -67,6 +72,16 @@ export const Layout: React.FC<Props> = ({ children }) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom);
+  useInitializeLoggedIn();
+
+  // ログインしていない場合はログイン画面にリダイレクト
+  React.useEffect(() => {
+    if (!isLoggedIn) {
+      router.push(views.AUTH_LOGIN.path);
+    }
+  }, [isLoggedIn]);
 
   /**
    * 学び管理のドロワーのコンポーネント
@@ -125,6 +140,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
               Studyo
             </Link>
           </Typography>
+          <LogoutButton />
         </Toolbar>
       </CustomAppBar>
       <Drawer
