@@ -73,22 +73,22 @@ export const Layout: React.FC<Props> = ({ children }) => {
    */
   const studyDrawerComponents = [
     {
-      name: "学び一覧",
+      name: views.STUDY_LIST.name,
       path: views.STUDY_LIST.path,
       icon: <FormatListBulletedIcon />,
     },
     {
-      name: "学び登録",
+      name: views.STUDY_REGISTER.name,
       path: views.STUDY_REGISTER.path,
       icon: <AppRegistrationIcon />,
     },
     {
-      name: "復習一覧",
+      name: views.STUDY_REVIEW_LIST.name,
       path: views.STUDY_REVIEW_LIST.path,
       icon: <RateReviewIcon />,
     },
     {
-      name: "タグ一覧",
+      name: views.STUDY_TAG_LIST.name,
       path: views.STUDY_TAG_LIST.path,
       icon: <FormatListBulletedIcon />,
     },
