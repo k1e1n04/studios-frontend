@@ -2,6 +2,7 @@
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { CustomDrawer } from "@/organisms/NoAuthRequired/Top/CustomDrawer";
+import { views } from "@/constants/views";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -53,7 +54,7 @@ export default function Page() {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
-              href="/auth/login"
+              href={views.AUTH_LOGIN.path}
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               ログイン <span aria-hidden="true">&rarr;</span>
@@ -91,7 +92,7 @@ export default function Page() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
-                href="/auth/signup"
+                href={views.AUTH_SIGNUP.path}
                 className="rounded-md bg-primary-blue px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#558BA8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#659CBA]"
               >
                 サインアップ

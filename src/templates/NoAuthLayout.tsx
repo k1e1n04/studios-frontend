@@ -3,6 +3,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { CustomDrawer } from "@/organisms/NoAuthRequired/Top/CustomDrawer";
 import { useState } from "react";
 import Image from "next/image";
+import { views } from "@/constants/views";
 type Props = {
   children: React.ReactNode;
 };
@@ -50,7 +51,7 @@ export const NoAuthLayout: React.FC<Props> = ({ children }) => {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
-              href="/auth/login"
+              href={views.AUTH_LOGIN.path}
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               ログイン <span aria-hidden="true">&rarr;</span>

@@ -13,6 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
 import { Loader, Stack } from "@mantine/core";
+import { views } from "@/constants/views";
 
 /**
  * 学習一覧ページ
@@ -41,7 +42,9 @@ export default function Page() {
   const limit = 10;
 
   const handleSearch = () => {
-    router.push(`/study/list?tags=${searchTags}&title=${searchTitle}`);
+    router.push(
+      `${views.STUDY_LIST.path}?tags=${searchTags}&title=${searchTitle}`,
+    );
   };
 
   // 次へボタンのクリックハンドラー

@@ -8,6 +8,7 @@ import { DeleteDialog } from "@/molecules/DeleteDialog";
 import { ConfirmDialog } from "@/molecules/ConfirmDialog";
 import { useRouter } from "next/navigation";
 import { Loader, Stack } from "@mantine/core";
+import { views } from "@/constants/views";
 
 /**
  * 学習詳細ページ
@@ -32,7 +33,7 @@ export default function Page({ params }: { params: { id: string } }) {
    */
   const studyDeleteHandler = async () => {
     await deleteStudy(params.id);
-    router.push("/study/list");
+    router.push(views.STUDY_LIST.path);
   };
 
   /**

@@ -20,6 +20,7 @@ import { FlexContainer } from "@/atoms/FlexContainer";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/navigation";
 import { TextInput, Stack } from "@mantine/core";
+import { views } from "@/constants/views";
 
 export const StudyRegisterForm: React.FC = () => {
   const { createStudy } = useStudy();
@@ -62,7 +63,7 @@ export const StudyRegisterForm: React.FC = () => {
       return;
     }
     setIsFormChanged(false);
-    router.push("/study/list");
+    router.push(views.STUDY_LIST.path);
   };
 
   const getTagsSuggestions = async (name: string) => {

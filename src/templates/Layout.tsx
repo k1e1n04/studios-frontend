@@ -6,7 +6,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -22,6 +21,7 @@ import RateReviewIcon from "@mui/icons-material/RateReview";
 import { CustomAppBar } from "@/molecules/CustomAppBar";
 import { StyledDrawerHeader } from "@/atoms/StyledDrawerHeader";
 import Link from "next/link";
+import { views } from "@/constants/views";
 
 type Props = {
   children: React.ReactNode;
@@ -68,6 +68,32 @@ export const Layout: React.FC<Props> = ({ children }) => {
     setOpen(false);
   };
 
+  /**
+   * 学び管理のドロワーのコンポーネント
+   */
+  const studyDrawerComponents = [
+    {
+      name: "学び一覧",
+      path: views.STUDY_LIST.path,
+      icon: <FormatListBulletedIcon />,
+    },
+    {
+      name: "学び登録",
+      path: views.STUDY_REGISTER.path,
+      icon: <AppRegistrationIcon />,
+    },
+    {
+      name: "復習一覧",
+      path: views.STUDY_REVIEW_LIST.path,
+      icon: <RateReviewIcon />,
+    },
+    {
+      name: "タグ一覧",
+      path: views.STUDY_TAG_LIST.path,
+      icon: <FormatListBulletedIcon />,
+    },
+  ];
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -95,7 +121,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             sx={{ fontWeight: "bold" }}
             color="primary"
           >
-            <Link href="/study/list" color="primary">
+            <Link href={views.STUDY_LIST.path} color="primary">
               Studyo
             </Link>
           </Typography>
@@ -125,64 +151,20 @@ export const Layout: React.FC<Props> = ({ children }) => {
         </StyledDrawerHeader>
         <List>
           <StyledDiv>学び管理</StyledDiv>
-          <ListItem key="学び一覧" disablePadding>
-            <Link
-              href="/study/list"
-              passHref
-              style={{ display: "flex", width: "100%" }}
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  <FormatListBulletedIcon />
-                </ListItemIcon>
-                <ListItemText primary="学び一覧" />
-              </ListItemButton>
-            </Link>
-          </ListItem>
-          <ListItem key="学び登録" disablePadding>
-            <Link
-              href="/study/register"
-              passHref
-              style={{ display: "flex", width: "100%" }}
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  <AppRegistrationIcon />
-                </ListItemIcon>
-                <ListItemText primary="学び登録" />
-              </ListItemButton>
-            </Link>
-          </ListItem>
-          <ListItem key="復習一覧" disablePadding>
-            <Link
-              href="/study/review/list"
-              passHref
-              style={{ display: "flex", width: "100%" }}
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  <RateReviewIcon />
-                </ListItemIcon>
-                <ListItemText primary="復習一覧" />
-              </ListItemButton>
-            </Link>
-          </ListItem>
-          <Divider sx={{ mb: "10px" }} />
-          <StyledDiv>タグ管理</StyledDiv>
-          <ListItem key="タグ一覧" disablePadding>
-            <Link
-              href="/study/tag/list"
-              passHref
-              style={{ display: "flex", width: "100%" }}
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  <FormatListBulletedIcon />
-                </ListItemIcon>
-                <ListItemText primary="タグ一覧" />
-              </ListItemButton>
-            </Link>
-          </ListItem>
+          {studyDrawerComponents.map((component) => (
+            <ListItem key={component.name} disablePadding>
+              <Link
+                href={component.path}
+                passHref
+                style={{ display: "flex", width: "100%" }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>{component.icon}</ListItemIcon>
+                  <ListItemText primary={component.name} />
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          ))}
         </List>
       </Drawer>
       <Main open={open}>

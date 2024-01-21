@@ -1,6 +1,7 @@
 import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
 import React from "react";
 import Link from "next/link";
+import { views } from "@/constants/views";
 
 type Props = {
   tag: string;
@@ -14,7 +15,7 @@ type Props = {
 export const TagButton: React.FC<Props> = ({ tag }) => {
   return (
     <StyledWhiteButton key={tag}>
-      <Link href={`/study/list/?tags=${tag}`}>{tag}</Link>
+      <Link href={`${views.STUDY_LIST.path}/?tags=${tag}`}>{tag}</Link>
     </StyledWhiteButton>
   );
 };

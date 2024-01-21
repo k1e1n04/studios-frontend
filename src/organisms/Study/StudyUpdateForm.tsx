@@ -21,6 +21,7 @@ import { FlexContainer } from "@/atoms/FlexContainer";
 import { useRouter } from "next/navigation";
 import { TextInput } from "@mantine/core";
 import { Loader, Stack } from "@mantine/core";
+import { views } from "@/constants/views";
 
 type Props = {
   id: string;
@@ -86,7 +87,7 @@ export const StudyUpdateForm: React.FC<Props> = ({ id }) => {
       return;
     }
     setIsFormChanged(false);
-    await router.push(`/study/detail/${id}`);
+    router.push(`${views.STUDY_DETAIL.path}/${id}`);
   };
 
   const getTagsSuggestions = async (query: string) => {

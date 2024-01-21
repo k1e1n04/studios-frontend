@@ -3,6 +3,7 @@ import { useCallback, useMemo } from "react";
 import { TagErrorResponseDto } from "@/types/Study/TagErrorResponseDto";
 import { TagListResponseDto } from "@/types/Study/TagListResponseDto";
 import { useRouter } from "next/navigation";
+import { views } from "@/constants/views";
 
 export const useTag = () => {
   const router = useRouter();
@@ -20,19 +21,22 @@ export const useTag = () => {
       (response: AxiosResponse) => response,
       (error: AxiosError<TagErrorResponseDto>) => {
         if (!error.response) {
-          router.push("/error/internal_server_error");
+          router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
         } else {
           switch (error.response.status) {
             case axios.HttpStatusCode.BadRequest:
               break;
             case axios.HttpStatusCode.NotFound:
-              router.push("/error/not_found");
+              router.push(views.ERROR_NOT_FOUND.path);
+              break;
+            case axios.HttpStatusCode.Unauthorized:
+              router.push(views.AUTH_LOGIN.path);
               break;
             case axios.HttpStatusCode.InternalServerError:
-              router.push("/error/internal_server_error");
+              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
               break;
             default:
-              router.push("/error/internal_server_error");
+              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
               break;
           }
         }

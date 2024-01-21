@@ -4,6 +4,7 @@ import { StudyErrorResponseDto } from "@/types/Study/StudyErrorResponseDto";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { StudiesResponseDto } from "@/types/Study/StudiesResponseDto";
 import { useRouter } from "next/navigation";
+import { views } from "@/constants/views";
 
 export const useStudy = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ export const useStudy = () => {
       (response: AxiosResponse) => response,
       (error: AxiosError<StudyErrorResponseDto>) => {
         if (!error.response) {
-          router.push("/error/internal_server_error");
+          router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
         }
         if (
           error.code === "ECONNABORTED" ||
@@ -34,13 +35,16 @@ export const useStudy = () => {
             case axios.HttpStatusCode.BadRequest:
               break;
             case axios.HttpStatusCode.NotFound:
-              router.push("/error/not_found");
+              router.push(views.ERROR_NOT_FOUND.path);
+              break;
+            case axios.HttpStatusCode.Unauthorized:
+              router.push(views.AUTH_LOGIN.path);
               break;
             case axios.HttpStatusCode.InternalServerError:
-              router.push("/error/internal_server_error");
+              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
               break;
             default:
-              router.push("/error/internal_server_error");
+              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
           }
         }
         return Promise.reject(error);

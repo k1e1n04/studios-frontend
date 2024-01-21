@@ -7,6 +7,7 @@ import { setCookie } from "cookies-next";
 import { useRecoilState } from "recoil";
 import { isLoggedInAtom } from "@/states/isLoggedInAtom";
 import { SignupResponseDto } from "@/types/Auth/SignupResponseDto";
+import { views } from "@/constants/views";
 
 export const useAuth = () => {
   const router = useRouter();
@@ -25,7 +26,7 @@ export const useAuth = () => {
       (response: AxiosResponse) => response,
       (error: AxiosError<StudyErrorResponseDto>) => {
         if (!error.response) {
-          router.push("/error/internal_server_error");
+          router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
         }
         if (
           error.code === "ECONNABORTED" ||
@@ -38,13 +39,15 @@ export const useAuth = () => {
             case axios.HttpStatusCode.BadRequest:
               break;
             case axios.HttpStatusCode.NotFound:
-              router.push("/error/not_found");
+              router.push(views.ERROR_NOT_FOUND.path);
+              break;
+            case axios.HttpStatusCode.Unauthorized:
               break;
             case axios.HttpStatusCode.InternalServerError:
-              router.push("/error/internal_server_error");
+              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
               break;
             default:
-              router.push("/error/internal_server_error");
+              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
           }
         }
         return Promise.reject(error);
@@ -71,7 +74,7 @@ export const useAuth = () => {
               secure: true,
             });
             setLoggedIn(true);
-            router.push("/study/list");
+            router.push(views.STUDY_LIST.path);
             return [response.status, response.data];
           },
         )
@@ -100,7 +103,7 @@ export const useAuth = () => {
           async (
             response: AxiosResponse<SignupResponseDto>,
           ): Promise<(number | SignupResponseDto)[]> => {
-            router.push("/auth/signup/success");
+            router.push(views.AUTH_SIGNUP_SUCCESS.path);
             return [response.status, response.data];
           },
         )

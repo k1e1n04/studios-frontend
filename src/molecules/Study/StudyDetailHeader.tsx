@@ -5,6 +5,7 @@ import { StyledDeleteButton } from "@/atoms/StyledDeleteButton";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { ButtonsVerticalContainer } from "@/atoms/ButtonsVerticalContainer";
 import Link from "next/link";
+import { views } from "@/constants/views";
 
 type Props = {
   studyResponseDto: StudyResponseDto;
@@ -37,7 +38,7 @@ export const StudyDetailHeader: React.FC<Props> = ({
           </Text>
         </div>
         <ButtonsVerticalContainer>
-          <Link href={`/study/update/${studyResponseDto.id}`}>
+          <Link href={`${views.STUDY_UPDATE.path}/${studyResponseDto.id}`}>
             <StyledPrimaryButton>更新</StyledPrimaryButton>
           </Link>
           <StyledDeleteButton onClick={handleOpenDeleteModal}>
