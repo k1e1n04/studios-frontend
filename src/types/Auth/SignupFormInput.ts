@@ -8,9 +8,9 @@
  * @property passwordConfirm パスワード（確認用）
  */
 export type SignupFormInput = {
-    username: string;
-    email: string;
-    agreeToTerms: boolean;
-    password: string;
-    passwordConfirm: string;
+  username: string;
+  email: string;
+  agreeToTerms: boolean;
+  password: string;
+  passwordConfirm: string;
 };

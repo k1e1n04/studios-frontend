@@ -9,7 +9,7 @@ import { StyledContainer } from "@/atoms/StyledContrainer";
 import { SearchButton } from "@/atoms/SearchButton";
 import { SearchTextField } from "@/molecules/SerachTextFiled";
 import { FlexContainer } from "@/atoms/FlexContainer";
-import {Loader, Stack} from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 
 /**
  * タグ一覧ページ

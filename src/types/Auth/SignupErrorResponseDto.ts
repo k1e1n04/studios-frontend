@@ -2,5 +2,5 @@
  * サインアップエラーレスポンスDTO
  */
 export type SignupErrorResponseDto = {
-    message: string;
+  message: string;
 };

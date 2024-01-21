@@ -12,7 +12,7 @@ import { SearchButton } from "@/atoms/SearchButton";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
-import {Loader, Stack} from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 
 /**
  * 学習一覧ページ
@@ -120,11 +120,12 @@ export default function Page() {
         {studyResponseDtos ? (
           <StudiesTable studyResponseDtos={studyResponseDtos} />
         ) : (
-          <Stack align="center" style={
-            {
-              marginTop: "20px"
-            }
-          }>
+          <Stack
+            align="center"
+            style={{
+              marginTop: "20px",
+            }}
+          >
             <Loader color="primary.0" />
           </Stack>
         )}

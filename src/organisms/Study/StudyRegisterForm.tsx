@@ -103,11 +103,7 @@ export const StudyRegisterForm: React.FC = () => {
 
   return (
     <StyledContainer>
-      <Stack
-        component={"form"}
-        onSubmit={handleSubmit(onSubmit)}
-        gap="md"
-      >
+      <Stack component={"form"} onSubmit={handleSubmit(onSubmit)} gap="md">
         {studyErrorResponseDto && (
           <Alert severity="warning">{studyErrorResponseDto.message}</Alert>
         )}

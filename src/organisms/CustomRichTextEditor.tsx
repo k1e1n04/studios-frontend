@@ -24,7 +24,7 @@ import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { Color } from "@tiptap/extension-color";
 import { TextStyle } from "@tiptap/extension-text-style";
 import { useLowlight } from "@/hooks/useLowlight";
-import { CustomTableStyleContainer } from "@/atoms/CustomTableStyleContainer";
+import { StyledContentContainer } from "@/atoms/StyledContentContainer";
 
 type Props = {
   content: string;
@@ -72,7 +72,7 @@ export const CustomRichTextEditor: React.FC<Props> = ({
   }
 
   return (
-    <CustomTableStyleContainer>
+    <StyledContentContainer>
       <RichTextEditor editor={editor}>
         <RichTextEditor.Toolbar sticky stickyOffset={60}>
           <RichTextEditor.ControlsGroup>
@@ -205,6 +205,6 @@ export const CustomRichTextEditor: React.FC<Props> = ({
 
         <RichTextEditor.Content />
       </RichTextEditor>
-    </CustomTableStyleContainer>
+    </StyledContentContainer>
   );
 };

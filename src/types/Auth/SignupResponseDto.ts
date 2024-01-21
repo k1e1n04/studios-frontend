@@ -1,4 +1,3 @@
-
 export type SignupResponseDto = {
-    message: string;
-}
+  message: string;
+};

@@ -1,9 +1,43 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 /**
- * 独自のスタイルを適用したテーブルコンテナ
+ * 独自のスタイルを適用した内容詳細表示コンテナ
  */
-export const CustomTableStyleContainer = styled.div`
+export const StyledContentContainer = styled.div`
+  letter-spacing: 0.05rem;
+  line-height: 2rem;
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 2rem 0;
+    border-bottom: 1px solid #eaecef;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 1.5rem 0;
+    border-bottom: 1px solid #eaecef;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1.25rem 0;
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1rem 0;
+  }
+
+  h5 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0.875rem 0;
+  }
+
   .tableWrapper {
     padding: 1rem 0;
     overflow-x: auto;
@@ -31,6 +65,14 @@ export const CustomTableStyleContainer = styled.div`
     color: #1c7ed6;
     font-weight: 600;
     text-align: left;
+  }
+
+  code {
+    background-color: rgb(247, 248, 249);
+    color: #333;
+    padding: 0 5px;
+    border-radius: 8px;
+    display: inline-block;
   }
 
   .selectedCell::after {

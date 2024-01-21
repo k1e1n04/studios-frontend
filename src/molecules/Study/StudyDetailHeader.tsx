@@ -1,5 +1,5 @@
 import { StyledDetailHeaderContainer } from "@/atoms/StyledDetailHeaderContainer";
-import { Text, Title } from '@mantine/core';
+import { Text, Title } from "@mantine/core";
 import { StyledPrimaryButton } from "@/atoms/StyledPrimaryButton";
 import { StyledDeleteButton } from "@/atoms/StyledDeleteButton";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
@@ -23,10 +23,7 @@ export const StudyDetailHeader: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Title order={1}
-      >
-        {studyResponseDto.title}
-      </Title>
+      <Title order={1}>{studyResponseDto.title}</Title>
       <StyledDetailHeaderContainer>
         <div>
           <Text className="text-left">

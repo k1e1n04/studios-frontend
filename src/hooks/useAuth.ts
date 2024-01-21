@@ -6,7 +6,7 @@ import { LoginResponseDto } from "@/types/Auth/LoginResponseDto";
 import { setCookie } from "cookies-next";
 import { useRecoilState } from "recoil";
 import { isLoggedInAtom } from "@/states/isLoggedInAtom";
-import {SignupResponseDto} from "@/types/Auth/SignupResponseDto";
+import { SignupResponseDto } from "@/types/Auth/SignupResponseDto";
 
 export const useAuth = () => {
   const router = useRouter();
@@ -92,9 +92,9 @@ export const useAuth = () => {
         .post("/auth/signup", {
           username,
           email,
-          "agree_to_terms": agreeToTerms,
+          agree_to_terms: agreeToTerms,
           password,
-          "password_confirm": passwordConfirm,
+          password_confirm: passwordConfirm,
         })
         .then(
           async (

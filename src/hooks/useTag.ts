@@ -44,7 +44,7 @@ export const useTag = () => {
 
   const fetchTags = useCallback(
     async (tag: string | null = null): Promise<TagListResponseDto> => {
-      return  await tagApi
+      return await tagApi
         .get("/tag/list", {
           params: { tag },
         })

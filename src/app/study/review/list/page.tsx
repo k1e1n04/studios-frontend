@@ -7,7 +7,7 @@ import { Layout } from "@/templates/Layout";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { StudiesTable } from "@/organisms/Study/StudiesTable";
 import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
-import {Loader, Stack} from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 
 /**
  * 復習一覧ページ

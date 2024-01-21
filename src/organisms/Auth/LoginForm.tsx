@@ -14,7 +14,7 @@ export const LoginForm: React.FC = () => {
     control,
     handleSubmit,
     formState: { errors },
-      watch
+    watch,
   } = useForm<LoginFormInput>({
     defaultValues: {
       email: "",
@@ -42,68 +42,70 @@ export const LoginForm: React.FC = () => {
   const password = watch("password", "");
   const isFormComplete = email && password;
   return (
-      <SmallFormContainer>
-        <Stack component={"form"} onSubmit={handleSubmit(onSubmit)}>
-          {loginErrorResponseDto && (
-            <Alert title="ログイン失敗" color="yellow">
-              {loginErrorResponseDto.message}
-            </Alert>
+    <SmallFormContainer>
+      <Stack component={"form"} onSubmit={handleSubmit(onSubmit)}>
+        {loginErrorResponseDto && (
+          <Alert title="ログイン失敗" color="yellow">
+            {loginErrorResponseDto.message}
+          </Alert>
+        )}
+        <Controller
+          name="email"
+          control={control}
+          rules={{
+            required: "メールアドレスは必須です",
+            pattern: {
+              value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+              message: `正しいメールアドレスを入力してください`,
+            },
+          }}
+          render={({ field }) => (
+            <TextInput
+              {...field}
+              label="メールアドレス"
+              placeholder="example@example.com"
+              error={!!errors.email}
+            />
           )}
-          <Controller
-            name="email"
-            control={control}
-            rules={{
-              required: "メールアドレスは必須です",
-              pattern: {
-                value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-                message: `正しいメールアドレスを入力してください`,
-              },
-            }}
-            render={({ field }) => (
-              <TextInput
-                {...field}
-                label="メールアドレス"
-                placeholder="example@example.com"
-                error={!!errors.email}
-              />
-            )}
-          ></Controller>
-          {errors.email?.message && (
-            <StyledFormErrorText>{errors.email.message}</StyledFormErrorText>
+        ></Controller>
+        {errors.email?.message && (
+          <StyledFormErrorText>{errors.email.message}</StyledFormErrorText>
+        )}
+        <Controller
+          name="password"
+          control={control}
+          rules={{
+            required: "パスワードは必須です",
+            maxLength: {
+              value: 64,
+              message: `パスワードは64文字以内で入力してください`,
+            },
+            minLength: {
+              value: 8,
+              message: `パスワードは8文字以上で入力してください`,
+            },
+          }}
+          render={({ field }) => (
+            <TextInput
+              {...field}
+              label="パスワード"
+              error={!!errors.password}
+              type="password"
+            />
           )}
-          <Controller
-            name="password"
-            control={control}
-            rules={{
-              required: "パスワードは必須です",
-              maxLength: {
-                value: 64,
-                message: `パスワードは64文字以内で入力してください`,
-              },
-              minLength: {
-                value: 8,
-                message: `パスワードは8文字以上で入力してください`,
-              },
-            }}
-            render={({ field }) => (
-              <TextInput
-                {...field}
-                label="パスワード"
-                error={!!errors.password}
-                type="password"
-              />
-            )}
-          ></Controller>
-          {errors.password?.message && (
-            <StyledFormErrorText>{errors.password.message}</StyledFormErrorText>
-          )}
-          <StyledPrimaryButton
-            disabled={Object.keys(errors).length > 0 || !isFormComplete || isSubmitting}
-            type="submit"
-          >
-            {isSubmitting ? "ログイン中..." : "ログイン"}
-          </StyledPrimaryButton>
-        </Stack>
-      </SmallFormContainer>
+        ></Controller>
+        {errors.password?.message && (
+          <StyledFormErrorText>{errors.password.message}</StyledFormErrorText>
+        )}
+        <StyledPrimaryButton
+          disabled={
+            Object.keys(errors).length > 0 || !isFormComplete || isSubmitting
+          }
+          type="submit"
+        >
+          {isSubmitting ? "ログイン中..." : "ログイン"}
+        </StyledPrimaryButton>
+      </Stack>
+    </SmallFormContainer>
   );
 };

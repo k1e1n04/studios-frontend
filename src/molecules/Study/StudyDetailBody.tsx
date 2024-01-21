@@ -1,6 +1,7 @@
 import { CodeHighlight } from "@mantine/code-highlight";
 import sanitizeHtml from "sanitize-html";
-import { CustomTableStyleContainer } from "@/atoms/CustomTableStyleContainer";
+import { StyledContentContainer } from "@/atoms/StyledContentContainer";
+import { useCallback } from "react";
 
 type Props = {
   content: string;
@@ -15,7 +16,7 @@ export const StudyDetailBody: React.FC<Props> = ({ content }) => {
   /**
    * コードブロックをレンダリング
    */
-  const renderCodeBlocks = () => {
+  const renderCodeBlocks = useCallback(() => {
     // 正規表現を使用して <pre><code> タグを検出
     const regex =
       /<pre><code class="language-(.*?)">([\s\S]*?)<\/code><\/pre>/g;
@@ -39,20 +40,22 @@ export const StudyDetailBody: React.FC<Props> = ({ content }) => {
           <CodeHighlight
             key={index}
             code={content.split(regex)[index + 1]}
+            withCopyButton
+            copiedLabel="Copied!"
             language={part}
           />
         );
       }
       return null;
     });
-  };
+  }, [content]);
 
   return (
-    <CustomTableStyleContainer
+    <StyledContentContainer
       className="study-detail-body"
       style={{ marginTop: "20px" }}
     >
       {renderCodeBlocks()}
-    </CustomTableStyleContainer>
+    </StyledContentContainer>
   );
 };

@@ -25,12 +25,7 @@ export const NoAuthLayout: React.FC<Props> = ({ children }) => {
         >
           <div className="flex lg:flex-1">
             <a href="/" className="-m-1.5 p-1.5">
-              <Image
-                src="/favicon.ico"
-                width={32}
-                height={32}
-                alt=""
-              />
+              <Image src="/favicon.ico" width={32} height={32} alt="" />
             </a>
           </div>
           <div className="flex lg:hidden">

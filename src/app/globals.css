@@ -54,14 +54,6 @@ p {
   margin: 0;
 }
 
-code {
-  background-color: rgb(247, 248, 249);
-  color: #333;
-  padding: 1px 5px;
-  border-radius: 8px;
-  display: inline-block;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -9,11 +9,7 @@ import {
 import { useStudy } from "@/hooks/useStudy";
 import { StudyErrorResponseDto } from "@/types/Study/StudyErrorResponseDto";
 import axios from "axios";
-import {
-  Alert,
-  Button,
-  useTheme,
-} from "@mui/material";
+import { Alert, Button, useTheme } from "@mui/material";
 import { useTag } from "@/hooks/useTag";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { StyledFormErrorText } from "@/atoms/StyledFormErrorText";
@@ -24,7 +20,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { FlexContainer } from "@/atoms/FlexContainer";
 import { useRouter } from "next/navigation";
 import { TextInput } from "@mantine/core";
-import {Loader,Stack} from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 
 type Props = {
   id: string;
@@ -134,11 +130,7 @@ export const StudyUpdateForm: React.FC<Props> = ({ id }) => {
     <>
       {isLoaded ? (
         <StyledContainer>
-          <Stack
-            component={"form"}
-            onSubmit={handleSubmit(onSubmit)}
-            gap="md"
-          >
+          <Stack component={"form"} onSubmit={handleSubmit(onSubmit)} gap="md">
             {studyErrorResponseDto && (
               <Alert severity="warning">{studyErrorResponseDto.message}</Alert>
             )}
