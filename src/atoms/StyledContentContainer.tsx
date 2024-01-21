@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
  */
 export const StyledContentContainer = styled.div`
   letter-spacing: 0.05rem;
-  line-height: 2rem;
+  line-height: 1.5rem;
   h1 {
     font-size: 2rem;
     font-weight: 600;
@@ -39,8 +39,10 @@ export const StyledContentContainer = styled.div`
   }
 
   .tableWrapper {
+    margin: 1rem 0;
     padding: 1rem 0;
     overflow-x: auto;
+    max-width: 100%;
   }
 
   table {

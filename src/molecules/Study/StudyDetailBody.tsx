@@ -43,6 +43,7 @@ export const StudyDetailBody: React.FC<Props> = ({ content }) => {
             withCopyButton
             copiedLabel="Copied!"
             language={part}
+            style={{ margin: "10px 0" }}
           />
         );
       }
