@@ -73,7 +73,7 @@ export const CustomRichTextEditor: React.FC<Props> = ({
 
   return (
     <StyledContentContainer>
-      <RichTextEditor editor={editor}>
+      <RichTextEditor editor={editor}　style={{ minHeight: "400px"}}>
         <RichTextEditor.Toolbar sticky stickyOffset={60}>
           <RichTextEditor.ControlsGroup>
             <RichTextEditor.Bold />
@@ -203,7 +203,7 @@ export const CustomRichTextEditor: React.FC<Props> = ({
           <RichTextEditor.UnsetColor />
         </RichTextEditor.Toolbar>
 
-        <RichTextEditor.Content />
+        <RichTextEditor.Content  style={{ minHeight: "300px"}}/>
       </RichTextEditor>
     </StyledContentContainer>
   );

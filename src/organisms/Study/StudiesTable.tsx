@@ -3,6 +3,7 @@ import { TableHead } from "@/molecules/TableHead";
 import { StudiesTableBody } from "@/molecules/Study/StudiesTableBody";
 import { Table } from "@mantine/core";
 import styled from "@emotion/styled";
+import React from "react";
 
 type Props = {
   studyResponseDtos: StudyResponseDto[];
