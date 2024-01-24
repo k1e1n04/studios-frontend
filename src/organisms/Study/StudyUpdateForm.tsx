@@ -7,7 +7,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { useStudy } from "@/hooks/useStudy";
-import { StudyErrorResponseDto } from "@/types/Study/StudyErrorResponseDto";
+import { ErrorResponseDto } from "../../types/ErrorResponseDto";
 import axios from "axios";
 import { Alert, Button, useTheme } from "@mui/material";
 import { useTag } from "@/hooks/useTag";
@@ -31,7 +31,7 @@ export const StudyUpdateForm: React.FC<Props> = ({ id }) => {
   const { updateStudy, fetchStudy } = useStudy();
   const { fetchTags } = useTag();
   const [studyErrorResponseDto, setStudyErrorResponseDto] =
-    useState<StudyErrorResponseDto>();
+    useState<ErrorResponseDto>();
   const [suggestedTags, setSuggestedTags] = useState<string[]>([]);
   const [newTag, setNewTag] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);

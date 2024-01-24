@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SignupFormInput } from "@/types/Auth/SignupFormInput";
 import { Controller, useForm } from "react-hook-form";
-import { SignupErrorResponseDto } from "@/types/Auth/SignupErrorResponseDto";
+import { ErrorResponseDto } from "@/types/ErrorResponseDto";
 import { useAuth } from "@/hooks/useAuth";
 import axios from "axios";
 import { SmallFormContainer } from "@/atoms/SmallFormContainer";
@@ -29,7 +29,7 @@ export const SignupForm: React.FC = () => {
     },
   });
   const [signupErrorResponseDto, setSignupErrorResponseDto] =
-    useState<SignupErrorResponseDto>();
+    useState<ErrorResponseDto>();
   const { signup } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const onSubmit = async (data: SignupFormInput) => {

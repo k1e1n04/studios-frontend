@@ -1,60 +1,21 @@
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
-import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
-import { StudyErrorResponseDto } from "@/types/Study/StudyErrorResponseDto";
+import { useCallback } from "react";
+import { AxiosResponse } from "axios";
 import { LoginResponseDto } from "@/types/Auth/LoginResponseDto";
 import { setCookie, deleteCookie } from "cookies-next";
 import { useSetRecoilState } from "recoil";
 import { isLoggedInAtom } from "@/states/isLoggedInAtom";
 import { SignupResponseDto } from "@/types/Auth/SignupResponseDto";
 import { views } from "@/constants/views";
+import {useApi} from "@/hooks/useApi";
 
+/**
+ * 認証に関するカスタムフック
+ */
 export const useAuth = () => {
   const router = useRouter();
   const setIsLoggedIn = useSetRecoilState(isLoggedInAtom);
-
-  const authApi = useMemo((): AxiosInstance => {
-    const axiosInstance = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-      timeout: 15000,
-      headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,
-        "x-api-key": process.env.NEXT_PUBLIC_APIGATEWAY_API_KEY,
-      },
-    });
-    axiosInstance.interceptors.response.use(
-      (response: AxiosResponse) => response,
-      (error: AxiosError<StudyErrorResponseDto>) => {
-        if (!error.response) {
-          router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
-        }
-        if (
-          error.code === "ECONNABORTED" ||
-          error.message.includes("timeout")
-        ) {
-          return Promise.reject(error);
-        }
-        if (error.response) {
-          switch (error.response.status) {
-            case axios.HttpStatusCode.BadRequest:
-              break;
-            case axios.HttpStatusCode.NotFound:
-              router.push(views.ERROR_NOT_FOUND.path);
-              break;
-            case axios.HttpStatusCode.Unauthorized:
-              break;
-            case axios.HttpStatusCode.InternalServerError:
-              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
-              break;
-            default:
-              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
-          }
-        }
-        return Promise.reject(error);
-      },
-    );
-    return axiosInstance;
-  }, []);
+  const { noAuthRequiredApi } = useApi();
 
   /**
    * ログイン
@@ -64,7 +25,7 @@ export const useAuth = () => {
    */
   const login = useCallback(
     async (email: string, password: string) => {
-      return await authApi
+      return await noAuthRequiredApi
         .post("/auth/login", {
           email,
           password,
@@ -86,7 +47,7 @@ export const useAuth = () => {
         )
         .catch((error) => [error.response.status, error.response.data]);
     },
-    [authApi],
+    [noAuthRequiredApi],
   );
 
   /**
@@ -106,7 +67,7 @@ export const useAuth = () => {
       password: string,
       passwordConfirm: string,
     ) => {
-      return await authApi
+      return await noAuthRequiredApi
         .post("/auth/signup", {
           username,
           email,
@@ -124,7 +85,7 @@ export const useAuth = () => {
         )
         .catch((error) => [error.response.status, error.response.data]);
     },
-    [authApi],
+    [noAuthRequiredApi],
   );
 
   /**

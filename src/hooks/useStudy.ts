@@ -1,62 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
-import { useCallback, useMemo } from "react";
-import { StudyErrorResponseDto } from "@/types/Study/StudyErrorResponseDto";
+import { AxiosResponse } from "axios";
+import { useCallback } from "react";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { StudiesResponseDto } from "@/types/Study/StudiesResponseDto";
-import { useRouter } from "next/navigation";
-import { views } from "@/constants/views";
-import { getCookie } from "cookies-next";
-import {useSetRecoilState} from "recoil";
-import {isLoggedInAtom} from "@/states/isLoggedInAtom";
+import { useApi } from "@/hooks/useApi";
 
+/**
+ * Studyに関するカスタムフック
+ */
 export const useStudy = () => {
-  const router = useRouter();
-  const setIsLoggedIn = useSetRecoilState(isLoggedInAtom);
-
-  const studyApi = useMemo((): AxiosInstance => {
-    const axiosInstance = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-      timeout: 15000,
-      headers: {
-        Authorization: `Bearer ${getCookie("accessToken")}`,
-        "x-api-key": process.env.NEXT_PUBLIC_APIGATEWAY_API_KEY,
-      },
-    });
-    axiosInstance.interceptors.response.use(
-      (response: AxiosResponse) => response,
-      (error: AxiosError<StudyErrorResponseDto>) => {
-        if (!error.response) {
-          router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
-        }
-        if (
-          error.code === "ECONNABORTED" ||
-          error.message.includes("timeout")
-        ) {
-          return Promise.reject(error);
-        }
-        if (error.response) {
-          switch (error.response.status) {
-            case axios.HttpStatusCode.BadRequest:
-              break;
-            case axios.HttpStatusCode.NotFound:
-              router.push(views.ERROR_NOT_FOUND.path);
-              break;
-            case axios.HttpStatusCode.Unauthorized:
-              setIsLoggedIn(false)
-              router.push(views.AUTH_LOGIN.path);
-              break;
-            case axios.HttpStatusCode.InternalServerError:
-              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
-              break;
-            default:
-              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
-          }
-        }
-        return Promise.reject(error);
-      },
-    );
-    return axiosInstance;
-  }, [router]);
+  const { authRequiredApi } = useApi();
 
   const fetchStudies = useCallback(
     async (
@@ -65,22 +17,22 @@ export const useStudy = () => {
       page: number | null = null,
       limit: number = 10,
     ): Promise<StudiesResponseDto> => {
-      return await studyApi
+      return await authRequiredApi
         .get("/study/list", {
           params: { tag, title, page, limit },
         })
         .then((response: AxiosResponse): StudiesResponseDto => response.data);
     },
-    [studyApi],
+    [authRequiredApi],
   );
 
   const fetchStudy = useCallback(
     async (id: string | undefined): Promise<StudyResponseDto> => {
-      return await studyApi
+      return await authRequiredApi
         .get(`/study/${id}`)
         .then((response: AxiosResponse): StudyResponseDto => response.data);
     },
-    [studyApi],
+    [authRequiredApi],
   );
 
   const createStudy = async (
@@ -93,7 +45,7 @@ export const useStudy = () => {
       /<pre><code>/g,
       '<pre><code class="language-plaintext">',
     );
-    return await studyApi
+    return await authRequiredApi
       .post("/study/register", {
         title: title,
         tags: tags,
@@ -104,7 +56,7 @@ export const useStudy = () => {
   };
 
   const deleteStudy = async (id: string) => {
-    return await studyApi
+    return await authRequiredApi
       .delete(`/study/delete/${id}`)
       .then((response) => [response.status, response.data])
       .catch((error) => [error.response.status, error.response.data]);
@@ -121,7 +73,7 @@ export const useStudy = () => {
       /<pre><code>/g,
       '<pre><code class="language-plaintext">',
     );
-    return await studyApi
+    return await authRequiredApi
       .put(`/study/update/${id}`, {
         title: title,
         tags: tags,
@@ -136,17 +88,17 @@ export const useStudy = () => {
       page: number | null = null,
       limit: number = 10,
     ): Promise<StudiesResponseDto> => {
-      return await studyApi
+      return await authRequiredApi
         .get("/study/review/list", {
           params: { page, limit },
         })
         .then((response: AxiosResponse): StudiesResponseDto => response.data);
     },
-    [studyApi],
+    [authRequiredApi],
   );
 
   const completeStudyReview = async (id: string) => {
-    return await studyApi
+    return await authRequiredApi
       .put(`/study/review/complete/${id}`)
       .then((response) => [response.status, response.data])
       .catch((error) => [error.response.status, error.response.data]);

@@ -203,7 +203,7 @@ export const CustomRichTextEditor: React.FC<Props> = ({
           <RichTextEditor.UnsetColor />
         </RichTextEditor.Toolbar>
 
-        <RichTextEditor.Content  style={{ minHeight: "300px"}}/>
+        <RichTextEditor.Content style={{ minHeight: "300px" }} />
       </RichTextEditor>
     </StyledContentContainer>
   );
