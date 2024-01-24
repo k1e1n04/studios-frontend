@@ -6,9 +6,12 @@ import { StudiesResponseDto } from "@/types/Study/StudiesResponseDto";
 import { useRouter } from "next/navigation";
 import { views } from "@/constants/views";
 import { getCookie } from "cookies-next";
+import {useSetRecoilState} from "recoil";
+import {isLoggedInAtom} from "@/states/isLoggedInAtom";
 
 export const useStudy = () => {
   const router = useRouter();
+  const setIsLoggedIn = useSetRecoilState(isLoggedInAtom);
 
   const studyApi = useMemo((): AxiosInstance => {
     const axiosInstance = axios.create({
@@ -39,6 +42,7 @@ export const useStudy = () => {
               router.push(views.ERROR_NOT_FOUND.path);
               break;
             case axios.HttpStatusCode.Unauthorized:
+              setIsLoggedIn(false)
               router.push(views.AUTH_LOGIN.path);
               break;
             case axios.HttpStatusCode.InternalServerError:
