@@ -63,6 +63,9 @@ export const LoginForm: React.FC = () => {
             <TextInput
               {...field}
               label="メールアドレス"
+              labelProps={{
+                style: { color: 'black' }
+              }}
               placeholder="example@example.com"
               error={!!errors.email}
             />
@@ -89,6 +92,9 @@ export const LoginForm: React.FC = () => {
             <TextInput
               {...field}
               label="パスワード"
+              labelProps={{
+                style: { color: 'black' }
+              }}
               error={!!errors.password}
               type="password"
             />

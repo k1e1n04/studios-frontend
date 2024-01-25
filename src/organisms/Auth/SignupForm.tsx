@@ -80,6 +80,9 @@ export const SignupForm: React.FC = () => {
               {...field}
               required
               label="メールアドレス"
+              labelProps={{
+                  style: { color: 'black' }
+              }}
               placeholder="example@example.com"
               error={!!errors.email}
             />
@@ -111,6 +114,9 @@ export const SignupForm: React.FC = () => {
               {...field}
               required
               label="ユーザー名"
+              labelProps={{
+                  style: { color: 'black' }
+              }}
               placeholder="username"
               error={!!errors.username}
             />
@@ -150,6 +156,9 @@ export const SignupForm: React.FC = () => {
             <TextInput
               {...field}
               label="パスワード"
+              labelProps={{
+                  style: { color: 'black' }
+              }}
               required
               type="password"
               error={!!errors.password}
@@ -176,6 +185,9 @@ export const SignupForm: React.FC = () => {
               type="password"
               required
               label="パスワード(確認)"
+              labelProps={{
+                  style: { color: 'black' }
+              }}
               error={!!errors.passwordConfirm}
             />
           )}
@@ -197,6 +209,7 @@ export const SignupForm: React.FC = () => {
               onBlur={onBlur}
               ref={ref}
               label="利用規約に同意する"
+              style={{ color: 'black' }}
             />
           )}
         />
