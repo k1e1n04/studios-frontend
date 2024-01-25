@@ -78,6 +78,7 @@ export const SignupForm: React.FC = () => {
           render={({ field }) => (
             <TextInput
               {...field}
+              required
               label="メールアドレス"
               placeholder="example@example.com"
               error={!!errors.email}
@@ -108,6 +109,7 @@ export const SignupForm: React.FC = () => {
           render={({ field }) => (
             <TextInput
               {...field}
+              required
               label="ユーザー名"
               placeholder="username"
               error={!!errors.username}
@@ -148,6 +150,7 @@ export const SignupForm: React.FC = () => {
             <TextInput
               {...field}
               label="パスワード"
+              required
               type="password"
               error={!!errors.password}
             />
@@ -171,6 +174,7 @@ export const SignupForm: React.FC = () => {
             <TextInput
               {...field}
               type="password"
+              required
               label="パスワード(確認)"
               error={!!errors.passwordConfirm}
             />
@@ -188,6 +192,7 @@ export const SignupForm: React.FC = () => {
           render={({ field: { onChange, onBlur, value, ref } }) => (
             <Checkbox
               checked={value}
+              required
               onChange={onChange}
               onBlur={onBlur}
               ref={ref}
