@@ -7,7 +7,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { useStudy } from "@/hooks/useStudy";
-import { ErrorResponseDto } from "../../types/ErrorResponseDto";
+import { ErrorResponseDto } from "@/types/ErrorResponseDto";
 import axios from "axios";
 import { Alert, Button, useTheme } from "@mui/material";
 import { useTag } from "@/hooks/useTag";
