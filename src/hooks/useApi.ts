@@ -75,35 +75,35 @@ export const useApi = () => {
       },
     });
     axiosInstance.interceptors.response.use(
-        (response: AxiosResponse) => response,
-        (error: AxiosError<ErrorResponseDto>) => {
-          if (!error.response) {
-            router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
-          }
-          if (
-              error.code === "ECONNABORTED" ||
-              error.message.includes("timeout")
-          ) {
-            return Promise.reject(error);
-          }
-          if (error.response) {
-            switch (error.response.status) {
-              case axios.HttpStatusCode.BadRequest:
-                break;
-              case axios.HttpStatusCode.NotFound:
-                router.push(views.ERROR_NOT_FOUND.path);
-                break;
-              case axios.HttpStatusCode.Unauthorized:
-                break;
-              case axios.HttpStatusCode.InternalServerError:
-                router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
-                break;
-              default:
-                router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
-            }
-          }
+      (response: AxiosResponse) => response,
+      (error: AxiosError<ErrorResponseDto>) => {
+        if (!error.response) {
+          router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
+        }
+        if (
+          error.code === "ECONNABORTED" ||
+          error.message.includes("timeout")
+        ) {
           return Promise.reject(error);
-        },
+        }
+        if (error.response) {
+          switch (error.response.status) {
+            case axios.HttpStatusCode.BadRequest:
+              break;
+            case axios.HttpStatusCode.NotFound:
+              router.push(views.ERROR_NOT_FOUND.path);
+              break;
+            case axios.HttpStatusCode.Unauthorized:
+              break;
+            case axios.HttpStatusCode.InternalServerError:
+              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
+              break;
+            default:
+              router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
+          }
+        }
+        return Promise.reject(error);
+      },
     );
     return axiosInstance;
   }, []);

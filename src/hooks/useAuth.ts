@@ -7,7 +7,7 @@ import { useSetRecoilState } from "recoil";
 import { isLoggedInAtom } from "@/states/isLoggedInAtom";
 import { SignupResponseDto } from "@/types/Auth/SignupResponseDto";
 import { views } from "@/constants/views";
-import {useApi} from "@/hooks/useApi";
+import { useApi } from "@/hooks/useApi";
 
 /**
  * 認証に関するカスタムフック

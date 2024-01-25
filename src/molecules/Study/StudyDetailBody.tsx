@@ -1,7 +1,7 @@
 import { CodeHighlight } from "@mantine/code-highlight";
 import { StyledContentContainer } from "@/atoms/StyledContentContainer";
 import React, { useCallback } from "react";
-import {useHtml} from "@/hooks/useHtml";
+import { useHtml } from "@/hooks/useHtml";
 
 type Props = {
   content: string;

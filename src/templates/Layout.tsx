@@ -185,7 +185,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
       </Drawer>
       <Main open={open}>
         <StyledDrawerHeader />
-        {children}
+          {children}
       </Main>
     </Box>
   );
