@@ -32,6 +32,10 @@ export const useApi = () => {
       (response: AxiosResponse) => response,
       (error: AxiosError<ErrorResponseDto>) => {
         if (!error.response) {
+          if (error.status === axios.HttpStatusCode.TooManyRequests) {
+            setIsThrottled(true);
+            return Promise.reject(error);
+          }
           router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
         }
         if (
@@ -50,9 +54,6 @@ export const useApi = () => {
             case axios.HttpStatusCode.Unauthorized:
               setIsLoggedIn(false);
               router.push(views.AUTH_LOGIN.path);
-              break;
-            case axios.HttpStatusCode.TooManyRequests:
-              setIsThrottled(true);
               break;
             case axios.HttpStatusCode.InternalServerError:
               router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
@@ -83,6 +84,10 @@ export const useApi = () => {
       (response: AxiosResponse) => response,
       (error: AxiosError<ErrorResponseDto>) => {
         if (!error.response) {
+          if (error.status === axios.HttpStatusCode.TooManyRequests) {
+            setIsThrottled(true);
+            return Promise.reject(error);
+          }
           router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
         }
         if (
@@ -99,9 +104,6 @@ export const useApi = () => {
               router.push(views.ERROR_NOT_FOUND.path);
               break;
             case axios.HttpStatusCode.Unauthorized:
-              break;
-            case axios.HttpStatusCode.TooManyRequests:
-              setIsThrottled(true);
               break;
             case axios.HttpStatusCode.InternalServerError:
               router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
