@@ -37,6 +37,11 @@ export const StyledContentContainer = styled.div`
     font-weight: 600;
     margin: 0.875rem 0;
   }
+  
+  a {
+    word-break: break-all;
+    color: #007bff;
+  }
 
   .tableWrapper {
     margin: 1rem 0;
@@ -96,5 +101,19 @@ export const StyledContentContainer = styled.div`
     width: 4px;
     height: 100%; /* handleの高さをセルの高さに合わせる */
     cursor: col-resize; /* リサイズ可能であることを示すカーソルに変更 */
+  }
+  
+  ul, ol {
+    padding-left: 20px;
+  }
+
+  ul li {
+    list-style-type: disc;
+    list-style-position: inherit;
+  }
+
+  ol li {
+    list-style-type: decimal;
+    list-style-position: inherit;
   }
 `;
