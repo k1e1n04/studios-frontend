@@ -6,6 +6,7 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { getCookie } from "cookies-next";
 import { ErrorResponseDto } from "@/types/ErrorResponseDto";
 import { views } from "@/constants/views";
+import {isThrottledAtom} from "@/states/isThrottledAtom";
 
 /**
  * APIを利用するためのカスタムフック
@@ -13,6 +14,7 @@ import { views } from "@/constants/views";
 export const useApi = () => {
   const router = useRouter();
   const setIsLoggedIn = useSetRecoilState(isLoggedInAtom);
+  const setIsThrottled = useSetRecoilState(isThrottledAtom);
 
   /**
    * 認証が必要なAPI
@@ -48,6 +50,9 @@ export const useApi = () => {
             case axios.HttpStatusCode.Unauthorized:
               setIsLoggedIn(false);
               router.push(views.AUTH_LOGIN.path);
+              break;
+            case axios.HttpStatusCode.TooManyRequests:
+              setIsThrottled(true);
               break;
             case axios.HttpStatusCode.InternalServerError:
               router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);
@@ -94,6 +99,9 @@ export const useApi = () => {
               router.push(views.ERROR_NOT_FOUND.path);
               break;
             case axios.HttpStatusCode.Unauthorized:
+              break;
+            case axios.HttpStatusCode.TooManyRequests:
+              setIsThrottled(true);
               break;
             case axios.HttpStatusCode.InternalServerError:
               router.push(views.ERROR_INTERNAL_SERVER_ERROR.path);

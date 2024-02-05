@@ -16,7 +16,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import { Box } from "@mui/material";
+import {Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import RateReviewIcon from "@mui/icons-material/RateReview";
 import { CustomAppBar } from "@/molecules/CustomAppBar";
 import { StyledDrawerHeader } from "@/atoms/StyledDrawerHeader";
@@ -26,6 +26,9 @@ import { useRecoilState } from "recoil";
 import { isLoggedInAtom, useInitializeLoggedIn } from "@/states/isLoggedInAtom";
 import { useRouter } from "next/navigation";
 import { LogoutButton } from "@/molecules/Auth/LogoutButton";
+import {useState} from "react";
+import {isThrottledAtom} from "@/states/isThrottledAtom";
+import {Button} from "@mantine/core";
 
 type Props = {
   children: React.ReactNode;
@@ -62,8 +65,9 @@ const Main = styled("main", {
 
 export const Layout: React.FC<Props> = ({ children }) => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
+  const [isThrottled, setIsThrottled] = useRecoilState(isThrottledAtom);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -187,6 +191,17 @@ export const Layout: React.FC<Props> = ({ children }) => {
         <StyledDrawerHeader />
           {children}
       </Main>
+      <Dialog open={isThrottled}>
+        <DialogTitle>リクエストが混み合っています</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            時間をおいて再度お試しください。
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setIsThrottled(false)}>閉じる</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

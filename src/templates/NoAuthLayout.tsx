@@ -4,6 +4,10 @@ import { CustomDrawer } from "@/organisms/NoAuthRequired/Top/CustomDrawer";
 import { useState } from "react";
 import Image from "next/image";
 import { views } from "@/constants/views";
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import {useRecoilState} from "recoil";
+import {isThrottledAtom} from "@/states/isThrottledAtom";
+import {Button} from "@mantine/core";
 type Props = {
   children: React.ReactNode;
 };
@@ -17,6 +21,7 @@ const navigation = [
 
 export const NoAuthLayout: React.FC<Props> = ({ children }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isThrottled, setIsThrottled] = useRecoilState(isThrottledAtom);
   return (
     <div className="bg-white min-h-screen">
       <header className="absolute inset-x-0 top-0 z-50">
@@ -65,6 +70,17 @@ export const NoAuthLayout: React.FC<Props> = ({ children }) => {
         />
       </header>
       {children}
+      <Dialog open={isThrottled}>
+        <DialogTitle>リクエストが混み合っています</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            時間をおいて再度お試しください。
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setIsThrottled(false)}>閉じる</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
