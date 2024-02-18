@@ -2,7 +2,7 @@ import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import {redirect} from "next/navigation";
 import { views } from "@/constants/views";
 import { useStudy } from "@/hooks/SSR/useStudy";
-import StudyDetailPage from "@/pageComponents/Study/StudyDetailPage";
+import {StudyDetailPage} from "@/pageComponents/Study/StudyDetailPage";
 
 /**
  * 学習詳細ページ
