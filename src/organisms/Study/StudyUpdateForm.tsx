@@ -6,11 +6,11 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import { useStudy } from "@/hooks/useStudy";
+import { useStudy } from "@/hooks/CSR/useStudy";
 import { ErrorResponseDto } from "../../types/ErrorResponseDto";
 import axios from "axios";
 import { Alert, Button, useTheme } from "@mui/material";
-import { useTag } from "@/hooks/useTag";
+import { useTag } from "@/hooks/CSR/useTag";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { StyledFormErrorText } from "@/atoms/StyledFormErrorText";
 import { TagAddInput } from "@/molecules/Study/Tag/TagAddInput";

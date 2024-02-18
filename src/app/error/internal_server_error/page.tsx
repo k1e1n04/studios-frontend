@@ -1,6 +1,6 @@
 "use client";
 import { Alert } from "@mantine/core";
-import { Layout } from "@/templates/Layout";
+import {NoAuthLayout} from "@/templates/NoAuthLayout";
 
 /**
  * サーバーエラーページ
@@ -8,8 +8,8 @@ import { Layout } from "@/templates/Layout";
  */
 export default function Page() {
   return (
-    <Layout>
+    <NoAuthLayout>
       <Alert color="red">サーバーエラーが発生しました。</Alert>
-    </Layout>
+    </NoAuthLayout>
   );
 }

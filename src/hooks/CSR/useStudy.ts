@@ -2,10 +2,10 @@ import { AxiosResponse } from "axios";
 import { useCallback } from "react";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { StudiesResponseDto } from "@/types/Study/StudiesResponseDto";
-import { useApi } from "@/hooks/useApi";
+import { useApi } from "@/hooks/CSR/useApi";
 
 /**
- * Studyに関するカスタムフック
+ * Studyに関するカスタムフック(CSR用)
  */
 export const useStudy = () => {
   const { authRequiredApi } = useApi();

@@ -1,15 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
-import { Layout } from "@/templates/Layout";
 import { TagListResponseDto } from "@/types/Study/TagListResponseDto";
-import { useTag } from "@/hooks/useTag";
+import { useTag } from "@/hooks/CSR/useTag";
 import { TagButton } from "@/molecules/Study/Tag/TagButton";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { SearchButton } from "@/atoms/SearchButton";
 import { SearchTextField } from "@/molecules/SerachTextFiled";
 import { FlexContainer } from "@/atoms/FlexContainer";
 import { Loader, Stack } from "@mantine/core";
+import {AuthRequiredLayout} from "@/templates/AuthRequiredLayout";
 
 /**
  * タグ一覧ページ
@@ -34,7 +34,7 @@ export default function Page() {
   }, [fetchTags]);
 
   return (
-    <Layout>
+    <AuthRequiredLayout>
       <StyledContainer>
         <Grid container spacing={2} sx={{ marginBottom: 2 }}>
           <Grid item xs={6} md={3}>
@@ -59,6 +59,6 @@ export default function Page() {
           ))}
         </FlexContainer>
       </StyledContainer>
-    </Layout>
+    </AuthRequiredLayout>
   );
 }

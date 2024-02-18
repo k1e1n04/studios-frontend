@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { useCallback, useMemo } from "react";
 import { TagListResponseDto } from "@/types/Study/TagListResponseDto";
-import { useApi } from "@/hooks/useApi";
+import { useApi } from "@/hooks/CSR/useApi";
 
 export const useTag = () => {
   const { authRequiredApi } = useApi();

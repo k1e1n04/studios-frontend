@@ -1,6 +1,7 @@
 "use client";
 import { Alert } from "@mantine/core";
-import { Layout } from "@/templates/Layout";
+import { AuthLayout } from "@/templates/AuthLayout";
+import {NoAuthLayout} from "@/templates/NoAuthLayout";
 
 /**
  * 404ページ
@@ -8,8 +9,8 @@ import { Layout } from "@/templates/Layout";
  */
 export default function Page() {
   return (
-    <Layout>
+    <NoAuthLayout>
       <Alert color="yellow">お探しのページは存在しません。</Alert>
-    </Layout>
+    </NoAuthLayout>
   );
 }

@@ -10,9 +10,7 @@ export const useHtml = () => {
    * @param options オプション
    * @returns サニタイズされたHTML
    */
-  const sanitizeHtml = (html: string, options = {}) => {
+  const sanitizeHtml = (html: string, options = {}): string => {
     return DOMPurify.sanitize(html, options);
   };
-
-  return { sanitizeHtml } as const;
 };

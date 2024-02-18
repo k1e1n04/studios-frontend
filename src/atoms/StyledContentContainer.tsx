@@ -37,7 +37,7 @@ export const StyledContentContainer = styled.div`
     font-weight: 600;
     margin: 0.875rem 0;
   }
-  
+
   a {
     word-break: break-all;
     color: #007bff;
@@ -102,8 +102,9 @@ export const StyledContentContainer = styled.div`
     height: 100%; /* handleの高さをセルの高さに合わせる */
     cursor: col-resize; /* リサイズ可能であることを示すカーソルに変更 */
   }
-  
-  ul, ol {
+
+  ul,
+  ol {
     padding-left: 20px;
   }
 

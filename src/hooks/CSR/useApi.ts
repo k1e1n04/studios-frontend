@@ -6,10 +6,10 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { getCookie } from "cookies-next";
 import { ErrorResponseDto } from "@/types/ErrorResponseDto";
 import { views } from "@/constants/views";
-import {isThrottledAtom} from "@/states/isThrottledAtom";
+import { isThrottledAtom } from "@/states/isThrottledAtom";
 
 /**
- * APIを利用するためのカスタムフック
+ * APIを利用するためのカスタムフック(CSR用)
  */
 export const useApi = () => {
   const router = useRouter();

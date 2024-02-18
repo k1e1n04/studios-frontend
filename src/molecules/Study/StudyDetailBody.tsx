@@ -1,7 +1,6 @@
 import { CodeHighlight } from "@mantine/code-highlight";
 import { StyledContentContainer } from "@/atoms/StyledContentContainer";
 import React, { useCallback } from "react";
-import { useHtml } from "@/hooks/useHtml";
 
 type Props = {
   content: string;
@@ -13,7 +12,6 @@ type Props = {
  * @constructor
  */
 export const StudyDetailBody: React.FC<Props> = ({ content }) => {
-  const { sanitizeHtml } = useHtml();
   /**
    * コードブロックをレンダリング
    */
@@ -32,7 +30,7 @@ export const StudyDetailBody: React.FC<Props> = ({ content }) => {
         return (
           <span
             key={index}
-            dangerouslySetInnerHTML={{ __html: sanitizeHtml(part) }}
+            dangerouslySetInnerHTML={{ __html: part }}
           />
         );
       } else if (index % 3 === 1) {

@@ -1,6 +1,6 @@
 "use client";
 import { StudyRegisterForm } from "@/organisms/Study/StudyRegisterForm";
-import { Layout } from "@/templates/Layout";
+import {AuthRequiredLayout} from "@/templates/AuthRequiredLayout";
 
 /**
  * 学習登録ページ
@@ -8,8 +8,8 @@ import { Layout } from "@/templates/Layout";
  */
 export default function Page() {
   return (
-    <Layout>
+    <AuthRequiredLayout>
       <StudyRegisterForm />
-    </Layout>
+    </AuthRequiredLayout>
   );
 }

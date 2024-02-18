@@ -1,6 +1,6 @@
 "use client";
 import { StudyUpdateForm } from "@/organisms/Study/StudyUpdateForm";
-import { Layout } from "@/templates/Layout";
+import {AuthRequiredLayout} from "@/templates/AuthRequiredLayout";
 
 /**
  * 学習更新ページ
@@ -8,8 +8,8 @@ import { Layout } from "@/templates/Layout";
  */
 export default function Page({ params }: { params: { id: string } }) {
   return (
-    <Layout>
+    <AuthRequiredLayout>
       <StudyUpdateForm id={params.id} />
-    </Layout>
+    </AuthRequiredLayout>
   );
 }

@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useStudy } from "@/hooks/useStudy";
+import { useStudy } from "@/hooks/CSR/useStudy";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import { Box, Typography } from "@mui/material";
-import { Layout } from "@/templates/Layout";
 import { StyledContainer } from "@/atoms/StyledContrainer";
 import { StudiesTable } from "@/organisms/Study/StudiesTable";
 import { StyledWhiteButton } from "@/atoms/StyledWhiteButton";
 import { Loader, Stack } from "@mantine/core";
+import {AuthRequiredLayout} from "@/templates/AuthRequiredLayout";
 
 /**
  * 復習一覧ページ
@@ -62,7 +62,7 @@ export default function Page() {
   }, [fetchReviewStudies, pageNumber]);
 
   return (
-    <Layout>
+    <AuthRequiredLayout>
       <StyledContainer>
         <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
           {pageElements}/{totalStudies}件
@@ -89,6 +89,6 @@ export default function Page() {
           </StyledWhiteButton>
         </Box>
       </StyledContainer>
-    </Layout>
+    </AuthRequiredLayout>
   );
 }
