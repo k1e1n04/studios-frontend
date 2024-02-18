@@ -34,12 +34,15 @@ export const StudyListPage: React.FC<Props> = ({data, queryTitle, queryTags}) =>
 
     // 次へボタンのクリックハンドラー
     const handleNext = async () => {
-        router.push(`${views.STUDY_LIST.path}?tags=${queryTags}&title=${queryTitle}&page=${data.page.pageNumber + 1}`);
+        const pageNumber = data.page?.pageNumber === undefined ? 1 : data.page?.pageNumber;
+        router.push(`${views.STUDY_LIST.path}?tags=${queryTags}&title=${queryTitle}&page=${pageNumber + 1}`);
     };
 
     // 前へボタンのクリックハンドラー
     const handlePrevious = async () => {
-        router.push(`${views.STUDY_LIST.path}?tags=${queryTags}&title=${queryTitle}&page=${data.page.pageNumber - 1}`);
+        // pageはundefinedの場合があるため、undefinedの場合は1にする
+        const pageNumber = data.page?.pageNumber === undefined ? 1 : data.page?.pageNumber;
+        router.push(`${views.STUDY_LIST.path}?tags=${queryTags}&title=${queryTitle}&page=${pageNumber - 1}`);
     };
 
 
@@ -66,25 +69,25 @@ export const StudyListPage: React.FC<Props> = ({data, queryTitle, queryTags}) =>
                     </Grid>
                 </Grid>
                 <Typography variant="subtitle1" align="right" sx={{ mt: 2 }}>
-                    {data.page.pageElements}/{data.page.totalElements}件
+                    {data.page?.pageElements}/{data.page?.totalElements}件
                 </Typography>
                 <StudiesTable studyResponseDtos={data.studies} />
                 <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
                     <StyledWhiteButton
-                        disabled={data.page.pageNumber === 1}
+                        disabled={data.page?.pageNumber === 1}
                         onClick={handlePrevious}
                     >
                         前へ
                     </StyledWhiteButton>
                     <StyledWhiteButton
-                        disabled={data.page.pageNumber === data.page.totalPages}
+                        disabled={data.page?.pageNumber === data.page?.totalPages}
                         onClick={handleNext}
                     >
                         次へ
                     </StyledWhiteButton>
                 </Box>
                 <div className="text-right mt-2 text-base">
-                    {data.page.pageNumber}/{data.page.totalPages} ページ
+                    {data.page?.pageNumber}/{data.page?.totalPages} ページ
                 </div>
             </StyledContainer>
         </AuthRequiredLayout>

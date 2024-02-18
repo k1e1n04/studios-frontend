@@ -33,10 +33,10 @@ export default function Page() {
     const studiesResponseDto = await fetchReviewStudies(pageNumber + 1, limit);
 
     setStudyResponseDtos(studiesResponseDto.studies);
-    setTotalPages(studiesResponseDto.page.totalPages);
-    setTotalStudies(studiesResponseDto.page.totalElements);
-    setPageElements(studiesResponseDto.page.pageElements);
-    setPageNumber(studiesResponseDto.page.pageNumber);
+    setTotalPages(studiesResponseDto.page?.totalPages);
+    setTotalStudies(studiesResponseDto.page?.totalElements);
+    setPageElements(studiesResponseDto.page?.pageElements);
+    setPageNumber(studiesResponseDto.page?.pageNumber ?? 1);
   };
 
   // 前へボタンのクリックハンドラー
@@ -44,20 +44,20 @@ export default function Page() {
     const studiesResponseDto = await fetchReviewStudies(pageNumber - 1, limit);
 
     setStudyResponseDtos(studiesResponseDto.studies);
-    setTotalPages(studiesResponseDto.page.totalPages);
-    setTotalStudies(studiesResponseDto.page.totalElements);
-    setPageElements(studiesResponseDto.page.pageElements);
-    setPageNumber(studiesResponseDto.page.pageNumber);
+    setTotalPages(studiesResponseDto.page?.totalPages);
+    setTotalStudies(studiesResponseDto.page?.totalElements);
+    setPageElements(studiesResponseDto.page?.pageElements);
+    setPageNumber(studiesResponseDto.page?.pageNumber ?? 1);
   };
 
   useEffect(() => {
     (async () => {
       const studiesResponseDto = await fetchReviewStudies(pageNumber, limit);
       setStudyResponseDtos(studiesResponseDto.studies);
-      setTotalPages(studiesResponseDto.page.totalPages);
-      setTotalStudies(studiesResponseDto.page.totalElements);
-      setPageElements(studiesResponseDto.page.pageElements);
-      setPageNumber(studiesResponseDto.page.pageNumber);
+      setTotalPages(studiesResponseDto.page?.totalPages);
+      setTotalStudies(studiesResponseDto.page?.totalElements);
+      setPageElements(studiesResponseDto.page?.pageElements);
+      setPageNumber(studiesResponseDto.page?.pageNumber ?? 1);
     })();
   }, [fetchReviewStudies, pageNumber]);
 

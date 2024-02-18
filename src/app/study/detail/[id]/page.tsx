@@ -1,9 +1,8 @@
-import { StudyDetailPage } from "@/pages/Study/StudyDetailPage";
 import { StudyResponseDto } from "@/types/Study/StudyResponseDto";
 import {redirect} from "next/navigation";
 import { views } from "@/constants/views";
 import { useStudy } from "@/hooks/SSR/useStudy";
-import {cookies} from "next/headers";
+import StudyDetailPage from "@/pageComponents/Study/StudyDetailPage";
 
 /**
  * 学習詳細ページ

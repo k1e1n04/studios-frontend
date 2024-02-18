@@ -81,7 +81,7 @@ export const AuthLayout: React.FC<Props> = ({ children }) => {
     setOpen(false);
   };
 
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInAtom);
+  const [isLoggedIn, _] = useRecoilState(isLoggedInAtom);
   useInitializeLoggedIn();
 
   // ログインしていない場合はログイン画面にリダイレクト

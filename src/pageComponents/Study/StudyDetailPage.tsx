@@ -110,4 +110,4 @@ export const StudyDetailPage: React.FC<Props> = ({ data }) => {
       />
     </AuthRequiredLayout>
   );
-};
+}

@@ -1,6 +1,5 @@
 import { useStudy } from "@/hooks/SSR/useStudy";
-import {StudyListPage} from "@/pages/Study/StudyListPage";
-import {ReadonlyURLSearchParams} from "next/navigation";
+import {StudyListPage} from "@/pageComponents/Study/StudyListPage";
 
 /**
  * 学習一覧ページ

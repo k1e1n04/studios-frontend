@@ -1,7 +1,5 @@
 import React from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { Button } from "@mantine/core";
-import { views } from "@/constants/views";
 
 /**
  * ログアウトボタン
